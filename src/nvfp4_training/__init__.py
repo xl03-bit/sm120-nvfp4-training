@@ -133,7 +133,9 @@ def load_checkpoint(path, model):
     state = model.state_dict()
     other = saved["model"]
     if state.keys() != other.keys() or any(
-        p.dtype != other[k].dtype or p.shape != other[k].shape for k,p in state.items()
+        p.dtype != other[k].dtype or (p.shape != other[k].shape and
+            not (k.rsplit(".", 1)[-1] == "_v6_unit_buffer" and other[k].ndim == 0 and p.ndim == 1))
+        for k,p in state.items()
     ):
         raise ValueError("Checkpoint model structure, dtype or shape mismatch")
     if len(saved["optimizer"]["param_groups"]) != 1 or len(saved["optimizer"]["param_groups"][0]["params"]) != len(opt.param_groups[0]["params"]):

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sm120-nvfp4-training"
-version = "0.1.0.dev0"
+version = "0.1.0.dev1"
 description = "NVFP4 training for GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs, with software stochastic rounding, random Hadamard transforms and six speed and memory profiles"
 readme = "README.md"
 license = {file = "LICENSE"}

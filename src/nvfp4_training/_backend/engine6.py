@@ -200,6 +200,13 @@ class AdamW6(AdamW5):
             raise ValueError('Checkpoint and model storage formats differ')
         return super().load_state_dict(state_dict)
 
+def _load_legacy_unit(module, state, prefix, *args):
+    key = prefix + "_v6_unit_buffer"
+    unit = state.get(key)
+    if unit is not None and unit.ndim == 0 and unit.dtype == torch.float32:
+        state[key] = unit.expand_as(module._v6_unit_buffer)
+
+
 def configure(model,mode,fmt,*,lr=1e-4,tiles=4,warps=4,prepack=False,pack_warps=8,remat=False,direct=False,mma_k=0,mma_warps=8,compact_embedding=False,act_pair=False,fast_scale=False):
     """Set up a fresh contiguous CUDA FP32 model for dense BF16 or native NVFP4."""
     if mode not in ('bf16','fp4') or fmt not in FORMATS:
@@ -278,7 +285,9 @@ def configure(model,mode,fmt,*,lr=1e-4,tiles=4,warps=4,prepack=False,pack_warps=
             if master==8:
                 if not direct:
                     p.data=(p.detach()/layer._v6_unit_buffer).to(torch.float8_e4m3fn)
+                layer._v6_unit_buffer=layer._v6_unit_buffer.expand(triton.cdiv(p.numel(),512)).clone()
                 p._v6_unit=layer._v6_unit_buffer
+                layer.register_load_state_dict_pre_hook(_load_legacy_unit)
             elif not direct:
                 hi=torch.empty_like(p,dtype=torch.float16 if master==17 else torch.bfloat16)
                 tail=torch.empty_like(p,dtype=torch.int8) if master==24 else hi

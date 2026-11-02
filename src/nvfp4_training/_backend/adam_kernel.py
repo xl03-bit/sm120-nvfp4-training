@@ -48,7 +48,9 @@ def update(P,GRAD,M,V,MS,VS,TAIL,PART,SA,SB,EXTRA,CTRL,D,S,DT,ST,CURRENT,TAG,UNI
         tail=tl.load(TAIL+i,mask,other=0).to(tl.int32)*256
         p=(bits+tail.to(tl.uint32)).to(tl.float32,bitcast=True)
     elif MASTER==8:
-        p=hp.to(tl.float32)*tl.load(UNIT)
+        tl.static_assert(B==512)
+        unit=tl.load(UNIT+block,block<TILES,other=1.)
+        p=hp.to(tl.float32)*unit[:,None]
     else:
         p=hp.to(tl.float32)
     if PACKED_GRAD:
@@ -111,11 +113,17 @@ def update(P,GRAD,M,V,MS,VS,TAIL,PART,SA,SB,EXTRA,CTRL,D,S,DT,ST,CURRENT,TAG,UNI
         tl.store(P+i,hi,mask)
         tl.store(TAIL+i,_signed_tail(updated,hi),mask)
     elif MASTER==8:
-        unit=tl.load(UNIT)
+        # One CTA owns each unit and all its encoded weights. Grow just the
+        # blocks whose actual FP32 update would exceed E4M3's largest value.
+        peak=tl.max(tl.where(mask,tl.abs(updated),0.),1)
+        grow=(peak>448.*unit)&(peak<float("inf"))
+        raised=tl.exp2(tl.floor(tl.log2(tl.maximum(peak,1.e-30)))-7.)
+        unit=tl.where(grow,tl.maximum(unit,raised),unit)
+        tl.store(UNIT+block,unit,(block<TILES)&grow)
         rnd_master=_random_bits(i,t,key+198743)
-        encoded_master=round_e4m3(updated/unit,rnd_master)
+        encoded_master=round_e4m3(updated/unit[:,None],rnd_master)
         tl.store(P+i,encoded_master,mask)
-        hi=(encoded_master.to(tl.float32)*unit).to(tl.bfloat16)
+        hi=(encoded_master.to(tl.float32)*unit[:,None]).to(tl.bfloat16)
     elif MASTER==17:
         # Binary16 has 10 fraction bits. For normals discard 13 FP32 bits
         # stochastically. Subnormals instead use the fixed 2**-24 quantum.

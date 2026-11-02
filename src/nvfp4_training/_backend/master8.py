@@ -1,4 +1,4 @@
-"""Experimental E4M3 weights with a per-tensor power-of-two unit. GEMMs still use E2M1 or BF16."""
+"""E4M3 projection weights with a power-of-two unit per 512 consecutive weights."""
 import math
 import torch
 import triton
@@ -14,7 +14,7 @@ def unit_for(p):
 @triton.jit
 def _decode(P,U,Y,N:tl.constexpr,B:tl.constexpr):
     i=tl.program_id(0)*B+tl.arange(0,B)
-    tl.store(Y+i,(tl.load(P+i,i<N,other=0.).to(tl.float32)*tl.load(U)).to(tl.bfloat16),i<N)
+    tl.store(Y+i,(tl.load(P+i,i<N,other=0.).to(tl.float32)*tl.load(U+tl.program_id(0))).to(tl.bfloat16),i<N)
 
 def decoded(p):
     if p.dtype!=torch.float8_e4m3fn:return p.bfloat16()
@@ -30,7 +30,7 @@ def round_e4m3(x,bits):
     low=tl.floor(mag)
     sub=(low+((bits&0xfffff).to(tl.float32)/1048576.<mag-low).to(tl.float32))/512.
     val=tl.where(tl.abs(x)<.015625,tl.where(x<0.,-sub,sub),normal)
-    # Make range violations visible in the finite-loss gate.
+    # Preserve nonfinite updates for explicit tensor health checks.
     return tl.where(tl.abs(x)<=448.,val,float('nan')).to(tl.float8e4nv)
 
 @triton.jit
@@ -38,8 +38,11 @@ def _scaled_pair(W,U,D,S,DT,ST,P,M:tl.constexpr,K:tl.constexpr,MP:tl.constexpr,K
                  ROW:tl.constexpr,TRANS:tl.constexpr,R:tl.constexpr,C:tl.constexpr):
     r=tl.program_id(0)*R;c=tl.program_id(1)*C
     row=r+tl.arange(0,R);col=c+tl.arange(0,C)
-    v=tl.load(W+row[:,None]*K+col[None,:],(row[:,None]<M)&(col[None,:]<K),other=0.).to(tl.float32)
-    v=(v*tl.load(U)).to(tl.bfloat16).to(tl.float32)
+    offset=row[:,None].to(tl.int64)*K+col[None,:]
+    valid=(row[:,None]<M)&(col[None,:]<K)
+    v=tl.load(W+offset,valid,other=0.).to(tl.float32)
+    unit=tl.load(U+offset//512,valid,other=1.)
+    v=(v*unit).to(tl.bfloat16).to(tl.float32)
     inv=tl.div_rn(1.,tl.load(P))
     if ROW:_encode(v,D,S,inv,r,c,KP,R,C)
     if TRANS:_encode(tl.trans(v),DT,ST,inv,c,r,MP,C,R)
