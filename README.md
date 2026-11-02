@@ -1,10 +1,20 @@
 # SM120 NVFP4 Training
 
-**A single GeForce RTX 5060 Ti 16GB trained all 4.06B parameters of a language model for 2,048 FineWeb updates.** At batch size 2 and sequence length 512, held-out cross-entropy fell from 11.401 to 6.675 over 2.10M training tokens. Peak GPU memory was 12.75 GiB allocated and 14.33 GiB reserved by PyTorch. The test used `experimental_fp8_master`, block-by-block initialization and transpose recomputation. Weights, activations and AdamW state stayed on the GPU. [Loss and memory curves](results/fineweb-4b-2048/README.md) · [Measurements and reproduction](results/fineweb-4b-2048/README.md#reproduce)
+**A single GeForce RTX 5060 Ti 16GB trained all 4.06B parameters of a language model for 2,048 AdamW updates on FineWeb.** The final training batch had a loss of **6.61997**. On the same 65,536 held-out tokens, validation loss fell from **11.40081 to 6.67528**. PyTorch peak GPU memory was **12.75 GiB allocated** and **14.33 GiB reserved**. [Per-update data and reproduction instructions](results/fineweb-4b-2048/README.md)
 
 GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs have native FP4 Tensor Cores, but Transformer Engine does not support its full NVFP4 training recipe with stochastic rounding and random Hadamard transforms on SM120. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
 
 This project builds on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120). It keeps stochastic rounding and the Hadamard transform in software, runs forward and backward matrix multiplies on the FP4 Tensor Cores, and speeds up training by fusing weight-gradient and AdamW updates where the matrix shape allows. Six profiles trade training speed against GPU memory use. The benchmarks below were run on a GeForce RTX 5060 Ti 16GB.
+
+## 4.06B full-parameter run
+
+The model saw 2,097,152 training tokens at batch size 2 and sequence length 512. Each update averaged 297.98 ms (3,436 tokens/s). The run used `experimental_fp8_master`, block-by-block initialization and transpose recomputation. Weights, activations and AdamW state stayed on the GPU.
+
+![Per-update training loss, 32-update moving average and fixed-window validation loss](results/fineweb-4b-2048/loss.png)
+
+![GPU memory allocated and reserved during training, graph capture and validation](results/fineweb-4b-2048/memory.png)
+
+An earlier run exposed an overflow in the fixed-scale FP8 master weights. Version `0.1.0.dev1` lets each block of 512 weights grow its scale when an update exceeds its range. With the same seed and data, the rerun passed all 19 FP8 weight scans and the final model and optimizer health check. [Failure diagnosis and fix](results/fineweb-4b-2048/README.md#the-first-run-and-the-fp8-fix)
 
 ## Install and verify
 
@@ -39,12 +49,6 @@ check_finite(model)
 ```
 
 Start with a fresh trainable FP32 model with ordinary `nn.Linear` layers on one device. The converter attaches the matching AdamW as `model.nvfp4_optimizer`. For fixed shapes, use `with capture_step(model, objective, x, y, steps=N) as graph:` and call `graph.step(next_x, next_y)` once per real update. An eager step can precede capture. After closing the graph, use `save_checkpoint(path, model)` and restore with `load_checkpoint(path, fresh_converted_model)`. Save the sampler position separately. Global gradient clipping, cross-step accumulation, distributed training and custom Linear subclasses need their own integration. The FP8-master profile requires one deferred weight-gradient contribution per compressed projection per backward.
-
-## 4.06B full-parameter run
-
-![Training and validation loss on the 4.06B FineWeb run](results/fineweb-4b-2048/loss.png)
-
-The first run exposed an overflow in the fixed-scale FP8 master weights. Starting in `0.1.0.dev1`, the optimizer grows a power-of-two scale for a block of 512 weights when a finite update exceeds its range. The rerun used the same seed and data. All 19 validation checks and the final model and optimizer health check passed. Healthy older checkpoints load with their original scale replicated across blocks. [GPU memory curve, failure diagnosis and fix](results/fineweb-4b-2048/README.md)
 
 ## Measurements on one RTX 5060 Ti
 
