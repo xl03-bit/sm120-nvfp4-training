@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sm120-nvfp4-training"
+version = "0.1.0.dev0"
+description = "Single-GPU native NVFP4 mixed-precision training for SM120"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["torch==2.11.0","torchao==0.17.0","triton==3.6.0","numpy","ninja"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+license-files = ["THIRD_PARTY_LICENSES/*.txt", "NOTICE.md"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"nvfp4_training._backend" = ["csrc/*.cpp","csrc/*.cu","csrc_graph/*.cpp","csrc_graph/*.cu"]
+"nvfp4_training._verification" = ["LICENSE.txt"]
