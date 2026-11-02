@@ -1,0 +1,271 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "tests": [
+    {
+      "profile": "balanced",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "balanced",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "balanced",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "balanced",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "short128",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "short128",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "short128",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "short128",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "conservative",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "conservative",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 2,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "conservative",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "conservative",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "same_as_v5",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "same_as_v5",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "same_as_v5",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "same_as_v5",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_m4v4",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_m4v4",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_m4v4",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_m4v4",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_fp8_master",
+      "shape": "aligned",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_fp8_master",
+      "shape": "aligned",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_fp8_master",
+      "shape": "padded",
+      "remat": false,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    },
+    {
+      "profile": "experimental_fp8_master",
+      "shape": "padded",
+      "remat": true,
+      "native": 9,
+      "fused_wgrad": 0,
+      "sr": 6,
+      "rht": 6,
+      "checkpoint_next_update_exact": true,
+      "final_step": 7
+    }
+  ]
+}

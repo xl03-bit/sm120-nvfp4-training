@@ -1,0 +1,46 @@
+{
+  "trainable_parameters": 4063797760,
+  "steps": 2048,
+  "tokens": 2097152,
+  "final_tensor_health_check": "passed",
+  "final_error": null,
+  "validation_batches_per_point": 64,
+  "validation_tokens_per_point": 65536,
+  "validation_initial": 11.400805205106735,
+  "validation_final": 6.675278313457966,
+  "validation_best": {
+    "step": 2048,
+    "ce": 6.675278313457966
+  },
+  "first_32_train_ce": 9.604970872402191,
+  "last_32_train_ce": 6.781479686498642,
+  "training_seconds": 610.2648283229944,
+  "mean_step_ms": 297.9808732045871,
+  "median_step_ms": 298.091660999944,
+  "training_tokens_per_second": 3436.462176204659,
+  "overall": {
+    "peak_allocated_GiB": 12.747831344604492,
+    "peak_reserved_GiB": 14.33203125
+  },
+  "training": {
+    "peak_allocated_GiB": 8.794925689697266,
+    "peak_reserved_GiB": 14.33203125
+  },
+  "validation": {
+    "peak_allocated_GiB": 9.286533832550049,
+    "peak_reserved_GiB": 14.33203125
+  },
+  "capture": {
+    "peak_allocated_GiB": 12.747831344604492,
+    "peak_reserved_GiB": 13.396484375
+  },
+  "metrics_sha256": "6e4d2be021b06c86eb5c3f7033a8d6aec4ef705d87b4e68912690ae85cdb0523",
+  "fp8_master_audit": {
+    "evaluated_checkpoints": 19,
+    "nonfinite_codes_at_any_scan": 0,
+    "total_blocks": 7680000,
+    "first_observed_growth_step": 1152,
+    "final_grown_blocks": 157,
+    "scale_storage_bytes": 30720000
+  }
+}

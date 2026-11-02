@@ -1,0 +1,106 @@
+{
+  "source_commit": "74fab229fe8931c4c2a04e55daf85e85440101f1",
+  "profile": "experimental_fp8_master",
+  "step_count": 2048,
+  "seed": 1234,
+  "data": {
+    "sha256": "771fa4a99b9fe0946ffb6e848b4ba5c6a9b0fe87860ebf03bc2c1c7e45f8178e",
+    "split_token": 95000257,
+    "windows_sha256": {
+      "701": "25e467c67b827b8e04b50c021e94e3a29a1705d8d16d9ed38f4ce89876de5eb8",
+      "702": "eb4971741a1a7fbab427432c253d6a27f732f6c72e2482acbfe05ff5e6bce5cc"
+    }
+  },
+  "uniform_cross_entropy": 10.82490511970208,
+  "initial_validation_ce": 11.400805205106735,
+  "best_validation": {
+    "step": 896,
+    "ce": 7.043016590178013
+  },
+  "final_validation_ce": 10.824905395507812,
+  "last_32_training_ce": 6.768248096108437,
+  "nonfinite_at_step_1024": {
+    "blocks.39.down.weight": 1,
+    "blocks.42.down.weight": 2
+  },
+  "final_nonfinite": 255,
+  "final_affected_projections": 55,
+  "final_projection_counts": {
+    "blocks.5.down.weight": 2,
+    "blocks.7.down.weight": 2,
+    "blocks.8.down.weight": 1,
+    "blocks.9.down.weight": 2,
+    "blocks.11.down.weight": 2,
+    "blocks.12.down.weight": 2,
+    "blocks.13.down.weight": 2,
+    "blocks.18.proj.weight": 1,
+    "blocks.18.down.weight": 3,
+    "blocks.19.down.weight": 2,
+    "blocks.20.down.weight": 1,
+    "blocks.21.down.weight": 1,
+    "blocks.22.down.weight": 3,
+    "blocks.24.down.weight": 3,
+    "blocks.25.proj.weight": 1,
+    "blocks.25.down.weight": 3,
+    "blocks.26.proj.weight": 1,
+    "blocks.27.down.weight": 2,
+    "blocks.28.down.weight": 5,
+    "blocks.29.proj.weight": 3,
+    "blocks.29.down.weight": 5,
+    "blocks.30.proj.weight": 1,
+    "blocks.30.down.weight": 3,
+    "blocks.31.down.weight": 4,
+    "blocks.32.proj.weight": 1,
+    "blocks.33.down.weight": 3,
+    "blocks.34.down.weight": 4,
+    "blocks.35.proj.weight": 1,
+    "blocks.35.down.weight": 10,
+    "blocks.36.down.weight": 9,
+    "blocks.37.proj.weight": 1,
+    "blocks.37.down.weight": 6,
+    "blocks.38.proj.weight": 1,
+    "blocks.38.down.weight": 6,
+    "blocks.39.proj.weight": 1,
+    "blocks.39.down.weight": 4,
+    "blocks.40.proj.weight": 3,
+    "blocks.40.down.weight": 5,
+    "blocks.41.proj.weight": 1,
+    "blocks.41.down.weight": 6,
+    "blocks.42.proj.weight": 1,
+    "blocks.42.down.weight": 9,
+    "blocks.43.proj.weight": 4,
+    "blocks.44.proj.weight": 6,
+    "blocks.44.down.weight": 15,
+    "blocks.45.proj.weight": 1,
+    "blocks.45.down.weight": 9,
+    "blocks.46.proj.weight": 1,
+    "blocks.46.down.weight": 17,
+    "blocks.47.proj.weight": 4,
+    "blocks.47.down.weight": 22,
+    "blocks.48.proj.weight": 4,
+    "blocks.48.down.weight": 18,
+    "blocks.49.proj.weight": 9,
+    "blocks.49.down.weight": 18
+  },
+  "final_tensor_health_check": "failed",
+  "frozen_standard_ce": 10.824905395507812,
+  "frozen_cached_ce": 6.965499363839626,
+  "standard_first_token_distinct_logits": 1784,
+  "cached_first_token_distinct_logits": 1370,
+  "affected_scales": {
+    "blocks.39.down.weight": {
+      "fresh": "nan",
+      "optimizer_cached": 2.9064360205666162e-05
+    },
+    "blocks.42.down.weight": {
+      "fresh": "nan",
+      "optimizer_cached": 3.197079786332324e-05
+    }
+  },
+  "mean_step_ms": 293.6234916606454,
+  "memory": {
+    "peak_allocated_GiB": 12.719221115112305,
+    "peak_reserved_GiB": 14.22265625
+  },
+  "original_metrics_sha256": "a6c48f7465f4e8584cf71ad3f2c9df8100eccf2e4ee948e11c065b54e80d783a"
+}

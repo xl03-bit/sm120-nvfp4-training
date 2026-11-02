@@ -1,6 +1,6 @@
 # SM120 NVFP4 Training
 
-**Full-parameter training for a 4.06B language model fits on a single 16 GB GeForce RTX 5060 Ti.** In our capacity test, a 50-layer Transformer completed five AdamW updates and a held-out evaluation on batches of two 512-token sequences. Peak GPU memory was 12.65 GiB allocated and 13.96 GiB reserved. The run used block-by-block initialization and the `experimental_fp8_master` profile with transpose recomputation. Weights, activations and optimizer state stayed on the GPU. [Capacity run](results/capacity-4b.json)
+**A single GeForce RTX 5060 Ti 16GB trained all 4.06B parameters of a language model for 2,048 FineWeb updates.** At batch size 2 and sequence length 512, held-out cross-entropy fell from 11.401 to 6.675 over 2.10M training tokens. Peak GPU memory was 12.75 GiB allocated and 14.33 GiB reserved by PyTorch. The test used `experimental_fp8_master`, block-by-block initialization and transpose recomputation. Weights, activations and AdamW state stayed on the GPU. [Loss and memory curves](results/fineweb-4b-2048/README.md) · [Measurements and reproduction](results/fineweb-4b-2048/README.md#reproduce)
 
 GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs have native FP4 Tensor Cores, but Transformer Engine does not support its full NVFP4 training recipe with stochastic rounding and random Hadamard transforms on SM120. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
 
@@ -40,9 +40,15 @@ check_finite(model)
 
 Start with a fresh trainable FP32 model with ordinary `nn.Linear` layers on one device. The converter attaches the matching AdamW as `model.nvfp4_optimizer`. For fixed shapes, use `with capture_step(model, objective, x, y, steps=N) as graph:` and call `graph.step(next_x, next_y)` once per real update. An eager step can precede capture. After closing the graph, use `save_checkpoint(path, model)` and restore with `load_checkpoint(path, fresh_converted_model)`. Save the sampler position separately. Global gradient clipping, cross-step accumulation, distributed training and custom Linear subclasses need their own integration. The FP8-master profile requires one deferred weight-gradient contribution per compressed projection per backward.
 
+## 4.06B full-parameter run
+
+![Training and validation loss on the 4.06B FineWeb run](results/fineweb-4b-2048/loss.png)
+
+The first run exposed an overflow in the fixed-scale FP8 master weights. Starting in `0.1.0.dev1`, the optimizer grows a power-of-two scale for a block of 512 weights when a finite update exceeds its range. The rerun used the same seed and data. All 19 validation checks and the final model and optimizer health check passed. Healthy older checkpoints load with their original scale replicated across blocks. [GPU memory curve, failure diagnosis and fix](results/fineweb-4b-2048/README.md)
+
 ## Measurements on one RTX 5060 Ti
 
-Complete forward, loss, backward and AdamW update, 12 warmup steps and five rounds of 30 synchronized steps. Peak memory is PyTorch allocated GiB, measured from initialization through training. The table is from the original validated implementation, with transpose recomputation off; all round times and three recomputation variants are in [the results](results/benchmarks.json).
+Complete forward, loss, backward and AdamW update, 12 warmup steps and five rounds of 30 synchronized steps. Peak memory is PyTorch allocated GiB, measured from initialization through training. The table uses the original, pre-fix implementation and disables transpose recomputation. Per-round timings and three recomputation variants are in [the results](results/benchmarks.json).
 
 | Profile | Master / moments | 453M, 2×64 ms / GiB | FineWeb 354M, 2×512 ms / GiB |
 |---|---|---:|---:|
@@ -52,6 +58,8 @@ Complete forward, loss, backward and AdamW update, 12 warmup steps and five roun
 | `same_as_v5` | FP32 / INT8 + block-scaled FP16 | 28.81 / 3.351 | 46.27 / 3.447 |
 | `experimental_m4v4` | FP16 / 4+4 bits | 19.20 / 1.687 | 38.84 / 2.266 |
 | `experimental_fp8_master` | scaled E4M3 / 4+4 bits | 19.05 / 1.265 | 39.89 / 1.985 |
+
+Only `experimental_fp8_master` uses adaptive blocks of 512 for master-weight storage. `balanced`, `short128` and `experimental_m4v4` store their compressed projection weights in FP16. `conservative` stores a BF16 value plus a signed residual, and `same_as_v5` keeps FP32 master weights. The block scales for AdamW moments and for the NVFP4 matrix operands are separate from the FP8 master-weight scale.
 
 `remat=True` re-encodes the transposed weight during backward. In the 453M workload the FP8-master profile with recomputation measured **18.01 ms and 1.031 GiB**. Tied embedding/output weights stay FP32. Weight packing uses separate 1×16 scales along the two contraction directions. NVIDIA Transformer Engine's default 16×16 shared weight scaling is a different recipe.
 
