@@ -1,8 +1,8 @@
 # SM120 NVFP4 Training
 
-[Measurement records](results/benchmarks.json) · [Attribution](NOTICE.md)
+GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs have native FP4 Tensor Cores, but Transformer Engine does not support its full NVFP4 training recipe with stochastic rounding and random Hadamard transforms on SM120. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
 
-Train PyTorch Linear layers on native E2M1 Tensor Cores with software stochastic rounding and H16 random Hadamard transforms. The tested machine is a single RTX 5060 Ti 16GB under WSL2 Ubuntu 22.04. Other SM120 cards need their own verification.
+This project builds on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120). It keeps stochastic rounding and the Hadamard transform in software, runs forward and backward matrix multiplies on the FP4 Tensor Cores, and speeds up training by fusing weight-gradient and AdamW updates where the matrix shape allows. Six profiles trade training speed against GPU memory use. The benchmarks below were run on a GeForce RTX 5060 Ti 16GB.
 
 ## Install and verify
 
