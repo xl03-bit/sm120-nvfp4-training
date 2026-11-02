@@ -1,0 +1,49 @@
+{
+  "config": {
+    "profile": "experimental_fp8_master",
+    "mode": "fp4",
+    "width": 2560,
+    "layers": 50,
+    "seq": 512,
+    "batch": 2,
+    "steps": 5,
+    "seed": 1234,
+    "remat": true,
+    "parity": false
+  },
+  "parameters": 4063797760,
+  "weights_GiB": 4.152498245239258,
+  "free_start_GiB": 14.802734375,
+  "total_GiB": 15.90179443359375,
+  "provenance": {
+    "sha256": "771fa4a99b9fe0946ffb6e848b4ba5c6a9b0fe87860ebf03bc2c1c7e45f8178e",
+    "split_token": 95000257,
+    "windows_sha256": {
+      "701": "25e467c67b827b8e04b50c021e94e3a29a1705d8d16d9ed38f4ce89876de5eb8",
+      "702": "eb4971741a1a7fbab427432c253d6a27f732f6c72e2482acbfe05ff5e6bce5cc"
+    }
+  },
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "status": "complete",
+  "native_gemms": 603,
+  "sr_calls": 402,
+  "ms_step_probe": 294.74499240000114,
+  "train_alloc_GiB": 12.653478622436523,
+  "train_reserved_GiB": 13.2421875,
+  "train_losses": [
+    11.408672332763672,
+    13.412528038024902,
+    11.202775955200195,
+    10.810417175292969,
+    10.64400863647461
+  ],
+  "heldout_ce": 10.216728210449219,
+  "device_free_graph_GiB": 0.759765625,
+  "reserved_graph_GiB": 13.96484375,
+  "peak_alloc_GiB": 12.653478622436523,
+  "peak_reserved_GiB": 13.96484375,
+  "first_weight_sample_change": 4826.140625,
+  "state_GiB": 4.2627450823783875
+}

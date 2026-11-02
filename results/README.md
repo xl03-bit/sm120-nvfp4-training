@@ -4,6 +4,7 @@ All measurements here were recorded on one RTX 5060 Ti 16GB under WSL2 Ubuntu 22
 
 | Record | Origin and coverage |
 |---|---|
+| [capacity-4b.json](capacity-4b.json) | Single-GPU capacity run with 4,063,797,760 trainable parameters. The 50-layer model used FP8 master weights for eligible projections, two 4-bit AdamW moments and transpose recomputation. The tied embedding/output weight stayed FP32. The log includes all five training losses, one held-out evaluation and peak allocated and reserved memory. |
 | [benchmarks.json](benchmarks.json) | Eighteen full-step runs through the original local training API. Six profiles on both workloads and three additional transpose-recomputation runs per workload. Each record includes all five timed rounds. |
 | [validation.json](validation.json) and [plot](validation.png) | Saved 354M FineWeb runs. Seed 1234, 2×512 tokens per step, 64 fixed validation batches. The FP8-master BF16 control ends at its last finite validation. Confidence intervals use paired validation windows within this seed. |
 | [profile-checks.json](profile-checks.json) | The original installed API checks for all six profiles, both shape classes and both transpose settings. Each row includes FP4 operation counts and exact checkpoint continuation. |

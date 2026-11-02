@@ -1,5 +1,7 @@
 # SM120 NVFP4 Training
 
+**Full-parameter training for a 4.06B language model fits on a single 16 GB GeForce RTX 5060 Ti.** In our capacity test, a 50-layer Transformer completed five AdamW updates and a held-out evaluation on batches of two 512-token sequences. Peak GPU memory was 12.65 GiB allocated and 13.96 GiB reserved. The run used block-by-block initialization and the `experimental_fp8_master` profile with transpose recomputation. Weights, activations and optimizer state stayed on the GPU. [Capacity run](results/capacity-4b.json)
+
 GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs have native FP4 Tensor Cores, but Transformer Engine does not support its full NVFP4 training recipe with stochastic rounding and random Hadamard transforms on SM120. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
 
 This project builds on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120). It keeps stochastic rounding and the Hadamard transform in software, runs forward and backward matrix multiplies on the FP4 Tensor Cores, and speeds up training by fusing weight-gradient and AdamW updates where the matrix shape allows. Six profiles trade training speed against GPU memory use. The benchmarks below were run on a GeForce RTX 5060 Ti 16GB.
