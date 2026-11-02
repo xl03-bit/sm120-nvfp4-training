@@ -7,12 +7,13 @@ name = "sm120-nvfp4-training"
 version = "0.1.0.dev0"
 description = "Single-GPU native NVFP4 mixed-precision training for SM120"
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.10"
 dependencies = ["torch==2.11.0","torchao==0.17.0","triton==3.6.0","numpy","ninja"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-license-files = ["THIRD_PARTY_LICENSES/*.txt", "NOTICE.md"]
+license-files = ["LICENSE", "THIRD_PARTY_LICENSES/*.txt", "NOTICE.md"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

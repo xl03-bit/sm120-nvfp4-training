@@ -4,4 +4,4 @@ The reference CUDA quantizer and parts of the reference Linear and Hadamard impl
 
 The short-contraction MMA code follows the public [NVIDIA SM120 MMA fragment layouts](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm120.hpp). PyTorch, TorchAO, Triton and the CUDA Toolkit are external dependencies under their respective licenses. This is an independent project.
 
-A project-wide license for the additional code has not been specified.
+The project's original contributions are distributed under the [MIT License](LICENSE), copyright © 2026 xl03-bit.

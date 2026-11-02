@@ -74,4 +74,6 @@ The table and curves come from the saved RTX 5060 Ti runs. The 453M task uses sy
 
 On a new machine, `verify` tests all three backward paths against the reference. It records `fast_pair` for both aligned and padded inputs after the tests pass. This preserves the weight-packing configuration used for the table and long runs.
 
-The implementation builds on [Elliot Arledge's SM120 work](https://github.com/Infatoshi/nvfp4-sm120). See [NOTICE](NOTICE.md) for component provenance and licensing information.
+## License and attribution
+
+The project's original contributions are licensed under the [MIT License](LICENSE). The implementation builds on [Elliot Arledge's SM120 work](https://github.com/Infatoshi/nvfp4-sm120). The upstream MIT license and copyright notice are included. See [NOTICE](NOTICE.md) for component provenance.
