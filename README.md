@@ -1,20 +1,21 @@
 # SM120 NVFP4 Training
 
-**A single GeForce RTX 5060 Ti 16GB trained all 4.06B parameters of a language model for 2,048 AdamW updates on FineWeb.** The final training batch had a loss of **6.61997**. On the same 65,536 held-out tokens, validation loss fell from **11.40081 to 6.67528**. PyTorch peak GPU memory was **12.75 GiB allocated** and **14.33 GiB reserved**. [Per-update data and reproduction instructions](results/fineweb-4b-2048/README.md)
+**GeForce RTX 50-series cards and the RTX PRO 6000 Blackwell have native FP4 Tensor Cores, but NVIDIA Transformer Engine does not offer its full NVFP4 training recipe on these SM120 GPUs.** Its supported NVFP4 training path on this hardware requires disabling stochastic rounding and random Hadamard transforms. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
 
-GeForce RTX 50-series and RTX PRO 6000 Blackwell GPUs have native FP4 Tensor Cores, but Transformer Engine does not support its full NVFP4 training recipe with stochastic rounding and random Hadamard transforms on SM120. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
+I built this open-source PyTorch package on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120) to make NVFP4 training accessible on these cards. It implements both operations in software and uses the FP4 Tensor Cores for forward and backward matrix multiplies. Six training profiles let you choose how much memory to spend on weights and AdamW state.
 
-This project builds on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120). It keeps stochastic rounding and the Hadamard transform in software, runs forward and backward matrix multiplies on the FP4 Tensor Cores, and speeds up training by fusing weight-gradient and AdamW updates where the matrix shape allows. Six profiles trade training speed against GPU memory use. The benchmarks below were run on a GeForce RTX 5060 Ti 16GB.
+## What does this mean?
 
-## 4.06B full-parameter run
+Consumer GPUs can put their FP4 compute to work during training. Workloads dominated by large matrix multiplies stand to benefit most. When GPU memory is the limit, storing weights and optimizer state more compactly can make room for a larger model on the same card.
 
-The model saw 2,097,152 training tokens at batch size 2 and sequence length 512. Each update averaged 297.98 ms (3,436 tokens/s). The run used `experimental_fp8_master`, block-by-block initialization and transpose recomputation. Weights, activations and AdamW state stayed on the GPU.
+As a rough illustration, the first three targets below compare NVFP4 on the smaller card with BF16 on the larger card, for the same model and batch shape. The fourth compares the size of model that fits in memory.
 
-![Per-update training loss, 32-update moving average and fixed-window validation loss](results/fineweb-4b-2048/loss.png)
+- An **RTX 5060** could approach **RTX 5080** training throughput.
+- An **RTX 5080** could approach **RTX 5090** training throughput.
+- An **RTX 5090** could approach **RTX PRO 6000 Blackwell** training throughput.
+- **One RTX PRO 6000 Blackwell** using a compact NVFP4 profile could fit a model that would otherwise need **two such GPUs** for BF16 training.
 
-![GPU memory allocated and reserved during training, graph capture and validation](results/fineweb-4b-2048/memory.png)
-
-An earlier run exposed an overflow in the fixed-scale FP8 master weights. Version `0.1.0.dev1` lets each block of 512 weights grow its scale when an update exceeds its range. With the same seed and data, the rerun passed all 19 FP8 weight scans and the final model and optimizer health check. [Failure diagnosis and fix](results/fineweb-4b-2048/README.md#the-first-run-and-the-fp8-fix)
+These comparisons illustrate potential gains. This project has no head-to-head benchmarks for those GPU pairs. The [single-card experiment](#406b-full-parameter-run) below measures what fit and how training progressed on one GPU.
 
 ## Install and verify
 
@@ -87,6 +88,18 @@ At 8,192 steps and 8,388,608 training tokens, validation cross-entropy was **5.8
 The table and curves come from the saved RTX 5060 Ti runs. The 453M task uses synthetic, GPU-resident inputs, bidirectional attention and MSE. FineWeb uses causal attention, a tied vocabulary head and token cross-entropy. At step 8,192 the balanced FP4–BF16 difference was +0.00781 CE on the same held-out windows. See the [validation and packaging record](results/README.md) for the scope of the checks.
 
 On a new machine, `verify` tests all three backward paths against the reference. It records `fast_pair` for both aligned and padded inputs after the tests pass. This preserves the weight-packing configuration used for the table and long runs.
+
+## 4.06B full-parameter run
+
+**On one GeForce RTX 5060 Ti 16GB, a 4.06B-parameter language model completed 2,048 full-parameter AdamW updates on FineWeb.** Training loss averaged **9.60 over the first 32 updates** and **6.78 over the last 32**. On the same 65,536 held-out tokens, validation loss fell from **11.40 at initialization** to **7.03 at update 1,024** and **6.68 at update 2,048**.
+
+![Per-update training loss, 32-update moving average and fixed-window validation loss](results/fineweb-4b-2048/loss.png)
+
+PyTorch peak GPU memory was **12.75 GiB allocated** and **14.33 GiB reserved**. Weights, activations and AdamW state stayed on the card. With two 512-token sequences per batch, the model saw 2,097,152 training tokens at 297.98 ms per update (3,436 tokens/s). The run used `experimental_fp8_master`, block-by-block initialization and transpose recomputation.
+
+![GPU memory allocated and reserved during training, graph capture and validation](results/fineweb-4b-2048/memory.png)
+
+An earlier run exposed an overflow in the fixed-scale FP8 master weights. Version `0.1.0.dev1` lets each block of 512 weights grow its scale when an update exceeds its range. With the same seed and data, the rerun passed all 19 FP8 weight scans and the model and optimizer health check at step 2,048. [Per-update measurements, fix and reproduction instructions](results/fineweb-4b-2048/README.md)
 
 ## License and attribution
 
