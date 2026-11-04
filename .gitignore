@@ -9,6 +9,7 @@ dist/
 *.so
 *.pyd
 *.pt
+*.pt.sha256
 *.ckpt
 *.safetensors
 *.bin

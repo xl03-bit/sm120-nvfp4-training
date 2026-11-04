@@ -8,7 +8,24 @@ from .profiles import list_profiles, profile_config
 from ._runtime import load_runtime
 
 __all__ = ["list_profiles", "prepare_training", "enable_nvfp4", "train_step",
-           "capture_step", "save_checkpoint", "load_checkpoint", "check_finite"]
+           "capture_step", "save_checkpoint", "load_checkpoint", "check_finite",
+           "pack_frozen_layers", "save_frozen_cache", "load_frozen_cache", "capture_frozen"]
+
+def pack_frozen_layers(model, *, include, keep=()):
+    from .frozen import pack_frozen_layers as convert
+    return convert(model,include=include,keep=keep)
+
+def save_frozen_cache(path,model,*,model_fingerprint):
+    from .frozen import save_frozen_cache as save
+    return save(path,model,model_fingerprint=model_fingerprint)
+
+def load_frozen_cache(path,model,*,expected_fingerprint,device='cuda'):
+    from .frozen import load_frozen_cache as load
+    return load(path,model,expected_fingerprint=expected_fingerprint,device=device)
+
+def capture_frozen(model,compute,*inputs,backward=True,warmup=2):
+    from .frozen import capture_frozen as capture
+    return capture(model,compute,*inputs,backward=backward,warmup=warmup)
 
 
 def prepare_training(model, *, profile="balanced", precision="fp4", remat=False,
