@@ -15,7 +15,7 @@ As a rough illustration, the first three targets below compare NVFP4 on the smal
 - An **RTX 5090** could approach **RTX PRO 6000 Blackwell** training throughput.
 - **One RTX PRO 6000 Blackwell** using a compact NVFP4 profile could fit a model that would otherwise need **two such GPUs** for BF16 training.
 
-These comparisons illustrate potential gains. This project has no head-to-head benchmarks for those GPU pairs. The [single-card experiment](#406b-full-parameter-run) below measures what fit and how training progressed on one GPU.
+These are illustrative hardware targets. The [measurements below](#406b-full-parameter-run) come from one RTX 5060 Ti and show model capacity, throughput and training progress.
 
 ## Install and verify
 
@@ -36,7 +36,7 @@ python examples/train.py --profile balanced
 For frozen backbones used in inference or differentiable objectives, an opt-in
 [frozen-weight path](docs/frozen.md) packs weights once, supports checked disk
 caches and captures forward/backward with replay-safe stochastic rounding.
-The guide explains the problem, solution, integration steps and limits.
+The guide explains the problem, solution, supported workloads and integration steps.
 The existing six profiles below remain the path for trainable base weights.
 
 ```python

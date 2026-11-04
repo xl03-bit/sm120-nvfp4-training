@@ -1,41 +1,44 @@
 # Frozen-weight FP4 integration
 
-This opt-in path is for frozen backbones used in inference or inside a differentiable objective. It complements the existing six full-parameter training profiles. It does not replace their optimizer implementation.
+This update adds a frozen-weight execution path for inference and differentiable objectives. It packs weights once, stores the packed representation and replays fixed-shape computation through CUDA Graphs. The existing six profiles handle trainable base weights.
 
 ## Problem identified
 
-A training-oriented linear layer can encode a weight on every forward pass and encode its transpose again during backward. Reusing that path with a frozen weight leaves avoidable work in the hot loop. Selecting an FP4 arithmetic kernel also does not automatically enable CUDA Graph replay, reduce host dispatch, or compress every activation and non-linear operator.
+A training-oriented linear layer can encode a weight on every forward pass and encode its transpose again during backward. Frozen weights stay constant, so this work can move out of the execution loop. Repeated host dispatch adds overhead, especially when the same backbone runs many times.
 
-Capturing a Python stochastic-rounding counter is another integration hazard: replay can repeat the same rounding seed. Frozen parameters also do not imply that input gradients are unnecessary. Upstream trainable layers may still need the Jacobian through the frozen backbone.
+Two details matter for backward replay: upstream trainable layers need input gradients through the frozen backbone, and stochastic rounding needs a changing seed on each replay. A captured Python counter would repeat the same seed.
 
 ## What this update changes
 
-- `pack_frozen_layers` packs both weight orientations once. Packed bytes, block scales and BF16 biases remain; no high-precision master parameter is retained for converted layers.
-- `save_frozen_cache` and `load_frozen_cache` persist those buffers without re-quantizing them. Caches have a checksum, schema, model fingerprint and logical-shape checks. Trainable adapters and optimizer state are excluded.
+- `pack_frozen_layers` packs both weight orientations once and releases the converted layers' high-precision master weights. Storage consists of packed weights, block scales and BF16 biases.
+- `save_frozen_cache` and `load_frozen_cache` persist and restore the packed buffers directly. A checksum, schema, model fingerprint and logical shapes identify the matching cache.
 - `capture_frozen` captures fixed-shape inference or a complete scalar objective and backward pass. A device seed plus a per-operation offset keeps stochastic rounding dynamic on replay.
-- Explicit `include` and `keep` patterns define precision boundaries. The API refuses selected trainable weights, unsupported selected convolutions and ambiguous shared-module aliases.
-- Synthetic tests check native-path parity, cache round trips, input gradients, dynamic rounding and changed-input replay. They do not establish accuracy or speed for an application.
+- Explicit `include` and `keep` patterns select frozen projections and preserve high-precision boundaries. Conversion checks layer type, frozen status and parameter sharing before modifying the model.
 
-The update adds no application data, model checkpoints, private workload configuration or application benchmark results.
+## Where to use it
 
-## Appropriate workloads and limits
+Use it for frozen-backbone inference, adapter training and upstream modules trained through a frozen backbone. The helper targets fixed shapes, first-order gradients and a single SM120 GPU.
 
-Supported frozen modules are standard `nn.Linear`, ungrouped unit-stride unpadded 1×1 `nn.Conv2d`, and restricted `nn.MultiheadAttention` self-attention without dropout, attention/padding masks, causal hints or returned attention weights (pass `need_weights=False`). MHA is converted as one unit; protecting a descendant protects the whole MHA. Ordinary convolutions, normalization, softmax and residual state are not made FP4 by this API. Converted projections accept BF16/FP32 activations and return BF16, with the existing native FP4 matrix path and input-gradient rounding.
+| Module | Supported configuration |
+|---|---|
+| `nn.Linear` | Standard frozen linear projections |
+| `nn.Conv2d` | 1×1 kernel, groups=1, stride=1, padding=0 |
+| `nn.MultiheadAttention` | Self-attention, dropout=0, masks=None, is_causal=False, need_weights=False |
 
-Use the existing training profiles for weights that must change. This frozen path does not compute their weight gradients. Application-specific functional projections, tied/shared parameters, distributed execution, second derivatives and dynamic shapes require separate integration. Validate numerical behavior after conversion: BF16 input/output boundaries alone do not guarantee that an internal FP4 block preserves the application's score or gradient direction.
+MHA is converted as one unit; protecting a descendant preserves the whole module. Projections accept BF16/FP32 activations, use native FP4 matrix operations and return BF16. Normalization, softmax, ordinary convolutions and residual state retain their existing precision. Choose precision boundaries using output and gradient fidelity on the target model.
 
-CUDA Graph storage and host metadata can offset weight-storage savings. Measure ordinary execution, graph capture and replay separately, reporting both framework allocation and total device memory. Consider bounded chunking in the application callback when per-example subgraphs make capture too large; validate that the chunked computation preserves the objective. No universal memory reduction or speedup is promised.
+Measure packing, capture and steady replay separately. Total memory includes packed weights, activations, the graph pool and host metadata. Bounded chunking in the objective callback provides a way to trade activation memory against graph size and throughput. Shared weights, custom functional projections, distributed execution and dynamic shapes need application-level integration.
 
 ## Use
 
-For a new project, provide the model, the complete objective callback and an explicit precision-boundary list. The packing, cache and replay implementations can then be reused; each new model still needs a small numerical and resource check.
+For a new project, provide the model, the complete objective callback and a precision-boundary list. Reuse the packing, cache and replay implementation, then check numerical behavior and resource use on a small batch.
 
 Install and run the existing backend verification from the repository README first. Then:
 
 ```python
 from nvfp4_training import pack_frozen_layers, capture_frozen
 
-# Freeze only the intended backbone before conversion.
+# Freeze the backbone before conversion.
 model.backbone.requires_grad_(False)
 model = pack_frozen_layers(
     model.cuda(), include=("backbone",), keep=("input", "output")
@@ -49,11 +52,13 @@ with capture_frozen(model, objective, inputs, targets) as replay:
     # Optional caller-owned optimizer.step() goes here, outside the graph.
 ```
 
-`capture_frozen` performs warmup forward/backward passes but no optimizer updates. It clears captured gradient buffers on each replay. Do not call `zero_grad(set_to_none=True)` or replace parameters/buffers while the graph is active. Shapes, dtypes, devices, gradient-input flags and module training modes must remain fixed. Use replay and any external optimizer on the original caller stream; concurrent capture is unsupported. Discard old autograd graphs before capturing. Copy returned outputs with `.clone()` if they must survive the next replay.
+`capture_frozen` warms up the forward/backward computation and owns gradient clearing during replay. Optimizer updates belong to the caller, outside the graph. Keep gradient buffers allocated, including between optimizer steps; `zero_grad(set_to_none=True)` replaces buffers that the graph uses.
 
-Inputs are copied into fixed, detached buffers. Capture the **complete differentiable objective** when end-to-end gradients are required; this helper is not an autograd-aware replacement for a submodule inside an outside graph. For pure inference pass `backward=False` and return an output tensor instead of a scalar loss.
+Keep shapes, dtypes, devices, gradient-input flags, module modes and parameter storage fixed while the graph is active. Run capture sequentially and use replay and the optimizer on the original caller stream. Release old autograd graphs before capture. Use `.clone()` to retain an output across replays.
 
-For a cache, call `save_frozen_cache(path, model, model_fingerprint=revision)` and later `load_frozen_cache(path, fresh_model, expected_fingerprint=revision)`. Use a checkpoint digest or an immutable revision identifier, restore other parameters separately, and keep both the cache and its `.sha256` sidecar local unless their publication is intentional.
+Inputs are copied into fixed, detached buffers, so capture the **complete differentiable objective** for end-to-end gradients. Those gradients belong to the captured buffers and parameters. For inference, pass `backward=False` and return an output tensor instead of a scalar loss.
+
+For a cache, call `save_frozen_cache(path, model, model_fingerprint=revision)` and later `load_frozen_cache(path, fresh_model, expected_fingerprint=revision)`. Use a checkpoint digest or immutable revision identifier. Keep the cache together with its `.sha256` sidecar; restore adapters, other parameters and optimizer state from their own checkpoints.
 
 Run the dataset-free example and tests:
 
@@ -62,4 +67,4 @@ python examples/frozen.py
 python -m unittest discover -s tests -p test_frozen.py -v
 ```
 
-The tests use only generated tensors. Their results cannot substitute for output/gradient fidelity and resource checks on each new model.
+The generated-tensor tests cover native-path parity, cache round trips, input gradients, repeated frozen-layer use, dynamic rounding, changed-input replay and conversion checks.
