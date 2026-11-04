@@ -28,6 +28,8 @@ CUDA Graph storage and host metadata can offset weight-storage savings. Measure 
 
 ## Use
 
+For a new project, provide the model, the complete objective callback and an explicit precision-boundary list. The packing, cache and replay implementations can then be reused; each new model still needs a small numerical and resource check.
+
 Install and run the existing backend verification from the repository README first. Then:
 
 ```python

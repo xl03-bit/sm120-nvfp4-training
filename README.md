@@ -36,7 +36,7 @@ python examples/train.py --profile balanced
 For frozen backbones used in inference or differentiable objectives, an opt-in
 [frozen-weight path](docs/frozen.md) packs weights once, supports checked disk
 caches and captures forward/backward with replay-safe stochastic rounding.
-[中文使用说明](docs/frozen.zh-CN.md) explains the problem, solution and limits.
+The guide explains the problem, solution, integration steps and limits.
 The existing six profiles below remain the path for trainable base weights.
 
 ```python
