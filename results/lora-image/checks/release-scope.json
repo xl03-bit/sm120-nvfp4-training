@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "protected_baseline": "060a50b25771f89d7c63b9940bf58c2574bd476b",
+  "protected_runtime_files": 42,
+  "original_public_functions_unchanged": true,
+  "original_dependency_pins_unchanged": true,
+  "lora_runtime_sha256_matches_1000_step_run": true,
+  "cancelled_hybrid_mode_excluded": true,
+  "image_files": [
+    "beach-progress.png",
+    "flux-loss.png",
+    "flux-memory-time.png",
+    "h3-training.png",
+    "mode-comparison.png"
+  ],
+  "example_entry": "two actual GPU updates passed; timing is a smoke result, not a benchmark",
+  "wheel_matches_tested_sources": true,
+  "wheel_import_and_cpu_preserve_update": "passed, no installation or new environment"
+}

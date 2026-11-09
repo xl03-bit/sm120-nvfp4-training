@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "synthetic weights, genuine Flux2 architecture; not pretrained quality or speed",
+  "layers": 16,
+  "records": [
+    {
+      "step": 1,
+      "side": 16,
+      "loss": 0.3387434482574463,
+      "grad_norm": 0.00025737518444657326
+    },
+    {
+      "step": 2,
+      "side": 16,
+      "loss": 0.34194767475128174,
+      "grad_norm": 0.00025760638527572155
+    },
+    {
+      "step": 3,
+      "side": 20,
+      "loss": 0.3451433777809143,
+      "grad_norm": 0.00023012598103377968
+    },
+    {
+      "step": 4,
+      "side": 20,
+      "loss": 0.3423783779144287,
+      "grad_norm": 0.0002283244684804231
+    }
+  ],
+  "checkpoint_restore": "exact",
+  "core_modified": false
+}

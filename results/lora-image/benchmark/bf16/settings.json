@@ -1,0 +1,22 @@
+{
+  "mode": "preserve",
+  "backward_mode": "recompute",
+  "label": "preserve-bf16-r1",
+  "steps": 40,
+  "warmup": 10,
+  "profile": true,
+  "validate": true,
+  "torch": "2.14.1+cu132",
+  "cuda": "13.2",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "trainable": 23887872,
+  "resolution": 1024,
+  "batch": 1,
+  "rank": 16,
+  "alpha": 16,
+  "lr": 0.0001,
+  "attention": "cudnn",
+  "precision": "BF16 compute / FP32 adapters and fused AdamW",
+  "checkpointing": true,
+  "timing": "synchronized forward + loss + backward + clip + optimizer; no validation, profile or first warmup steps"
+}

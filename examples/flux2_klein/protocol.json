@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "subject": "google/dreambooth/monster_toy",
+  "trigger": "sks monster toy",
+  "train": [
+    "00.jpg",
+    "01.jpg",
+    "02.jpg",
+    "03.jpg"
+  ],
+  "heldout": [
+    "04.jpg"
+  ],
+  "resolution": 1024,
+  "resize": "shortest side then center crop, bicubic",
+  "horizontal_flip": false,
+  "seeds": [
+    7849
+  ],
+  "prompts": {
+    "empty": "",
+    "train_00": "A photo of sks monster toy sitting on an indoor windowsill, with a city visible outside.",
+    "train_01": "A photo of sks monster toy sitting on an office desk in front of a computer monitor.",
+    "train_02": "A photo of sks monster toy sitting on a sunlit windowsill, seen from a slight side angle.",
+    "train_03": "A photo of sks monster toy sitting on the hood of a car outdoors.",
+    "heldout_04": "A photo of sks monster toy sitting on a stone surface beside green plants.",
+    "short_beach": "A photo of sks monster toy sitting on a sandy beach beside a small blue bucket, full body visible."
+  },
+  "baseline_keys": [
+    "short_beach"
+  ],
+  "inference": {
+    "steps": 50,
+    "guidance_scale": 4.0,
+    "height": 1024,
+    "width": 1024,
+    "is_distilled": false
+  },
+  "proposed_training": {
+    "rank": 16,
+    "alpha": 16,
+    "lr": 0.0001,
+    "optimizer": "FP32 fused AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "grad_clip": 1.0,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "seed": 7849,
+    "timestep_sampling": "uniform over original 1000-step scheduler",
+    "loss": "unweighted MSE, target noise - latent",
+    "checkpointing": true,
+    "caption_dropout": 0,
+    "prior_preservation": false,
+    "initialization": "A Kaiming uniform; B zero",
+    "target_modules": "same 98 projections quantized in official NVFP4 checkpoint in both modes",
+    "candidate_max_steps": 1000,
+    "preview_steps": [
+      100,
+      300,
+      600,
+      1000
+    ]
+  },
+  "quality_rubric": {
+    "identity": [
+      "two stalk eyes and yellow hair",
+      "red nose and two white fangs",
+      "yellow belly patch",
+      "four red rope limbs with white ends",
+      "overall body proportions"
+    ],
+    "prompt_following": "scene/accessory changes, full subject visible",
+    "memorization": "no direct reuse of training backgrounds; heldout scenes",
+    "preservation": "generic cat and different monster prompts stay responsive",
+    "base_gate": "inspect short AND detailed prompt outputs; change subject before training if identity is already reliable"
+  },
+  "caveats": [
+    "Only four training photographs and one heldout photograph: not a broad statistical benchmark.",
+    "The official recipe is adapted to the existing LoRA API; PEFT is not installed or required.",
+    "1024px uses the model-card inference size; source photographs are 1440px square.",
+    "Report any later recipe or dataset changes explicitly."
+  ]
+}

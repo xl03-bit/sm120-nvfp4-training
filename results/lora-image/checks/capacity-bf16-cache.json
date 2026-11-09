@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "scope": "random inputs through full pretrained model; no learning or benchmark conclusion",
+  "mode": "bf16",
+  "backward_mode": "cache",
+  "profiled": false,
+  "records": [
+    {
+      "resolution": 512,
+      "step": 1,
+      "seconds": 1.706870699999854,
+      "loss": 0.4112236499786377,
+      "grad_norm": 0.24286246299743652,
+      "peak_allocated_GiB": 7.899333953857422,
+      "peak_reserved_GiB": 8.1796875
+    },
+    {
+      "resolution": 512,
+      "step": 2,
+      "seconds": 1.1363055000001623,
+      "loss": 0.405522882938385,
+      "grad_norm": 0.2751583456993103,
+      "peak_allocated_GiB": 8.081861972808838,
+      "peak_reserved_GiB": 8.26953125
+    },
+    {
+      "resolution": 512,
+      "step": 3,
+      "seconds": 1.137739199999487,
+      "loss": 0.37957870960235596,
+      "grad_norm": 0.3719315528869629,
+      "peak_allocated_GiB": 8.081861972808838,
+      "peak_reserved_GiB": 8.322265625
+    },
+    {
+      "resolution": 1024,
+      "step": 1,
+      "seconds": 5.145648599998822,
+      "loss": 0.3374399244785309,
+      "grad_norm": 0.5312750935554504,
+      "peak_allocated_GiB": 9.110144138336182,
+      "peak_reserved_GiB": 9.724609375
+    },
+    {
+      "resolution": 1024,
+      "step": 2,
+      "seconds": 5.140730600000097,
+      "loss": 0.2626883387565613,
+      "grad_norm": 0.3760971426963806,
+      "peak_allocated_GiB": 9.109167575836182,
+      "peak_reserved_GiB": 9.724609375
+    },
+    {
+      "resolution": 1024,
+      "step": 3,
+      "seconds": 5.140840699999899,
+      "loss": 0.2198377549648285,
+      "grad_norm": 0.2509479820728302,
+      "peak_allocated_GiB": 9.109167575836182,
+      "peak_reserved_GiB": 9.724609375
+    }
+  ]
+}

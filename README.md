@@ -83,6 +83,22 @@ for target selection, save/load, merging, independent packaging and examples.
 The [LoRA measurements](results/lora/README.md) include three workload shapes and
 512 FineWeb updates of a real pretrained GPT-2, with matched data and loss curves.
 
+### Image-model LoRA on a 16 GB GPU
+
+**FLUX.2 Klein Base 4B completed 1,000 NVFP4 LoRA updates at 1024px.** In the matched
+40-update benchmark, native NVFP4 reduced full update time from **3.405 to 2.306 s**
+and peak allocated memory from **9.516 to 6.626 GiB**. The memory-saving recompute
+option took **2.360 s** and **4.669 GiB**—about half the BF16 training allocation.
+All modes used the same data, rank, optimizer, checkpointing and attention backend.
+
+![Subject learning after 100, 200, 300, 500 and 1000 updates](results/lora-image/beach-progress.png)
+
+See the [image/H3 experiment report](results/lora-image/README.md) for loss and memory
+curves, numerical checks, optimization history and the scope of the H3 tests.
+The [FLUX.2 example](examples/flux2_klein/README.md) includes training, inference,
+adapter export and the matched benchmark. These additions leave the six
+full-parameter profiles and the existing frozen-weight interfaces unchanged.
+
 ## Measurements on one RTX 5060 Ti
 
 Complete forward, loss, backward and AdamW update, 12 warmup steps and five rounds of 30 synchronized steps. Peak memory is PyTorch allocated GiB, measured from initialization through training. The table uses the original, pre-fix implementation and disables transpose recomputation. Per-round timings and three recomputation variants are in [the results](results/benchmarks.json).

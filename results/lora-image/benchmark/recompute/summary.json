@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "measured_steps": 30,
+  "mean_seconds": 2.359710876666577,
+  "median_seconds": 2.3596556000011333,
+  "round_means": [
+    2.360051399999429,
+    2.359146630000396,
+    2.3599345999999057
+  ],
+  "images_per_second": 0.42378073088879453,
+  "peak_allocated_GiB": 4.669101238250732,
+  "peak_reserved_GiB": 5.80859375
+}

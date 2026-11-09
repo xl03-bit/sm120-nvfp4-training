@@ -15,3 +15,10 @@ dist/
 *.bin
 *.zip
 .env
+examples/flux2_klein/models/
+examples/flux2_klein/cache/
+examples/flux2_klein/kernel-cache/
+examples/flux2_klein/data/
+examples/flux2_klein/results/
+examples/flux2_klein/metadata/
+examples/flux2_klein/benchmark-runs/

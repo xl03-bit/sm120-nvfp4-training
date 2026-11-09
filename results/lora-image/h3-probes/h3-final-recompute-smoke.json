@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "scope": "synthetic-input execution only",
+  "cache_gib": 0.0,
+  "steps": [
+    {
+      "step": 1,
+      "seconds": 1.7245253999990382,
+      "loss": 2.0590529441833496,
+      "grad_norm": 0.06825695931911469,
+      "allocated_gib": 12.1002197265625,
+      "peak_allocated_gib": 12.190358638763428,
+      "peak_reserved_gib": 12.544921875
+    },
+    {
+      "step": 2,
+      "seconds": 0.7600812000000587,
+      "loss": 2.056988477706909,
+      "grad_norm": 0.0532253198325634,
+      "allocated_gib": 12.1002197265625,
+      "peak_allocated_gib": 12.357967376708984,
+      "peak_reserved_gib": 12.546875
+    },
+    {
+      "step": 3,
+      "seconds": 0.7594628000006196,
+      "loss": 2.056988477706909,
+      "grad_norm": 0.05188397690653801,
+      "allocated_gib": 12.1002197265625,
+      "peak_allocated_gib": 12.357324600219727,
+      "peak_reserved_gib": 12.546875
+    },
+    {
+      "step": 4,
+      "seconds": 0.7380530999998882,
+      "loss": 2.056988477706909,
+      "grad_norm": 0.051306333392858505,
+      "allocated_gib": 12.1002197265625,
+      "peak_allocated_gib": 12.357967376708984,
+      "peak_reserved_gib": 12.546875
+    }
+  ]
+}

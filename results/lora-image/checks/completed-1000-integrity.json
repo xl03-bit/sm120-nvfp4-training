@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "exports": [
+    {
+      "step": 500,
+      "tensors": 196,
+      "bitwise_equal": true,
+      "path": "results\\nvfp4-cache-1000\\exported-0500\\pytorch_lora_weights.safetensors",
+      "bytes": 95583416,
+      "sha256": "bd4bbb0ccd29f1c9bcca0bef6d17aa33e1bd93cdc53b79b8620121b94b881859"
+    },
+    {
+      "step": 600,
+      "tensors": 196,
+      "bitwise_equal": true,
+      "path": "results\\nvfp4-cache-1000\\exported-0600\\pytorch_lora_weights.safetensors",
+      "bytes": 95583416,
+      "sha256": "a5560a7a85e6cd374078fca594a799e93306476a892aa8db90bfe4eaa10bf77e"
+    },
+    {
+      "step": 1000,
+      "tensors": 196,
+      "bitwise_equal": true,
+      "path": "results\\nvfp4-cache-1000\\exported-1000\\pytorch_lora_weights.safetensors",
+      "bytes": 95583416,
+      "sha256": "b97b8bdf3666a9bc6a4797a4d32024861d994703f2efd3f0902b620e9f74090f"
+    }
+  ],
+  "report_links_exist": true,
+  "acceleration_core_unchanged": true
+}

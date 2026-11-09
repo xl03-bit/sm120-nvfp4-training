@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "torch": "2.14.1+cu132",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "checks": [
+    {
+      "check": "backward_scale_correctly_rounded_division",
+      "passed": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        128,
+        384
+      ],
+      "awq": false,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        128,
+        384
+      ],
+      "awq": true,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        193,
+        257
+      ],
+      "awq": false,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        193,
+        257
+      ],
+      "awq": true,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        11,
+        19
+      ],
+      "awq": false,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        11,
+        19
+      ],
+      "awq": true,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        256,
+        512
+      ],
+      "awq": false,
+      "bitwise": true
+    },
+    {
+      "check": "padding_cache_recompute_paired_sr_awq",
+      "shape": [
+        256,
+        512
+      ],
+      "awq": true,
+      "bitwise": true
+    },
+    {
+      "check": "mlp_updates_resume_checkpoint",
+      "steps": 64,
+      "loss_start": 1.3061103820800781,
+      "loss_end": 0.5700165033340454,
+      "base_bytes_unchanged": true
+    },
+    {
+      "check": "two_block_attention_checkpoint_updates",
+      "steps": 32,
+      "batch": 2,
+      "sequence": 37,
+      "loss_start": 3.467250108718872,
+      "loss_end": 2.7176051139831543
+    }
+  ]
+}

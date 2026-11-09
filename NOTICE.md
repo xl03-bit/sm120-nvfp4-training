@@ -5,3 +5,5 @@ The reference CUDA quantizer and parts of the reference Linear and Hadamard impl
 The short-contraction MMA code follows the public [NVIDIA SM120 MMA fragment layouts](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm120.hpp). PyTorch, TorchAO, Triton and the CUDA Toolkit are external dependencies under their respective licenses. This is an independent project.
 
 The project's original contributions are distributed under the [MIT License](LICENSE), copyright © 2026 xl03-bit.
+
+The H3 experiments use [kohya-ss/musubi-tuner](https://github.com/kohya-ss/musubi-tuner/tree/f8a1b03794a49239a3539015075f5123d6c07d66) as the external model implementation and numerical reference for Comfy NVFP4 layout decoding. The Flux integration calls the installed Hugging Face Diffusers checkpoint converter and pipeline. These dependencies, model weights and training datasets retain their own licenses; they are not bundled in the LoRA wheel. Dataset attribution and pinned model revisions are listed in the [image/H3 report](results/lora-image/README.md).

@@ -1,0 +1,29 @@
+{
+  "real_cached_layouts_bitwise": 40,
+  "records": [
+    {
+      "case": "det-cached",
+      "loss": 2.0590529441833496,
+      "gradient_norm": 0.06814155727624893,
+      "seconds": 1.362494599999991
+    },
+    {
+      "case": "det-repeat",
+      "loss": 2.0590529441833496,
+      "gradient_norm": 0.06814155727624893,
+      "seconds": 0.8448494000003848,
+      "relative_gradient_difference": 0.0,
+      "gradient_cosine": 1.0008882284164429,
+      "bitwise": true
+    },
+    {
+      "case": "det-recompute",
+      "loss": 2.0590529441833496,
+      "gradient_norm": 0.06814155727624893,
+      "seconds": 0.8643020999988948,
+      "relative_gradient_difference": 0.0,
+      "gradient_cosine": 1.0008882284164429,
+      "bitwise": true
+    }
+  ]
+}

@@ -21,6 +21,24 @@ conversion occurs inside these interfaces. `nvfp4` deliberately replaces the
 selected base projections with quantized buffers; use `preserve` when the original
 weight format must remain intact.
 
+`preserve` does **not** use NVFP4: its frozen base forward and dX are floating-point
+operations. Retaining BF16 weights means retaining two bytes per base weight on
+the GPU. For a pretrained NVFP4 checkpoint, `packed_nvfp4` instead preserves the
+checkpoint's packed representation. It does not restore the original BF16 model.
+
+For measured image-model choices, see [the 4B benchmark](../results/lora-image/README.md):
+
+| Choice | Full update | Training peak allocated | What remains in GPU memory |
+|---|---:|---:|---|
+| BF16 `preserve` | 3.405 s | 9.516 GiB | Original BF16 base |
+| `packed_nvfp4`, `cache` | 2.306 s | 6.626 GiB | Source packed base and backward layout |
+| `packed_nvfp4`, `recompute` | 2.360 s | 4.669 GiB | Source packed base; transient backward layout |
+
+These are RTX 5060 Ti results for FLUX.2 Klein Base 4B, 1024px, batch 1, rank 16,
+checkpointing and cuDNN attention. They are workload measurements, not universal
+mode speedups. The original floating-base `nvfp4` mode has separate
+[MLP and GPT-2 measurements](../results/lora/README.md).
+
 ## Minimal integration
 
 ```python
@@ -94,6 +112,8 @@ Graph replay requires fused torch AdamW and a CUDA model. It captures the curren
 training mode and optimizer hyperparameters. Close and recapture after changing
 shape, learning rate, mode or optimizer state. Save checkpoints after closing the
 graph. Do not run simultaneous training against a model captured in a graph.
+`packed_nvfp4` uses eager execution and explicitly rejects graph capture; use
+ordinary checkpointed training for that mode.
 
 For long sequences, add `checkpoint_modules=["model.layers.0", ...]` to
 `prepare_lora`. Use your model's actual parent block paths. Non-reentrant PyTorch
@@ -145,6 +165,7 @@ installation is desired. `preserve` still imports no CUDA compiler or quantizer.
 ```bash
 python tests/test_lora.py
 python tests/test_lora_graph.py
+python tests/test_packed_lora.py --output packed-checks.json
 python tests/benchmark_lora.py bench --output results/lora/bench.json
 # Uses a local GPT-2 checkpoint and the existing verified FineWeb token shard:
 LORA_GPT2=/path/to/gpt2 NVFP4_FINEWEB=/path/to/fineweb_train_000001.bin \
@@ -159,3 +180,8 @@ base, data and AdamW state to an ordinary PyTorch LoRA implementation.
 
 See [measured results](../results/lora/README.md) for timings, memory, loss curves
 and the limits of the experiment.
+
+The [FLUX.2 Klein example](../examples/flux2_klein/README.md) provides a complete
+pretrained-image-model integration, including the source-format mapping and
+Diffusers-compatible adapter export. Model-specific prompt/VAE handling belongs
+in that integration; the LoRA and packed CUDA kernels are shared with the H3 tests.

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "cudnn": 92400,
+  "records": [
+    {
+      "length": 257,
+      "cudnn_supported": false
+    },
+    {
+      "length": 1536,
+      "cudnn_supported": false
+    },
+    {
+      "length": 4608,
+      "cudnn_supported": false
+    }
+  ]
+}

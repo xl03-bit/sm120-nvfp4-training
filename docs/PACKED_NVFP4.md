@@ -90,3 +90,15 @@ task quality needs a real-data run for the chosen model and recipe.
 H3-specific prompt formatting, video/audio packing, VAE caches and RoPE selection
 remain in the H3 experiment integration. They are not global model patches in
 this package.
+
+## Pretrained model examples
+
+The [FLUX.2 Klein recipe](../examples/flux2_klein/README.md) loads official NVFP4
+weights and exposes `--backward-mode cache` / `recompute`. Its original scalar
+activation calibration is metadata, not an AWQ vector. The experiment explicitly
+uses dynamic activation scales during training and inference.
+
+The [experiment report](../results/lora-image/README.md) contains the matched BF16
+comparison, 1,000-update subject run, H3 engineering measurements and development
+fixes. Only the selected beach subject progression is published as generated
+imagery; the numerical traces retain all recorded training steps.

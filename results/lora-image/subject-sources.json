@@ -1,0 +1,36 @@
+{
+  "repo": "google/dreambooth",
+  "revision": "4f887af7970a06fc0cd3adaa1d0b368547d6a1d0",
+  "files": [
+    {
+      "file": "00.jpg",
+      "sha256": "8138db18ca07bb93126a9de4a4aaf18ee2f3168f90f7e2525fd16edba386d346",
+      "bytes": 320910,
+      "source": "https://raw.githubusercontent.com/google/dreambooth/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy/00.jpg"
+    },
+    {
+      "file": "01.jpg",
+      "sha256": "c55c3212e020221e8ac659bafcd181f0ce6dc026bfdb8219573f7a28b425a25e",
+      "bytes": 306583,
+      "source": "https://raw.githubusercontent.com/google/dreambooth/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy/01.jpg"
+    },
+    {
+      "file": "02.jpg",
+      "sha256": "eaf37f344c2c4229cf16da19fe38c5722625b81b76d846bbeff057f78f1dd41d",
+      "bytes": 446699,
+      "source": "https://raw.githubusercontent.com/google/dreambooth/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy/02.jpg"
+    },
+    {
+      "file": "03.jpg",
+      "sha256": "2c1c5d9e4b7b34b43901b99abad9bf1b043dc3e2e082bb91c0d2f73da5b96e6e",
+      "bytes": 364511,
+      "source": "https://raw.githubusercontent.com/google/dreambooth/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy/03.jpg"
+    },
+    {
+      "file": "04.jpg",
+      "sha256": "0acdcfe19e422bac159b2b90eb8702f669175d22761ce6faf21b4b621911824b",
+      "bytes": 492208,
+      "source": "https://raw.githubusercontent.com/google/dreambooth/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy/04.jpg"
+    }
+  ]
+}

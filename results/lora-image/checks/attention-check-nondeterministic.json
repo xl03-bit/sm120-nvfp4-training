@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "allow_nondeterministic": true,
+  "cudnn": 92400,
+  "records": [
+    {
+      "length": 257,
+      "cudnn_supported": true,
+      "relative_l2_output_dq_dk_dv": [
+        0.0021617780439555645,
+        0.002372685121372342,
+        0.0023511359468102455,
+        0.0023410003632307053
+      ],
+      "seconds_fwd_bwd": {
+        "EFFICIENT_ATTENTION": 0.0004028600000310689,
+        "CUDNN_ATTENTION": 0.00034992000000784175
+      },
+      "repeat_bitwise_exact": false,
+      "repeat_relative_l2": [
+        0.0,
+        1.2865467397205066e-05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "length": 1536,
+      "cudnn_supported": true,
+      "relative_l2_output_dq_dk_dv": [
+        0.0012649416457861662,
+        0.003586800303310156,
+        0.0035558310337364674,
+        0.00019177280773874372
+      ],
+      "seconds_fwd_bwd": {
+        "EFFICIENT_ATTENTION": 0.006149460000233376,
+        "CUDNN_ATTENTION": 0.0025824600001215004
+      },
+      "repeat_bitwise_exact": false,
+      "repeat_relative_l2": [
+        0.0,
+        2.0834264432778582e-05,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "length": 4608,
+      "cudnn_supported": true,
+      "relative_l2_output_dq_dk_dv": [
+        0.0010671394411474466,
+        0.0035896736662834883,
+        0.0035633910447359085,
+        0.0002827595453709364
+      ],
+      "seconds_fwd_bwd": {
+        "EFFICIENT_ATTENTION": 0.0547539200000756,
+        "CUDNN_ATTENTION": 0.02120089999989432
+      },
+      "repeat_bitwise_exact": false,
+      "repeat_relative_l2": [
+        0.0,
+        2.563997077231761e-05,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

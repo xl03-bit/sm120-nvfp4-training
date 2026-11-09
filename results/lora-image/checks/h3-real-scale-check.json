@@ -1,0 +1,962 @@
+[
+  {
+    "layer": "blocks.20.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000674552284181118,
+    "fused": 0.000674552284181118
+  },
+  {
+    "layer": "blocks.20.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003372400242369622,
+    "fused": 0.0003372400242369622
+  },
+  {
+    "layer": "blocks.20.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000371060858014971,
+    "fused": 0.000371060858014971
+  },
+  {
+    "layer": "blocks.20.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00040449932566843927,
+    "fused": 0.00040449932566843927
+  },
+  {
+    "layer": "blocks.21.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007152239559218287,
+    "fused": 0.0007152239559218287
+  },
+  {
+    "layer": "blocks.21.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003478399303276092,
+    "fused": 0.0003478399303276092
+  },
+  {
+    "layer": "blocks.21.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00036496762186288834,
+    "fused": 0.00036496762186288834
+  },
+  {
+    "layer": "blocks.21.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004804710333701223,
+    "fused": 0.0004804710333701223
+  },
+  {
+    "layer": "blocks.22.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005476762307807803,
+    "fused": 0.0005476762307807803
+  },
+  {
+    "layer": "blocks.22.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003263480612076819,
+    "fused": 0.0003263480612076819
+  },
+  {
+    "layer": "blocks.22.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00038050574949011207,
+    "fused": 0.00038050574949011207
+  },
+  {
+    "layer": "blocks.22.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004161639662925154,
+    "fused": 0.0004161639662925154
+  },
+  {
+    "layer": "blocks.23.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0011444354895502329,
+    "fused": 0.0011444354895502329
+  },
+  {
+    "layer": "blocks.23.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003335120272822678,
+    "fused": 0.0003335120272822678
+  },
+  {
+    "layer": "blocks.23.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003805097658187151,
+    "fused": 0.0003805097658187151
+  },
+  {
+    "layer": "blocks.23.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00045173591934144497,
+    "fused": 0.00045173591934144497
+  },
+  {
+    "layer": "blocks.24.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0008344433736056089,
+    "fused": 0.0008344433736056089
+  },
+  {
+    "layer": "blocks.24.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00032906452543102205,
+    "fused": 0.00032906452543102205
+  },
+  {
+    "layer": "blocks.24.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00038335970020852983,
+    "fused": 0.00038335970020852983
+  },
+  {
+    "layer": "blocks.24.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004067250993102789,
+    "fused": 0.0004067250993102789
+  },
+  {
+    "layer": "blocks.25.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0010808759834617376,
+    "fused": 0.0010808759834617376
+  },
+  {
+    "layer": "blocks.25.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00033175089629366994,
+    "fused": 0.00033175089629366994
+  },
+  {
+    "layer": "blocks.25.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003702660615090281,
+    "fused": 0.0003702660615090281
+  },
+  {
+    "layer": "blocks.25.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005153054371476173,
+    "fused": 0.0005153054371476173
+  },
+  {
+    "layer": "blocks.26.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007413991843350232,
+    "fused": 0.0007413991843350232
+  },
+  {
+    "layer": "blocks.26.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00034781184513121843,
+    "fused": 0.00034781184513121843
+  },
+  {
+    "layer": "blocks.26.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003848970518447459,
+    "fused": 0.0003848970518447459
+  },
+  {
+    "layer": "blocks.26.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00047413597349077463,
+    "fused": 0.00047413597349077463
+  },
+  {
+    "layer": "blocks.27.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0014303355710580945,
+    "fused": 0.0014303355710580945
+  },
+  {
+    "layer": "blocks.27.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004587784642353654,
+    "fused": 0.0004587784642353654
+  },
+  {
+    "layer": "blocks.27.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003698847722262144,
+    "fused": 0.0003698847722262144
+  },
+  {
+    "layer": "blocks.27.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006311731413006783,
+    "fused": 0.0006311731413006783
+  },
+  {
+    "layer": "blocks.28.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007692120270803571,
+    "fused": 0.0007692120270803571
+  },
+  {
+    "layer": "blocks.28.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004234875086694956,
+    "fused": 0.0004234875086694956
+  },
+  {
+    "layer": "blocks.28.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004076764453202486,
+    "fused": 0.0004076764453202486
+  },
+  {
+    "layer": "blocks.28.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000514396233484149,
+    "fused": 0.000514396233484149
+  },
+  {
+    "layer": "blocks.29.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.001105576055124402,
+    "fused": 0.001105576055124402
+  },
+  {
+    "layer": "blocks.29.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00037272664485499263,
+    "fused": 0.00037272664485499263
+  },
+  {
+    "layer": "blocks.29.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0003970915568061173,
+    "fused": 0.0003970915568061173
+  },
+  {
+    "layer": "blocks.29.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004773592227138579,
+    "fused": 0.0004773592227138579
+  },
+  {
+    "layer": "blocks.30.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0012905584881082177,
+    "fused": 0.0012905584881082177
+  },
+  {
+    "layer": "blocks.30.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004467364924494177,
+    "fused": 0.0004467364924494177
+  },
+  {
+    "layer": "blocks.30.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00047238587285391986,
+    "fused": 0.00047238587285391986
+  },
+  {
+    "layer": "blocks.30.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006374891381710768,
+    "fused": 0.0006374891381710768
+  },
+  {
+    "layer": "blocks.31.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0008985226158984005,
+    "fused": 0.0008985226158984005
+  },
+  {
+    "layer": "blocks.31.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00039817733340896666,
+    "fused": 0.00039817733340896666
+  },
+  {
+    "layer": "blocks.31.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004166878352407366,
+    "fused": 0.0004166878352407366
+  },
+  {
+    "layer": "blocks.31.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005190404481254518,
+    "fused": 0.0005190404481254518
+  },
+  {
+    "layer": "blocks.32.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0014909908641129732,
+    "fused": 0.0014909908641129732
+  },
+  {
+    "layer": "blocks.32.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00046272421604953706,
+    "fused": 0.00046272421604953706
+  },
+  {
+    "layer": "blocks.32.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005639690207317472,
+    "fused": 0.0005639690207317472
+  },
+  {
+    "layer": "blocks.32.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005634712288156152,
+    "fused": 0.0005634712288156152
+  },
+  {
+    "layer": "blocks.33.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0009534339187666774,
+    "fused": 0.0009534339187666774
+  },
+  {
+    "layer": "blocks.33.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000400481338147074,
+    "fused": 0.000400481338147074
+  },
+  {
+    "layer": "blocks.33.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004147972504142672,
+    "fused": 0.0004147972504142672
+  },
+  {
+    "layer": "blocks.33.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006734002381563187,
+    "fused": 0.0006734002381563187
+  },
+  {
+    "layer": "blocks.34.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0012185175437480211,
+    "fused": 0.0012185175437480211
+  },
+  {
+    "layer": "blocks.34.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004310819786041975,
+    "fused": 0.0004310819786041975
+  },
+  {
+    "layer": "blocks.34.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004601592954713851,
+    "fused": 0.0004601592954713851
+  },
+  {
+    "layer": "blocks.34.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006876438856124878,
+    "fused": 0.0006876438856124878
+  },
+  {
+    "layer": "blocks.35.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0011783295776695013,
+    "fused": 0.0011783295776695013
+  },
+  {
+    "layer": "blocks.35.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004358265141490847,
+    "fused": 0.0004358265141490847
+  },
+  {
+    "layer": "blocks.35.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005031028995290399,
+    "fused": 0.0005031028995290399
+  },
+  {
+    "layer": "blocks.35.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005360958748497069,
+    "fused": 0.0005360958748497069
+  },
+  {
+    "layer": "blocks.36.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0013286452740430832,
+    "fused": 0.0013286452740430832
+  },
+  {
+    "layer": "blocks.36.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00043503576307557523,
+    "fused": 0.00043503576307557523
+  },
+  {
+    "layer": "blocks.36.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005341249634511769,
+    "fused": 0.0005341249634511769
+  },
+  {
+    "layer": "blocks.36.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006740926764905453,
+    "fused": 0.0006740926764905453
+  },
+  {
+    "layer": "blocks.37.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0015666023828089237,
+    "fused": 0.0015666023828089237
+  },
+  {
+    "layer": "blocks.37.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00043111006380058825,
+    "fused": 0.00043111006380058825
+  },
+  {
+    "layer": "blocks.37.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005194739205762744,
+    "fused": 0.0005194739205762744
+  },
+  {
+    "layer": "blocks.37.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006382999708876014,
+    "fused": 0.0006382999708876014
+  },
+  {
+    "layer": "blocks.38.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0015812292695045471,
+    "fused": 0.0015812292695045471
+  },
+  {
+    "layer": "blocks.38.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005356583278626204,
+    "fused": 0.0005356583278626204
+  },
+  {
+    "layer": "blocks.38.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00044424383668228984,
+    "fused": 0.00044424383668228984
+  },
+  {
+    "layer": "blocks.38.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005433009355328977,
+    "fused": 0.0005433009355328977
+  },
+  {
+    "layer": "blocks.39.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.001285230042412877,
+    "fused": 0.001285230042412877
+  },
+  {
+    "layer": "blocks.39.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00047692572115920484,
+    "fused": 0.00047692572115920484
+  },
+  {
+    "layer": "blocks.39.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004979108343832195,
+    "fused": 0.0004979108343832195
+  },
+  {
+    "layer": "blocks.39.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006912003154866397,
+    "fused": 0.0006912003154866397
+  },
+  {
+    "layer": "blocks.40.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0009057718561962247,
+    "fused": 0.0009057718561962247
+  },
+  {
+    "layer": "blocks.40.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00043582249782048166,
+    "fused": 0.00043582249782048166
+  },
+  {
+    "layer": "blocks.40.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004898387123830616,
+    "fused": 0.0004898387123830616
+  },
+  {
+    "layer": "blocks.40.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005186269991099834,
+    "fused": 0.0005186269991099834
+  },
+  {
+    "layer": "blocks.41.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0011867668945342302,
+    "fused": 0.0011867668945342302
+  },
+  {
+    "layer": "blocks.41.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004616324440576136,
+    "fused": 0.0004616324440576136
+  },
+  {
+    "layer": "blocks.41.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000687290623318404,
+    "fused": 0.000687290623318404
+  },
+  {
+    "layer": "blocks.41.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000629786285571754,
+    "fused": 0.000629786285571754
+  },
+  {
+    "layer": "blocks.42.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0015555318677797914,
+    "fused": 0.0015555318677797914
+  },
+  {
+    "layer": "blocks.42.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00043961769551970065,
+    "fused": 0.00043961769551970065
+  },
+  {
+    "layer": "blocks.42.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005752040888182819,
+    "fused": 0.0005752040888182819
+  },
+  {
+    "layer": "blocks.42.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006540508475154638,
+    "fused": 0.0006540508475154638
+  },
+  {
+    "layer": "blocks.43.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.001770312082953751,
+    "fused": 0.001770312082953751
+  },
+  {
+    "layer": "blocks.43.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0004731284570880234,
+    "fused": 0.0004731284570880234
+  },
+  {
+    "layer": "blocks.43.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000824886083137244,
+    "fused": 0.000824886083137244
+  },
+  {
+    "layer": "blocks.43.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007641464471817017,
+    "fused": 0.0007641464471817017
+  },
+  {
+    "layer": "blocks.44.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0016389423981308937,
+    "fused": 0.0016389423981308937
+  },
+  {
+    "layer": "blocks.44.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005185587797313929,
+    "fused": 0.0005185587797313929
+  },
+  {
+    "layer": "blocks.44.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00048517444520257413,
+    "fused": 0.00048517444520257413
+  },
+  {
+    "layer": "blocks.44.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007391473627649248,
+    "fused": 0.0007391473627649248
+  },
+  {
+    "layer": "blocks.45.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.001321998075582087,
+    "fused": 0.001321998075582087
+  },
+  {
+    "layer": "blocks.45.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000507403863593936,
+    "fused": 0.000507403863593936
+  },
+  {
+    "layer": "blocks.45.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00046485563507303596,
+    "fused": 0.00046485563507303596
+  },
+  {
+    "layer": "blocks.45.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007643591379746795,
+    "fused": 0.0007643591379746795
+  },
+  {
+    "layer": "blocks.46.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.001618117792531848,
+    "fused": 0.001618117792531848
+  },
+  {
+    "layer": "blocks.46.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005302836070768535,
+    "fused": 0.0005302836070768535
+  },
+  {
+    "layer": "blocks.46.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005586344050243497,
+    "fused": 0.0005586344050243497
+  },
+  {
+    "layer": "blocks.46.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006685774424113333,
+    "fused": 0.0006685774424113333
+  },
+  {
+    "layer": "blocks.47.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0018217834876850247,
+    "fused": 0.0018217834876850247
+  },
+  {
+    "layer": "blocks.47.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000515379651915282,
+    "fused": 0.000515379651915282
+  },
+  {
+    "layer": "blocks.47.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0007018293254077435,
+    "fused": 0.0007018293254077435
+  },
+  {
+    "layer": "blocks.47.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0008428526925854385,
+    "fused": 0.0008428526925854385
+  },
+  {
+    "layer": "blocks.48.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0019436521688476205,
+    "fused": 0.0019436521688476205
+  },
+  {
+    "layer": "blocks.48.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005167243652977049,
+    "fused": 0.0005167243652977049
+  },
+  {
+    "layer": "blocks.48.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006220553768798709,
+    "fused": 0.0006220553768798709
+  },
+  {
+    "layer": "blocks.48.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0006114564021117985,
+    "fused": 0.0006114564021117985
+  },
+  {
+    "layer": "blocks.49.attn.qkv_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0017317618476226926,
+    "fused": 0.0017317618476226926
+  },
+  {
+    "layer": "blocks.49.attn.out_proj.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.0005368063575588167,
+    "fused": 0.0005368063575588167
+  },
+  {
+    "layer": "blocks.49.mlp.fc1.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.000804161827545613,
+    "fused": 0.000804161827545613
+  },
+  {
+    "layer": "blocks.49.mlp.fc2.base",
+    "scale_equal": true,
+    "packed_equal": true,
+    "block_scales_equal": true,
+    "reference": 0.00036759275826625526,
+    "fused": 0.00036759275826625526
+  }
+]
