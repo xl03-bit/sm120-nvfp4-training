@@ -91,6 +91,15 @@ and peak allocated memory from **9.516 to 6.626 GiB**. The memory-saving recompu
 option took **2.360 s** and **4.669 GiB**—about half the BF16 training allocation.
 All modes used the same data, rank, optimizer, checkpointing and attention backend.
 
+**Training reference — one of the four photographs used to learn this toy:**
+
+<img src="results/lora-image/reference/monster-toy-00.jpg" alt="Original training photograph of the red monster toy, showing its raised eyes, yellow hair and belly, and four rope limbs" width="280">
+
+Photo by Varun Jampani, Google DreamBooth, CC BY 4.0.
+[Original image, source and license](results/lora-image/reference/README.md).
+
+**Generated beach scene after 100, 200, 300, 500 and 1000 updates:**
+
 ![Subject learning after 100, 200, 300, 500 and 1000 updates](results/lora-image/beach-progress.png)
 
 See the [image/H3 experiment report](results/lora-image/README.md) for loss and memory

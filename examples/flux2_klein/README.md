@@ -19,7 +19,7 @@ python generate.py --mode nvfp4 --attention cudnn --adapter results/subject-1000
 python export_adapter.py results/subject-1000/adapter-1000.pt results/export-1000
 ```
 
-When using an external experiment directory, place `models/` there too. The files are large; existing snapshots can be reused. Dataset images and model weights retain their upstream terms and are not included in this repository. `monster_toy` photographs are by Varun Jampani, from [Google DreamBooth](https://github.com/google/dreambooth/tree/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy). The manifest pins the five source hashes.
+When using an external experiment directory, place `models/` there too. The files are large; existing snapshots can be reused. The training dataset and model weights are downloaded separately under their upstream terms; one original training photograph is included in the report for visual comparison. `monster_toy` photographs are by Varun Jampani, from [Google DreamBooth](https://github.com/google/dreambooth/tree/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/monster_toy). The manifest pins the five source hashes.
 
 Choose `--backward-mode recompute` to save about 1.96 GiB in this workload. For the BF16 control, use `--mode bf16` with the same remaining arguments. Every output label must be new. To continue from step 300, use `--resume path/to/adapter-0300.pt --resume-step 300 --steps 1000`; optimizer step counts are checked. Training caches stay in FP32 after VAE normalization; the VAE and text encoder are frozen and not resident during DiT training.
 

@@ -24,6 +24,18 @@ Raw settings, round means and every step are in [benchmark/](benchmark/). [The r
 
 The subject is Google DreamBooth's `monster_toy`: four training photographs and one heldout photograph. The recipe follows the public Diffusers FLUX.2 Klein DreamBooth example: flow matching, frozen text encoder/VAE, original scheduler, no caption dropout or prior-preservation images. Training latents retain the original FP32 VAE normalization statistics. The public recipe, dataset hashes and pinned revisions are recorded in [flux-protocol.json](flux-protocol.json) and [subject-sources.json](subject-sources.json).
 
+**Training reference: original `monster_toy/00.jpg`, one of the four training photographs.**
+
+<img src="reference/monster-toy-00.jpg" alt="Original training photo of the red monster toy sitting on a windowsill" width="320">
+
+Photo by Varun Jampani, Google DreamBooth, CC BY 4.0. This is the unchanged 1440×1440
+source photograph; training used its 1024×1024 resized version.
+[Open the full-size original](reference/monster-toy-00.jpg) · [Source and license](reference/README.md).
+Compare its raised eyes, yellow hair, yellow belly and four red rope limbs with
+the generated beach scenes below.
+
+**Generated images with the same beach prompt at 100, 200, 300, 500 and 1000 updates:**
+
 ![The same beach prompt at 100, 200, 300, 500 and 1000 updates](beach-progress.png)
 
 Prompt: “A photo of sks monster toy sitting on a sandy beach beside a small blue bucket, full body visible.” All five images use seed 7849, 1024×1024, 50 sampling steps and guidance 4.0. At 100 updates the model makes a generic red furry figure; the belly patch, rope limbs, raised eyes and yellow hair become more recognizable in later checkpoints. The prompt's sitting pose remains inconsistent. This page publishes the beach series selected for presentation, not every evaluation image.
@@ -71,6 +83,6 @@ The real Tuxemon run completed **200 updates**, including a resume after 12; the
 - [Diffusers public Klein DreamBooth recipe](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/train_dreambooth_lora_flux2_klein.py). Local integration uses installed Diffusers 0.40.0.
 - [DreamBooth dataset](https://github.com/google/dreambooth/tree/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset); `monster_toy` photographs by Varun Jampani, with [upstream attribution and terms](https://github.com/google/dreambooth/blob/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/references_and_licenses.txt).
 - [FenomAI MiniMax-H3](https://huggingface.co/FenomAI/MiniMax-H3/tree/15646562c19be9d62aee6d28a7070d00d026027c); musubi source revision `f8a1b03794a49239a3539015075f5123d6c07d66`.
-- [diffusers/tuxemon](https://huggingface.co/datasets/diffusers/tuxemon/tree/b64c6251dfac455ab6f6d54290c86d46b149a428), sourced from the Tuxemon Project, CC BY-SA 3.0. No source dataset images or weights are redistributed here.
+- [diffusers/tuxemon](https://huggingface.co/datasets/diffusers/tuxemon/tree/b64c6251dfac455ab6f6d54290c86d46b149a428), sourced from the Tuxemon Project, CC BY-SA 3.0. Tuxemon source images and model weights are not redistributed here. The single DreamBooth training reference above is included with its source attribution and CC BY 4.0 license.
 
 [Validation records](checks/) include Windows and WSL packed tests, the legacy LoRA regression, paired SR, 64 MLP updates, 32 attention-block updates, exact resume, checkpoint layout verification, genuine Flux architecture checks and adapter export. [plot.py](plot.py) rebuilds the charts and performance table from the included data.
