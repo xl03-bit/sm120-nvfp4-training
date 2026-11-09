@@ -77,6 +77,13 @@ The real Tuxemon run completed **200 updates**, including a resume after 12; the
 
 ![H3 engineering-run objective and memory](h3-training.png)
 
+The [H3 training scripts and usage guide](../../examples/minimax_h3_single_frame/README.md)
+include pinned download sources, dataset/text/latent preparation, the unchanged
+training recipe and the two recorded launch configurations. The shared CUDA
+kernels and the H3 model runtime retain the hashes used by the 200-step run;
+packaging changes only source and asset path discovery. No additional H3 training
+was run for this source release.
+
 ## Sources and checks
 
 - [FLUX.2 Klein Base 4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4B/tree/a3b4f4849157f664bdbc776fd7453c2783562f4d) and [official NVFP4 representation](https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4b-nvfp4/tree/e655535fb8c2c148b47308cfa559a86a73273d55).

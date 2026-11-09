@@ -104,6 +104,8 @@ Photo by Varun Jampani, Google DreamBooth, CC BY 4.0.
 
 See the [image/H3 experiment report](results/lora-image/README.md) for loss and memory
 curves, numerical checks, optimization history and the scope of the H3 tests.
+The [H3 single-frame example](examples/minimax_h3_single_frame/README.md) includes
+the scripts and recorded configuration of the completed 200-step LoRA experiment.
 The [FLUX.2 example](examples/flux2_klein/README.md) includes training, inference,
 adapter export and the matched benchmark. These additions leave the six
 full-parameter profiles and the existing frozen-weight interfaces unchanged.

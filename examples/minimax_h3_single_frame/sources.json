@@ -1,0 +1,72 @@
+{
+  "musubi": {
+    "repo": "https://github.com/kohya-ss/musubi-tuner",
+    "revision": "f8a1b03794a49239a3539015075f5123d6c07d66"
+  },
+  "model": {
+    "repo": "FenomAI/MiniMax-H3",
+    "revision": "15646562c19be9d62aee6d28a7070d00d026027c",
+    "files": [
+      {
+        "file": "minimax_h3_ref2va_pruned_nvfp4.safetensors",
+        "bytes": 12528636800,
+        "sha256": "8eea02f43902e69904990c4405968d01a13c6656aa392d37ab80331e79b5df2f"
+      },
+      {
+        "file": "text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "bytes": 15687142551,
+        "sha256": "35a88d51044231fe332301d7a62aa81e3f2cba62febeb446e2c1e3e0ef76f2c6"
+      },
+      {
+        "file": "vae/minimax_h3_audio_vae_fp32.safetensors",
+        "bytes": 605254808,
+        "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48"
+      },
+      {
+        "file": "vae/minimax_h3_video_vae_fp16.safetensors",
+        "bytes": 5207808496,
+        "sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522"
+      }
+    ]
+  },
+  "official": {
+    "repo": "MiniMaxAI/MiniMax-H3",
+    "revision": "42ed227ee7df40d41602854ae760620d6eb651fe",
+    "files": [
+      "LICENSE",
+      "README.md",
+      "docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md",
+      "processor/chat_template.json",
+      "processor/merges.txt",
+      "processor/preprocessor_config.json",
+      "processor/tokenizer.json",
+      "processor/tokenizer_config.json",
+      "processor/video_preprocessor_config.json",
+      "processor/vocab.json",
+      "text_encoder/config.json"
+    ]
+  },
+  "dataset": {
+    "repo": "diffusers/tuxemon",
+    "revision": "b64c6251dfac455ab6f6d54290c86d46b149a428",
+    "files": [
+      "README.md",
+      "data/train-00000-of-00001.parquet"
+    ],
+    "parquet_sha256": "5bf23726cb5547a1905219b94d40d83744329a19ba229c75e9838d9ef634d862",
+    "seed": 20261109,
+    "train": 32,
+    "heldout": 8
+  },
+  "cached_recipe": {
+    "lr": 0.0001,
+    "schedule_steps": 800,
+    "seed": 20261109,
+    "guidance_scale": 4.0,
+    "guidance_sigma_threshold": 0.15,
+    "video_shift": 1.0,
+    "audio_shift": 3.0,
+    "manifest_sha256": "88cf6f1a50b563afb386c9473c1a75792c21e28de3f58fbff82e85652cb570b9",
+    "prompts_sha256": "706253a079c56e280d3aeaff25d3a03129520f27a2caf11123edf8a0d3fced8a"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "scope": "source equivalence, readiness and CLI only; no new H3 training",
+  "exact_source_copies": [
+    "h3_runtime.py",
+    "cache_inputs.py",
+    "prepare_dataset.py",
+    "smoke_h3.py"
+  ],
+  "training_change": "source path discovery only; formulas, CLI defaults and recipe unchanged",
+  "kernel_wrapper_change": "import location only; same kernel functions and cache policy",
+  "downloader_change": "work directory path and metadata-directory creation only",
+  "shared_kernel_and_lora_sha256": {
+    "_packed_cuda.py": "b4fe1999c20cf8b38d5b6643bf33b58bbac5972e903aed612956b65d86e4cadd",
+    "packed.py": "1dac6492e1eeaa11ced5397ebb180e3ff160c56665f57f9312379ca0fd64d743",
+    "core.py": "f87a3e165458aa9e12243b07abf46917feca5578261f195780810b1a34773e8d"
+  },
+  "existing_runtime_and_dependency_pins_unchanged": true,
+  "original_experiment_protected_files": 20,
+  "original_checkpoint_sha256": "8c2352179e7881b30b479e733b36c1946e523cb0b08557f5b347b7af835e7a4e",
+  "readiness": {
+    "status": "passed",
+    "scope": "readiness and imports only; no training run",
+    "model_hashes_verified": false,
+    "versions": {
+      "torch": "2.14.1+cu132",
+      "transformers": "5.16.1",
+      "diffusers": "0.40.0",
+      "accelerate": "1.14.0",
+      "safetensors": "0.8.0",
+      "einops": "0.8.2",
+      "numpy": "2.4.6",
+      "pillow": "12.3.0",
+      "av": "17.1.0",
+      "pyarrow": "23.0.1",
+      "toml": "0.10.2",
+      "voluptuous": "0.15.2",
+      "huggingface-hub": "1.30.0",
+      "requests": "2.34.2"
+    },
+    "errors": []
+  },
+  "cli_help_passed": true,
+  "recorded_completed_steps": 200,
+  "new_training_steps": 0
+}

@@ -22,3 +22,4 @@ examples/flux2_klein/data/
 examples/flux2_klein/results/
 examples/flux2_klein/metadata/
 examples/flux2_klein/benchmark-runs/
+examples/minimax_h3_single_frame/workdir/

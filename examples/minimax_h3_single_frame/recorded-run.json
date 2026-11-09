@@ -1,0 +1,139 @@
+{
+  "scope": "Completed 200-step single-frame LoRA engineering experiment",
+  "sessions": [
+    {
+      "config": {
+        "action": "pilot",
+        "mode": "nvfp4",
+        "max_steps": 12,
+        "schedule_steps": 800,
+        "out": "nvfp4-main",
+        "resume": false,
+        "rank": 8,
+        "first_block": 20,
+        "no_checkpoint": false,
+        "seconds_limit": 9000,
+        "sample_steps": 20,
+        "sample_every": 200,
+        "lr": 0.0001,
+        "checkpoint_path": null,
+        "backward_cache_gib": 0.0,
+        "attention": "efficient-deterministic"
+      },
+      "recipe": {
+        "mode": "nvfp4",
+        "rank": 8,
+        "alpha": 8,
+        "first_train_block": 20,
+        "checkpoint": true,
+        "source": "FenomAI/MiniMax-H3@15646562c19be9d62aee6d28a7070d00d026027c",
+        "attention": "efficient-deterministic",
+        "training": {
+          "lr": 0.0001,
+          "schedule_steps": 800,
+          "seed": 20261109,
+          "guidance_scale": 4.0,
+          "guidance_sigma_threshold": 0.15,
+          "video_shift": 1.0,
+          "audio_shift": 3.0,
+          "manifest_sha256": "88cf6f1a50b563afb386c9473c1a75792c21e28de3f58fbff82e85652cb570b9",
+          "prompts_sha256": "706253a079c56e280d3aeaff25d3a03129520f27a2caf11123edf8a0d3fced8a"
+        }
+      },
+      "torch": "2.14.1+cu132",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti",
+      "trainable": 22364160,
+      "start_step": 0,
+      "code_sha256": {
+        "experiment.py": "e7068ff968072ada709b2b778e0f0679a0fee9c9461d4f636bb5b9640ed2d90c",
+        "h3_runtime.py": "148d4a5a92ff0854a3ce1282abaf9e857d971669add51369d862e42e4b8af6ce",
+        "nv4_cuda.py": "4b50aa62cd1eebe32c16ec275ddf6967395e2856fe6e2a071ff61179ef4aee12",
+        "cache_inputs.py": "6eb7e2461db10a1ae4b70907e63e855594b0cde695a1ccf9952fc7beab0fc144",
+        "_packed_cuda.py": "b4fe1999c20cf8b38d5b6643bf33b58bbac5972e903aed612956b65d86e4cadd",
+        "packed.py": "1dac6492e1eeaa11ced5397ebb180e3ff160c56665f57f9312379ca0fd64d743",
+        "core.py": "f87a3e165458aa9e12243b07abf46917feca5578261f195780810b1a34773e8d"
+      }
+    },
+    {
+      "config": {
+        "action": "train",
+        "mode": "nvfp4",
+        "max_steps": 200,
+        "schedule_steps": 800,
+        "out": "nvfp4-main",
+        "resume": true,
+        "rank": 8,
+        "first_block": 20,
+        "no_checkpoint": false,
+        "seconds_limit": 9000,
+        "sample_steps": 20,
+        "sample_every": 200,
+        "lr": 0.0001,
+        "checkpoint_path": null,
+        "backward_cache_gib": 0.0,
+        "attention": "efficient-deterministic"
+      },
+      "recipe": {
+        "mode": "nvfp4",
+        "rank": 8,
+        "alpha": 8,
+        "first_train_block": 20,
+        "checkpoint": true,
+        "source": "FenomAI/MiniMax-H3@15646562c19be9d62aee6d28a7070d00d026027c",
+        "attention": "efficient-deterministic",
+        "training": {
+          "lr": 0.0001,
+          "schedule_steps": 800,
+          "seed": 20261109,
+          "guidance_scale": 4.0,
+          "guidance_sigma_threshold": 0.15,
+          "video_shift": 1.0,
+          "audio_shift": 3.0,
+          "manifest_sha256": "88cf6f1a50b563afb386c9473c1a75792c21e28de3f58fbff82e85652cb570b9",
+          "prompts_sha256": "706253a079c56e280d3aeaff25d3a03129520f27a2caf11123edf8a0d3fced8a"
+        }
+      },
+      "torch": "2.14.1+cu132",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti",
+      "trainable": 22364160,
+      "start_step": 12,
+      "code_sha256": {
+        "experiment.py": "e7068ff968072ada709b2b778e0f0679a0fee9c9461d4f636bb5b9640ed2d90c",
+        "h3_runtime.py": "148d4a5a92ff0854a3ce1282abaf9e857d971669add51369d862e42e4b8af6ce",
+        "nv4_cuda.py": "4b50aa62cd1eebe32c16ec275ddf6967395e2856fe6e2a071ff61179ef4aee12",
+        "cache_inputs.py": "6eb7e2461db10a1ae4b70907e63e855594b0cde695a1ccf9952fc7beab0fc144",
+        "_packed_cuda.py": "b4fe1999c20cf8b38d5b6643bf33b58bbac5972e903aed612956b65d86e4cadd",
+        "packed.py": "1dac6492e1eeaa11ced5397ebb180e3ff160c56665f57f9312379ca0fd64d743",
+        "core.py": "f87a3e165458aa9e12243b07abf46917feca5578261f195780810b1a34773e8d"
+      }
+    }
+  ],
+  "complete": [
+    {
+      "event": "complete",
+      "time": 1794205803.8814092,
+      "step": 12,
+      "training_seconds": 12.224740999999995,
+      "median_seconds": 1.0326303000001644,
+      "estimated_800_steps_minutes": 13.768404000002192,
+      "frozen_versions_unchanged": true
+    },
+    {
+      "event": "complete",
+      "time": 1794206084.7307603,
+      "step": 200,
+      "training_seconds": 180.1589717999941,
+      "median_seconds": 0.9706956000009086,
+      "estimated_800_steps_minutes": 12.942608000012115,
+      "frozen_versions_unchanged": true
+    }
+  ],
+  "original_script_sha256": {
+    "experiment.py": "e7068ff968072ada709b2b778e0f0679a0fee9c9461d4f636bb5b9640ed2d90c",
+    "h3_runtime.py": "148d4a5a92ff0854a3ce1282abaf9e857d971669add51369d862e42e4b8af6ce",
+    "cache_inputs.py": "6eb7e2461db10a1ae4b70907e63e855594b0cde695a1ccf9952fc7beab0fc144",
+    "prepare_dataset.py": "62c408fa6a2e91c838fee8daf69847c86fb60cd3673e87189ecdd2a1f2bfabbc",
+    "download_parts.py": "dfcde03e154bb0effc180ac576f7d5950f74c9deaa6cb3036dba4ef945aa743b",
+    "smoke_h3.py": "f438205fa77b860df0c5772bfb699e480ec81ba4db9e3104c77979901a0b341c"
+  }
+}

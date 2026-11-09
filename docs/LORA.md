@@ -185,3 +185,9 @@ The [FLUX.2 Klein example](../examples/flux2_klein/README.md) provides a complet
 pretrained-image-model integration, including the source-format mapping and
 Diffusers-compatible adapter export. Model-specific prompt/VAE handling belongs
 in that integration; the LoRA and packed CUDA kernels are shared with the H3 tests.
+
+The [MiniMax H3 single-frame example](../examples/minimax_h3_single_frame/README.md)
+preserves the completed 200-step engineering experiment: pinned inputs, cached
+text/latents, the original 12-step pilot followed by a resume to 200, and adapter
+export. Its 800-step learning-rate schedule is retained. This is a single-frame
+test of an NVFP4 Ref2VA checkpoint, not a validated video-training recipe.
