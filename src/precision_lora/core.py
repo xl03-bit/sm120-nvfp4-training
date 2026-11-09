@@ -14,6 +14,7 @@ from functools import partial
 import torch
 from torch import nn
 from torch.nn import functional as F
+from .packed import PackedNVFP4Linear
 
 
 class _FrozenFP4(nn.Module):
@@ -69,13 +70,15 @@ class _LoRAFunction(torch.autograd.Function):
         dtype = torch.get_autocast_dtype(x.device.type) if torch.is_autocast_enabled(x.device.type) else x.dtype
         if isinstance(base, _FrozenFP4) and dtype not in (torch.bfloat16, torch.float32):
             raise TypeError("NVFP4 LoRA requires BF16 or FP32 compute; use BF16 autocast")
+        if isinstance(base, PackedNVFP4Linear) and dtype != torch.bfloat16:
+            raise TypeError("Prepacked NVFP4 LoRA requires BF16 compute; use BF16 autocast")
         # Explicit casts keep adapter state FP32 and make backward independent of
         # whichever autocast context surrounds loss.backward().
         with torch.autocast(x.device.type, enabled=False):
             v = x.reshape(-1, shape[-1]).to(dtype)
             ac, bc = a.to(dtype), b.to(dtype)
             h = F.linear(v, ac)
-            if isinstance(base, _FrozenFP4):
+            if isinstance(base, (_FrozenFP4, PackedNVFP4Linear)):
                 y = base.multiply(v)
                 weight = v.new_empty(0)
             else:
@@ -104,7 +107,7 @@ class _LoRAFunction(torch.autograd.Function):
             da, db = da.to(ctx.a_dtype), db.to(ctx.b_dtype)
             dx = None
             if ctx.needs_input_grad[0]:
-                dx = ctx.base.multiply(g, backward=True) if isinstance(ctx.base, _FrozenFP4) else g @ weight.to(x.dtype)
+                dx = ctx.base.multiply(g, backward=True) if isinstance(ctx.base, (_FrozenFP4, PackedNVFP4Linear)) else g @ weight.to(x.dtype)
                 dx.addmm_(dh, a, alpha=ctx.scale)
                 dx = dx.reshape(ctx.shape).to(ctx.input_dtype)
         return dx, da, db, None, None
@@ -117,8 +120,9 @@ class LoRALinear(nn.Module):
         self.in_features, self.out_features = linear.in_features, linear.out_features
         self.rank, self.alpha, self.mode = rank, float(alpha), mode
         self.base = _FrozenFP4(linear, seed) if mode == "nvfp4" else linear
-        self.lora_A = nn.Parameter(torch.empty(rank, self.in_features, device=linear.weight.device, dtype=torch.float32))
-        self.lora_B = nn.Parameter(torch.zeros(self.out_features, rank, device=linear.weight.device, dtype=torch.float32))
+        device = linear.device if isinstance(linear, PackedNVFP4Linear) else linear.weight.device
+        self.lora_A = nn.Parameter(torch.empty(rank, self.in_features, device=device, dtype=torch.float32))
+        self.lora_B = nn.Parameter(torch.zeros(self.out_features, rank, device=device, dtype=torch.float32))
         nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
 
     def forward(self, x):
@@ -141,14 +145,16 @@ def enable_lora(model, *, mode="preserve", rank=16, alpha=None, target_modules=N
     mode='preserve': original base Parameter objects/dtypes/values are retained.
     mode='nvfp4': frozen bases are replaced by two independently RHT-packed FP4
     orientations; no full-size master weight remains for selected projections.
+    mode='packed_nvfp4': adapt explicit PackedNVFP4Linear instances while
+    retaining the checkpoint payload and its chosen backward memory policy.
     target_modules: exact paths or final component names; default targets all
     untied Linear layers except head/lm_head/output_layer. Root Linear is valid.
     checkpoint_modules: exact non-overlapping parent block paths, optional.
     """
     if not isinstance(model, nn.Module) or any(isinstance(m, LoRALinear) for m in model.modules()) or hasattr(model, "nvfp4_optimizer"):
         raise ValueError("Pass an unconverted nn.Module")
-    if mode not in ("preserve", "nvfp4"):
-        raise ValueError("mode must be 'preserve' or 'nvfp4'")
+    if mode not in ("preserve", "nvfp4", "packed_nvfp4"):
+        raise ValueError("mode must be 'preserve', 'nvfp4' or 'packed_nvfp4'")
     if type(rank) is not int or rank < 1:
         raise ValueError("rank must be a positive integer")
     alpha = rank if alpha is None else alpha
@@ -165,23 +171,29 @@ def enable_lora(model, *, mode="preserve", rank=16, alpha=None, target_modules=N
     counts = {}
     for _, p in model.named_parameters(remove_duplicate=False):
         counts[id(p)] = counts.get(id(p), 0) + 1
+    for _, p in model.named_buffers(remove_duplicate=False):
+        counts[id(p)] = counts.get(id(p), 0) + 1
     selected = {}
     matched = set()
     for name, module in paths.items():
-        if not isinstance(module, nn.Linear):
+        if not isinstance(module, (nn.Linear, PackedNVFP4Linear)):
             continue
+        is_packed = isinstance(module, PackedNVFP4Linear)
+        weight = module.packed if is_packed else module.weight
         if targets is None:
-            choose = counts[id(module.weight)] == 1 and name.rsplit(".",1)[-1] not in ("head", "lm_head", "output_layer")
+            choose = is_packed == (mode == "packed_nvfp4") and counts[id(weight)] == 1 and name.rsplit(".",1)[-1] not in ("head", "lm_head", "output_layer")
         else:
             keys = {name, name.rsplit(".",1)[-1]} & targets
             choose = bool(keys)
             matched.update(keys)
         if choose:
-            if counts[id(module.weight)] != 1:
+            if is_packed != (mode == "packed_nvfp4"):
+                raise TypeError("packed_nvfp4 targets require PackedNVFP4Linear; floating-point targets use preserve or nvfp4")
+            if counts[id(weight)] != 1:
                 raise ValueError(f"Target {name!r} shares a weight; leave tied/aliased projections frozen")
-            if type(module) is not nn.Linear:
+            if not is_packed and type(module) is not nn.Linear:
                 raise TypeError(f"Custom Linear at {name!r} requires explicit integration")
-            if module.weight.dtype not in (torch.float16, torch.bfloat16, torch.float32, torch.float64):
+            if not is_packed and module.weight.dtype not in (torch.float16, torch.bfloat16, torch.float32, torch.float64):
                 raise TypeError(f"Unsupported base storage at {name!r}: {module.weight.dtype}")
             if mode == "nvfp4" and (module.weight.device.type != "cuda" or module.weight.dtype == torch.float64 or counts[id(module.weight)] != 1):
                 raise ValueError("NVFP4 targets must be untied FP16/BF16/FP32 CUDA Linear layers")
@@ -218,6 +230,9 @@ def enable_lora(model, *, mode="preserve", rank=16, alpha=None, target_modules=N
         module = paths[name]
         module.forward = partial(_checkpoint_forward, original=module.forward)
     model.lora_config = dict(mode=mode, rank=rank, alpha=float(alpha), targets=selected_names, checkpoint_modules=checkpoints)
+    if mode == "packed_nvfp4":
+        model.lora_config["packed_layouts"] = {n: dict(shape=(paths[n].in_features, paths[n].out_features),
+            layout=paths[n].base.layout, rht_seed=paths[n].base.rht_seed) for n in selected_names}
     return model
 
 
@@ -244,7 +259,7 @@ def save_lora(path, model, *, optimizer=None, base_id=None):
     layers = {name: m for name,m in model.named_modules() if isinstance(m, LoRALinear)}
     payload = dict(schema=1, config=model.lora_config, base_id=base_id,
                    adapters={n: dict(A=m.lora_A.detach().cpu(), B=m.lora_B.detach().cpu(),
-                       sr=m.base.sr_seed.cpu() if isinstance(m.base, _FrozenFP4) else None) for n,m in layers.items()},
+                       sr=m.base.sr_seed.cpu() if isinstance(m.base, (_FrozenFP4, PackedNVFP4Linear)) else None) for n,m in layers.items()},
                    optimizer=None if optimizer is None else optimizer.state_dict(),
                    cpu_rng=torch.get_rng_state(),
                    cuda_rng=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [])
@@ -274,7 +289,7 @@ def load_lora(path, model, *, optimizer=None, base_id=None, restore_rng=True):
         for n,m in layers.items():
             item = saved["adapters"][n]
             m.lora_A.copy_(item["A"]); m.lora_B.copy_(item["B"])
-            if isinstance(m.base, _FrozenFP4):
+            if isinstance(m.base, (_FrozenFP4, PackedNVFP4Linear)):
                 m.base.sr_seed.copy_(item["sr"])
     if optimizer is not None:
         optimizer.load_state_dict(saved["optimizer"])

@@ -6,12 +6,12 @@ import tempfile
 
 from .profiles import list_profiles, profile_config
 from ._runtime import load_runtime
-from .lora import enable_lora, prepare_lora, lora_parameters, save_lora, load_lora, merge_lora
+from .lora import enable_lora, prepare_lora, lora_parameters, save_lora, load_lora, merge_lora, PackedNVFP4Linear
 from .lora_graph import capture_lora_step
 
 __all__ = ["list_profiles", "prepare_training", "enable_nvfp4", "train_step",
            "capture_step", "save_checkpoint", "load_checkpoint", "check_finite",
-           "enable_lora", "prepare_lora", "lora_parameters", "save_lora", "load_lora", "merge_lora", "capture_lora_step"]
+           "enable_lora", "prepare_lora", "lora_parameters", "save_lora", "load_lora", "merge_lora", "capture_lora_step", "PackedNVFP4Linear"]
 
 
 def prepare_training(model, *, profile="balanced", precision="fp4", remat=False,

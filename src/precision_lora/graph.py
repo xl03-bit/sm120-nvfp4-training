@@ -2,6 +2,7 @@
 import torch
 from functools import lru_cache
 from .core import lora_parameters, _FrozenFP4
+from .packed import PackedNVFP4Linear
 
 
 @lru_cache(maxsize=None)
@@ -13,6 +14,8 @@ def _capture_stream(device):
 
 class LoRAStep:
     def __init__(self, model, optimizer, loss_fn, *samples, warmup=3, max_grad_norm=None):
+        if any(isinstance(m, PackedNVFP4Linear) for m in model.modules()):
+            raise ValueError("packed_nvfp4 currently uses eager training; CUDA graph replay has not been validated")
         if type(warmup) is not int or warmup < 2:
             raise ValueError("Use at least two warmup steps")
         self.params = lora_parameters(model)

@@ -59,6 +59,12 @@ Start with a fresh trainable FP32 model with ordinary `nn.Linear` layers on one 
 Both use FP32 adapters and ordinary AdamW. Optional block checkpointing reduces
 activation memory, and CUDA Graph replay reduces launch overhead for fixed shapes.
 
+For already quantized NVFP4 checkpoints, `mode="packed_nvfp4"` preserves the source
+weight payload and offers GPU recomputation or caching of the backward layout.
+See [packed NVFP4 LoRA](docs/PACKED_NVFP4.md) for formats, tested compatibility and
+memory choices. This new mode uses eager training; the existing modes keep their
+CUDA Graph support.
+
 ```python
 from nvfp4_training import prepare_lora
 model, optimizer = prepare_lora(model, mode="preserve", rank=16, alpha=16)

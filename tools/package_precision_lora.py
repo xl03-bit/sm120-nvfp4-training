@@ -9,12 +9,12 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
 ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,default=ROOT/'dist');args=ap.parse_args()
-staging=args.output.resolve()/'precision-lora-0.1.0'
+staging=args.output.resolve()/'precision-lora-0.2.0.dev1'
 staging.mkdir(parents=True,exist_ok=True)
 shutil.copytree(ROOT/'src/precision_lora',staging/'src/precision_lora',dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__'))
 shutil.copyfile(ROOT/'LICENSE',staging/'LICENSE')
-(staging/'README.md').write_text((ROOT/'docs/LORA.md').read_text(encoding='utf8').replace('../results/lora/README.md','results/lora/README.md'),encoding='utf8')
-for name in ('tests/test_lora.py','tests/test_lora_graph.py','examples/lora.py'):
+(staging/'README.md').write_text((ROOT/'docs/LORA.md').read_text(encoding='utf8').replace('../results/lora/README.md','results/lora/README.md').replace('(PACKED_NVFP4.md)','(docs/PACKED_NVFP4.md)'),encoding='utf8')
+for name in ('tests/test_lora.py','tests/test_lora_graph.py','tests/test_packed_lora.py','examples/lora.py','docs/PACKED_NVFP4.md','docs/LORA.md'):
     dst=staging/name;dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,dst)
 if (ROOT/'results/lora').exists():
     shutil.copytree(ROOT/'results/lora',staging/'results/lora',dirs_exist_ok=True)
@@ -23,7 +23,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "precision-lora"
-version = "0.1.0"
+version = "0.2.0.dev1"
 description = "LoRA with unchanged base weight formats, fused accumulation and CUDA graph replay"
 readme = "README.md"
 license = {file = "LICENSE"}

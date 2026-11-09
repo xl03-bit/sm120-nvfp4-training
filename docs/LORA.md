@@ -1,16 +1,23 @@
 # LoRA training
 
-There are two base-weight modes. Both train A and B, keep adapters and AdamW
+There are three base-weight modes. All train A and B, keep adapters and AdamW
 state in FP32, and leave biases, norms and embeddings frozen.
 
 | Mode | Frozen base | Calculation | Use when |
 |---|---|---|---|
 | `preserve` | The original FP32, BF16 or FP16 Parameter objects and values | Original precision, or the caller's autocast precision | Keep the model's weight format and avoid quantization error |
 | `nvfp4` | Two prepacked FP4 orientations with independent 1×16 scales | Native FP4 base GEMMs, software SR in backward, H16 RHT in both directions | Reduce base memory and accelerate suitable SM120 workloads |
+| `packed_nvfp4` | Existing NVFP4 payload and scales; optional backward cache | Native FP4 base GEMMs; H128 RHT and SR in backward | Train LoRA on an already quantized NVFP4 checkpoint |
+
+For an existing quantized checkpoint, see [packed NVFP4 integration](PACKED_NVFP4.md).
+Its `recompute` option keeps about 0.5625 bytes per aligned base weight and builds
+the backward layout directly on the GPU. `cache` keeps both orientations. The
+existing `nvfp4` recipe is unchanged: its forward and backward weights are
+independently quantized from the original floating-point base.
 
 `preserve` also works independently as **precision-lora**, requiring only PyTorch.
 It does not import Triton, TorchAO or the NVFP4 CUDA extension. No model-wide dtype
-conversion occurs inside either interface. `nvfp4` deliberately replaces the
+conversion occurs inside these interfaces. `nvfp4` deliberately replaces the
 selected base projections with quantized buffers; use `preserve` when the original
 weight format must remain intact.
 
@@ -124,13 +131,14 @@ With PyTorch already installed, from this repository:
 
 ```bash
 python tools/package_precision_lora.py
-python -m pip install --no-deps dist/precision_lora-0.1.0-py3-none-any.whl
+python -m pip install --no-deps dist/precision_lora-0.2.0.dev1-py3-none-any.whl
 ```
 
 This builds from the same `src/precision_lora` used by the NVFP4 package. It creates
-no environment and downloads no dependencies. The independent wheel contains no
-NVFP4 CUDA backend; `mode="nvfp4"` requires the full package and its verified WSL/Linux
-stack. Use `PYTHONPATH=/path/to/repo/src` instead when no installation is desired.
+no environment and downloads no dependencies. The independent wheel includes the
+NVRTC backend for `packed_nvfp4`. The older `mode="nvfp4"` requires the full package
+and its verified WSL/Linux stack. Use `PYTHONPATH=/path/to/repo/src` instead when no
+installation is desired. `preserve` still imports no CUDA compiler or quantizer.
 
 ## Tests and measurements
 
