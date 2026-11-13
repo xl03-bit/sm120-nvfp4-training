@@ -1,5 +1,12 @@
 # Native NVFP4 LoRA: image-model results and H3 engineering tests
 
+For the subsequent [official Transformer Engine default comparison](../official-te-20261113/README.md),
+see the matched FLUX 40/1,000-update results and H3 capacity failure. It preserves
+both the original timing statistic and a shared-index view excluding the already
+documented live-preview overlap. Official TE now runs RHT/SR on the tested SM120
+revision; this project's measured contribution is its training performance,
+compact storage and cache/recompute choices. The historical results below are unchanged.
+
 FLUX.2 Klein Base 4B completed **1,000 LoRA updates at 1024×1024 on one RTX 5060 Ti 16 GB**. The frozen base runs native FP4 Tensor Core GEMMs in forward and backward; backward uses software stochastic rounding and H128 random Hadamard transforms. Both LoRA matrices train in BF16 compute with FP32 parameters and AdamW state.
 
 ## Matched full-step performance

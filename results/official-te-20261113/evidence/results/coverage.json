@@ -1,0 +1,212 @@
+[
+  {
+    "test": "短测 453m / balanced / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 453m / balanced / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 453m / conservative / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 453m / experimental_fp8_master / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 453m / experimental_fp8_master / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 453m / experimental_m4v4 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 453m / experimental_m4v4 / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 453m / same_as_v5 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 453m / short128 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_453m.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / balanced / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / balanced / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 fineweb / conservative / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / experimental_fp8_master / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / experimental_fp8_master / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 fineweb / experimental_m4v4 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / experimental_m4v4 / remat=True",
+    "status": "default_policy_only",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。项目转置重算无官方等价，明确为不同存储策略比较。"
+  },
+  {
+    "test": "短测 fineweb / same_as_v5 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "短测 fineweb / short128 / remat=False",
+    "status": "complete_shared_default_run",
+    "reason": "同模型默认官方结果复用 default_fineweb.json；无自定义压缩状态。模型/数据/计时与原归档匹配。"
+  },
+  {
+    "test": "8192步 FineWeb vs balanced",
+    "status": "complete",
+    "reason": "同一次官方默认8192步训练对照三个Git终点；三条混合配置辅助曲线另存curve_te_*.json。"
+  },
+  {
+    "test": "8192步 FineWeb vs experimental_m4v4",
+    "status": "complete",
+    "reason": "同一次官方默认8192步训练对照三个Git终点；三条混合配置辅助曲线另存curve_te_*.json。"
+  },
+  {
+    "test": "8192步 FineWeb vs experimental_fp8_master",
+    "status": "complete",
+    "reason": "同一次官方默认8192步训练对照三个Git终点；三条混合配置辅助曲线另存curve_te_*.json。"
+  },
+  {
+    "test": "LoRA [2, 64, 1536, 16] checkpoint=False eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 64, 1536, 16] checkpoint=False graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 64, 1536, 16] checkpoint=True eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 64, 1536, 16] checkpoint=True graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 512, 1536, 16] checkpoint=False eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 512, 1536, 16] checkpoint=False graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 512, 1536, 16] checkpoint=True eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [2, 512, 1536, 16] checkpoint=True graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [1, 257, 1024, 4] checkpoint=False eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [1, 257, 1024, 4] checkpoint=False graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [1, 257, 1024, 4] checkpoint=True eager",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "LoRA [1, 257, 1024, 4] checkpoint=True graph",
+    "status": "complete",
+    "reason": "原形状、预热、3×20步、逐步同步；官方默认无持久权重缓存。"
+  },
+  {
+    "test": "GPT-2 512步 checkpoint=False",
+    "status": "complete",
+    "reason": "保持原BF16 autocast边界；初次RHT输入类型失败与修复诊断保存在attempts/gpt2-input-dtype。"
+  },
+  {
+    "test": "GPT-2 512步 checkpoint=True",
+    "status": "complete",
+    "reason": "保持原BF16 autocast边界；初次RHT输入类型失败与修复诊断保存在attempts/gpt2-input-dtype。"
+  },
+  {
+    "test": "4.06B 5步容量",
+    "status": "oom",
+    "reason": "已建立4063797760个参数；官方FP32 Adam状态初始化实际OOM，无训练速度/损失。未降规模或增加卸载。"
+  },
+  {
+    "test": "4.06B 2048步训练",
+    "status": "oom",
+    "reason": "已建立4063797760个参数；官方FP32 Adam状态初始化实际OOM，无训练速度/损失。未降规模或增加卸载。"
+  },
+  {
+    "test": "H3 200步LoRA",
+    "status": "oom",
+    "reason": "官方默认需保留浮点基座；实际投影存储容量探针见default-capacity-h3.json。原H128/打包布局/缓存策略无默认官方等价；未用改变规模的模型代替。"
+  },
+  {
+    "test": "H3 已归档工程探针（CPU流式/GPU/重算/cache2）",
+    "status": "oom",
+    "reason": "官方默认需保留浮点基座；实际投影存储容量探针见default-capacity-h3.json。原H128/打包布局/缓存策略无默认官方等价；未用改变规模的模型代替。"
+  },
+  {
+    "test": "FLUX 40步（BF16/cache/recompute归档对照）",
+    "status": "complete",
+    "reason": "官方默认从对应BF16源检查点量化，保留1024px/批次/秩/数据/优化器/注意力；与预量化payload的差异明确列出。"
+  },
+  {
+    "test": "FLUX 1000步收敛",
+    "status": "complete",
+    "reason": "官方默认从对应BF16源检查点量化，保留1024px/批次/秩/数据/优化器/注意力；与预量化payload的差异明确列出。"
+  },
+  {
+    "test": "验证/布局/导出/缓存/Windows包接口等非训练测试",
+    "status": "not_applicable",
+    "reason": "这些针对项目私有接口或预量化布局，非官方训练速度基线；没有重新运行原实现。官方等价运行正确性用实际RHT/SR、图重放、有限值、冻结基座、步计数及原生指令证据验证。"
+  }
+]

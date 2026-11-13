@@ -1,0 +1,534 @@
+{
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "cudnn": 91900,
+  "te": "2.21.0",
+  "te_path": "/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/__init__.py",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "capability": [
+    12,
+    0
+  ],
+  "cases": [
+    {
+      "rht_requested": true,
+      "sr_requested": true,
+      "status": "failed",
+      "error": "RuntimeError('/TransformerEngine/transformer_engine/common/../common/cast/nvfp4/quantize_transpose_nvfp4.cuh:1854 in function quantize_transpose_impl: Assertion failed: rht_matrix != nullptr. Columnwise RHT requires an RHT matrix.')",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/probe_official.py\", line 27, in <module>\n    loss=layer(x).float().square().mean()\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 2562, in forward\n    out, new_weight_workspace = _linear_eager(\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/jit.py\", line 77, in wrapper\n    return disabled_f(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py\", line 1263, in _fn\n    return fn(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 1897, in _linear_eager\n    return _Linear.apply(weight_tensor, inp, bias, fwd_args)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/autograd/function.py\", line 596, in apply\n    return super().apply(*args, **kwargs)  # type: ignore[misc]\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 1836, in forward\n    ) = _linear_forward_impl(fwd_args)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 518, in _linear_forward_impl\n    inputmat = input_quantizer(inputmat)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/quantized_tensor.py\", line 482, in __call__\n    return self.quantize(tensor)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/quantized_tensor.py\", line 459, in quantize\n    result = _QuantizeFunc.forward(None, tensor, self.quantize_impl)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/tensor/_quantization_helpers.py\", line 82, in forward\n    return quantize_impl(tensor)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/tensor/nvfp4_tensor.py\", line 277, in quantize_impl\n    return tex.quantize(tensor, self)\nRuntimeError: /TransformerEngine/transformer_engine/common/../common/cast/nvfp4/quantize_transpose_nvfp4.cuh:1854 in function quantize_transpose_impl: Assertion failed: rht_matrix != nullptr. Columnwise RHT requires an RHT matrix.\n"
+    },
+    {
+      "rht_requested": true,
+      "sr_requested": false,
+      "status": "failed",
+      "error": "RuntimeError('/TransformerEngine/transformer_engine/common/../common/cast/nvfp4/quantize_transpose_nvfp4.cuh:1854 in function quantize_transpose_impl: Assertion failed: rht_matrix != nullptr. Columnwise RHT requires an RHT matrix.')",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/probe_official.py\", line 27, in <module>\n    loss=layer(x).float().square().mean()\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 2562, in forward\n    out, new_weight_workspace = _linear_eager(\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/jit.py\", line 77, in wrapper\n    return disabled_f(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py\", line 1263, in _fn\n    return fn(*args, **kwargs)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 1897, in _linear_eager\n    return _Linear.apply(weight_tensor, inp, bias, fwd_args)\n  File \"/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/torch/autograd/function.py\", line 596, in apply\n    return super().apply(*args, **kwargs)  # type: ignore[misc]\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 1836, in forward\n    ) = _linear_forward_impl(fwd_args)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/module/linear.py\", line 518, in _linear_forward_impl\n    inputmat = input_quantizer(inputmat)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/quantized_tensor.py\", line 482, in __call__\n    return self.quantize(tensor)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/quantized_tensor.py\", line 459, in quantize\n    result = _QuantizeFunc.forward(None, tensor, self.quantize_impl)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/tensor/_quantization_helpers.py\", line 82, in forward\n    return quantize_impl(tensor)\n  File \"/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/pytorch/tensor/nvfp4_tensor.py\", line 277, in quantize_impl\n    return tex.quantize(tensor, self)\nRuntimeError: /TransformerEngine/transformer_engine/common/../common/cast/nvfp4/quantize_transpose_nvfp4.cuh:1854 in function quantize_transpose_impl: Assertion failed: rht_matrix != nullptr. Columnwise RHT requires an RHT matrix.\n"
+    },
+    {
+      "rht_requested": false,
+      "sr_requested": true,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26598015427589417,
+        0.2633734345436096,
+        0.26082849502563477,
+        0.25830477476119995,
+        0.2558015286922455,
+        0.2533772587776184,
+        0.2510037422180176,
+        0.24869537353515625,
+        0.246131032705307,
+        0.2436390221118927,
+        0.24130463600158691,
+        0.23897893726825714,
+        0.23669834434986115,
+        0.2344053089618683,
+        0.23203358054161072
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=True,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 1662.9920000000002
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7630000000008295
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.231999999999971
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.7339999999994689
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 3.375
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.3499999999994543
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.1739999999999782
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.6159999999999854
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.3499999999994543
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.7039999999997235
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 5.400000000000546
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.2029999999995198
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.173000000000684
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.850999999999658
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 3.0230000000001382
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 2.905000000000655
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4669999999996435
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.20499999999992724
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.0219999999999345
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.6750000000001819
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.6750000000001819
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 1.673000000000684
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.526000000001659
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.495999999999185
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 1.7909999999992579
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.2619999999988067
+        },
+        {
+          "name": "transformer_engine::fused_attn::extract_seed_and_offset(long*, bool, long*, unsigned long, long*, unsigned long, unsigned int)",
+          "device_us": 0.6460000000006403
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.6460000000006403
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.1440000000002328
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.7049999999999272
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, true, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 9.948999999998705
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.3500000000003638
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.2029999999995198
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.7630000000008295
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 2.993000000000393
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.7630000000008295
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 2.993000000000393
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 2.787000000000262
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 24.886000000000422
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 0.8809999999994034
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 19.95600000000013
+        }
+      ]
+    },
+    {
+      "rht_requested": false,
+      "sr_requested": false,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26597023010253906,
+        0.2633553743362427,
+        0.2608245611190796,
+        0.258277028799057,
+        0.25576573610305786,
+        0.25334835052490234,
+        0.2509421408176422,
+        0.2486371397972107,
+        0.24605652689933777,
+        0.2435699999332428,
+        0.24123230576515198,
+        0.2388937622308731,
+        0.23660293221473694,
+        0.234300896525383,
+        0.23193620145320892
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 959.7710000000001
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.6749999999999545
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.2029999999999745
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.7339999999999236
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 3.375
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.349999999999909
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.231999999999971
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.6459999999999582
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.349999999999909
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.734000000000151
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 5.430000000000064
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.2029999999999745
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.2029999999999745
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.734000000000151
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 2.935000000000173
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 2.788000000000011
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4680000000000746
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.2339999999999236
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.0520000000001346
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.6460000000001855
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.6460000000001855
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 1.6440000000002328
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.52599999999984
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.4670000000000982
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 1.84900000000016
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.262000000000171
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.6459999999997308
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.1440000000002328
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.7339999999999236
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 3.4049999999997453
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.3789999999999054
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::swizzle_row_scaling_kernel<int4, 128, 4>(void const*, void*, int, int, int, int)",
+          "device_us": 1.2330000000001746
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.7339999999999236
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 3.1700000000000728
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.7330000000001746
+        },
+        {
+          "name": "nvjet_sm120_ootst_mma_128x64x256_3_32x32x256_tmaAB_alignCD4_bx_vec16_ue4m3_TNNN",
+          "device_us": 2.905999999999949
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 2.8179999999993015
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 75.01400000000012
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 0.8810000000003129
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 20.015000000000327
+        }
+      ]
+    }
+  ],
+  "loaded_gpu_libraries": [
+    "/home/lixin/te-nvfp4-compare-20261113/stable-cuda/nvidia/cu13/lib/libcublas.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/stable-cuda/nvidia/cu13/lib/libcublasLt.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/wheel_lib/libtransformer_engine.so",
+    "/home/lixin/te-nvfp4-compare-20261113/stable-site/transformer_engine/wheel_lib/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublas.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublasLt.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcudart.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcurand.so.10",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.0",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc.so.13",
+    "/usr/lib/wsl/drivers/nv_dispsi.inf_amd64_8117bef9bb5edac9/libcuda.so.1.1",
+    "/usr/lib/wsl/lib/libcuda.so.1",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcurand.so.10.4.0.35",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libnvrtc.so.13.0.88"
+  ]
+}

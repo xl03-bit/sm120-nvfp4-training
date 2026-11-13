@@ -1,0 +1,4 @@
+# Preserve archived bytes, including original CRLF/trailing spaces, for SHA256 verification.
+# New documentation and render.py retain the repository's normal text/whitespace checks.
+evidence/** -text -whitespace
+harness/** -text -whitespace

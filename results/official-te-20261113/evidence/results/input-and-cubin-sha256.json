@@ -1,0 +1,26 @@
+{
+  "C:\\Users\\18066\\Desktop\\workspace\\image-lora-klein-20261109\\models\\base\\transformer\\diffusion_pytorch_model.safetensors": {
+    "bytes": 7751109744,
+    "sha256": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6"
+  },
+  "C:\\Users\\18066\\Desktop\\workspace\\image-lora-klein-20261109\\models\\nvfp4\\flux-2-klein-base-4b-nvfp4.safetensors": {
+    "bytes": 2487544776,
+    "sha256": "f66faefe951b8eefe0ff3d4082b393fb6dc76d9a34861bd9f4ac54dc3ef381ab"
+  },
+  "C:\\Users\\18066\\Desktop\\workspace\\image-lora-klein-20261109\\cache\\text.pt": {
+    "bytes": 102457333,
+    "sha256": "5c017863a2b5b317674495f70f4557c4e01ff83aa0602663b6bc3bd33fc6dac0"
+  },
+  "C:\\Users\\18066\\Desktop\\workspace\\image-lora-klein-20261109\\cache\\latents.pt": {
+    "bytes": 11144517,
+    "sha256": "0dd8ee1a6468afa16b1c6c201aace49b405c23cf130e9c00c77f079e49d50295"
+  },
+  "C:\\Users\\18066\\Desktop\\workspace\\h3-lora-20261109\\models\\minimax_h3_ref2va_pruned_nvfp4.safetensors": {
+    "bytes": 12528636800,
+    "sha256": "8eea02f43902e69904990c4405968d01a13c6656aa392d37ab80331e79b5df2f"
+  },
+  "C:\\Users\\18066\\Desktop\\workspace\\te-nvfp4-compare-20261113\\results\\cupti-modules\\module_39.cubin": {
+    "bytes": 2711640,
+    "sha256": "fb52fc09066da61c382bc8b46a004ad50e50589ea614cef2bedc92f26a7a4383"
+  }
+}

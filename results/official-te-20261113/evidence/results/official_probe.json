@@ -1,0 +1,1240 @@
+{
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "cudnn": 91900,
+  "te": "2.22.0.dev0+464df759",
+  "te_path": "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/__init__.py",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "capability": [
+    12,
+    0
+  ],
+  "cases": [
+    {
+      "rht_requested": true,
+      "sr_requested": true,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "gemm_calls": [
+        {
+          "role": "FWD",
+          "layout": "TN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "DGRAD",
+          "layout": "NN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "WGRAD",
+          "layout": "NT",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        }
+      ],
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26598215103149414,
+        0.2633651793003082,
+        0.2608315348625183,
+        0.25830307602882385,
+        0.25578105449676514,
+        0.25339260697364807,
+        0.25099003314971924,
+        0.24872547388076782,
+        0.24617008864879608,
+        0.24364593625068665,
+        0.24129490554332733,
+        0.2389828860759735,
+        0.23668870329856873,
+        0.23441044986248016,
+        0.23203201591968536
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, disable_rht=False, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=True,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=True,\nstochastic_rounding=True,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 1473.5409999999993
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "device_us": 0.9709999999995489
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "device_us": 2.253000000000611
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 8.701000000000022
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2130000000006476
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1440000000002328
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7979999999997744
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.5949999999993452
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.8669999999992797
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 6.516999999999825
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1450000000004366
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1089999999994689
+        },
+        {
+          "name": "PROBE_GEMM_FWD",
+          "device_us": 107.01400000000012
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 1.0050000000001091
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.131000000000313
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.3969999999999345
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.6990000000005239
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.8320000000003347
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.536000000000058
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.7979999999997744
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.7979999999997744
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 2.113999999999578
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.8020000000014988
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.768000000000029
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 2.1149999999997817
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4220000000004802
+        },
+        {
+          "name": "transformer_engine::fused_attn::extract_seed_and_offset(long*, bool, long*, unsigned long, long*, unsigned long, unsigned int)",
+          "device_us": 0.7970000000004802
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "device_us": 0.7980000000006839
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "device_us": 1.9760000000005675
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, true, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 28.252000000000407
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1790000000000873
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.109999999998763
+        },
+        {
+          "name": "PROBE_GEMM_DGRAD",
+          "device_us": 98.76200000000063
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9009999999998399
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.130000000001019
+        },
+        {
+          "name": "PROBE_GEMM_WGRAD",
+          "device_us": 40.42000000000007
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.8659999999999854
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.060999999999694
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.3280000000013388
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 74.84400000000096
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 1.0059999999994034
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 23.50300000000061
+        }
+      ]
+    },
+    {
+      "rht_requested": true,
+      "sr_requested": false,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": true,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "gemm_calls": [
+        {
+          "role": "FWD",
+          "layout": "TN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "DGRAD",
+          "layout": "NN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "WGRAD",
+          "layout": "NT",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        }
+      ],
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26597315073013306,
+        0.26336348056793213,
+        0.26082348823547363,
+        0.2582935690879822,
+        0.2557579278945923,
+        0.2533540725708008,
+        0.2509555220603943,
+        0.24862143397331238,
+        0.24607479572296143,
+        0.24358004331588745,
+        0.24123278260231018,
+        0.2388869822025299,
+        0.23659875988960266,
+        0.23431316018104553,
+        0.23190896213054657
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, disable_rht=False, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=True,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=True,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 544.365
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "device_us": 0.8319999999999936
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "device_us": 2.149000000000001
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 9.150999999999954
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2830000000000155
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2129999999999654
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7970000000000255
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.5599999999999454
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.8659999999999854
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 6.620999999999981
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1429999999999154
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1090000000000373
+        },
+        {
+          "name": "PROBE_GEMM_FWD",
+          "device_us": 51.54499999999996
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9360000000000355
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.1299999999999955
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.3279999999999745
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.7690000000000055
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.27700000000004366
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.536000000000058
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.7970000000000255
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.7970000000000255
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 1.9070000000001528
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.768000000000029
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.8029999999998836
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 2.183999999999969
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4909999999999854
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "device_us": 0.76299999999992
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "device_us": 1.941000000000031
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 8.423000000000002
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1790000000000873
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1440000000000055
+        },
+        {
+          "name": "PROBE_GEMM_DGRAD",
+          "device_us": 33.41599999999994
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9009999999998399
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.1310000000000855
+        },
+        {
+          "name": "PROBE_GEMM_WGRAD",
+          "device_us": 31.128999999999905
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.8669999999997344
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.096000000000004
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.29300000000012
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 63.78200000000015
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 1.0059999999998581
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 23.432999999999993
+        }
+      ]
+    },
+    {
+      "rht_requested": false,
+      "sr_requested": true,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": true,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "gemm_calls": [
+        {
+          "role": "FWD",
+          "layout": "TN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "DGRAD",
+          "layout": "NN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "WGRAD",
+          "layout": "NT",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        }
+      ],
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26598015427589417,
+        0.2633734345436096,
+        0.26082849502563477,
+        0.25830477476119995,
+        0.2558015286922455,
+        0.2533772587776184,
+        0.2510037422180176,
+        0.24869537353515625,
+        0.246131032705307,
+        0.2436390221118927,
+        0.24130463600158691,
+        0.23897893726825714,
+        0.23669834434986115,
+        0.2344053089618683,
+        0.23203358054161072
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, disable_rht=True, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=True,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 937.9160000000002
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.8329999999996289
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.5270000000000437
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.9370000000008076
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 3.956999999999425
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2489999999997963
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.180000000000291
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7640000000001237
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.5619999999998981
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.8679999999994834
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 6.524999999999636
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.144999999999527
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1460000000006403
+        },
+        {
+          "name": "PROBE_GEMM_FWD",
+          "device_us": 97.86599999999999
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9020000000000437
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.1710000000002765
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.2969999999995707
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.8040000000000873
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.2780000000002474
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.574000000000524
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.7989999999999782
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.7989999999999782
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 1.943000000000211
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.7349999999996726
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.805000000000291
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 2.1870000000008076
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4920000000001892
+        },
+        {
+          "name": "transformer_engine::fused_attn::extract_seed_and_offset(long*, bool, long*, unsigned long, long*, unsigned long, unsigned int)",
+          "device_us": 0.7640000000001237
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7979999999997744
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.3540000000002692
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.8680000000003929
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, true, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 11.173999999999978
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1790000000000873
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1459999999997308
+        },
+        {
+          "name": "PROBE_GEMM_DGRAD",
+          "device_us": 60.871000000000095
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9020000000000437
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.1010000000005675
+        },
+        {
+          "name": "PROBE_GEMM_WGRAD",
+          "device_us": 41.923000000000684
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.8680000000003929
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.067000000000007
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.29700000000048
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 81.86700000000019
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 1.0410000000001673
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 23.52900000000045
+        }
+      ]
+    },
+    {
+      "rht_requested": false,
+      "sr_requested": false,
+      "quantizers": {
+        "scaling_fwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": true,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ],
+        "scaling_bwd": [
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          },
+          {
+            "type": "NVFP4Quantizer",
+            "rht": false,
+            "sr": false,
+            "two_dimensional_scaling": false,
+            "rht_matrix_shape": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "gemm_calls": [
+        {
+          "role": "FWD",
+          "layout": "TN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "DGRAD",
+          "layout": "NN",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        },
+        {
+          "role": "WGRAD",
+          "layout": "NT",
+          "operands": [
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            },
+            {
+              "type": "NVFP4TensorStorage",
+              "fp4_dtype": "DType.kFloat4E2M1",
+              "scale_dtype": "DType.kFloat8E4M3"
+            }
+          ]
+        }
+      ],
+      "status": "passed",
+      "losses": [
+        0.2686110734939575,
+        0.26597023010253906,
+        0.2633553743362427,
+        0.2608245611190796,
+        0.258277028799057,
+        0.25576573610305786,
+        0.25334835052490234,
+        0.2509421408176422,
+        0.2486371397972107,
+        0.24605652689933777,
+        0.2435699999332428,
+        0.24123230576515198,
+        0.2388937622308731,
+        0.23660293221473694,
+        0.234300896525383,
+        0.23193620145320892
+      ],
+      "finite_grad": true,
+      "recipe": "recipe_type=NVFP4BlockScaling, fp4_format=E2M1, fp8_format=E4M3, fp8_dpa=False, fp8_mha=False, backward_override=None, disable_rht=True, row_scaled_activation=False, nvfp4_4over6=none, nvfp4_4over6_e4m3_use_256=all, nvfp4_4over6_err_mode=MAE, fp4_quant_fwd_inp=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), fp4_quant_fwd_weight=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=True\n), fp4_quant_bwd_grad=Qparams(\npower_2_scale=False,\namax_epsilon=0.0,\nrandom_hadamard_transform=False,\nstochastic_rounding=False,\nfp4_2d_quantization=False\n), ",
+      "kernels": [
+        {
+          "name": "PROBE_FORWARD",
+          "device_us": 956.3119999999999
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.8320000000003347
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.5250000000005457
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.9359999999996944
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 4.158999999999651
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2820000000001528
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.2130000000006476
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.7969999999995707
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.6979999999994106
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.9009999999998399
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "device_us": 6.86200000000008
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.212999999999738
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1790000000000873
+        },
+        {
+          "name": "PROBE_GEMM_FWD",
+          "device_us": 159.3159999999998
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.9009999999998399
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.128999999999905
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.3270000000002256
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.8019999999996799
+        },
+        {
+          "name": "Memset (Device)",
+          "device_us": 0.2429999999994834
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "device_us": 3.5689999999995052
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "device_us": 0.7970000000004802
+        },
+        {
+          "name": "PROBE_BACKWARD",
+          "device_us": 0.7970000000004802
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "device_us": 1.905999999999949
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 1.8370000000004438
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "device_us": 1.8019999999996799
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "device_us": 2.2180000000007567
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "device_us": 1.4899999999997817
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "device_us": 0.76299999999992
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "device_us": 1.3179999999993015
+        },
+        {
+          "name": "Memcpy DtoD (Device -> Device)",
+          "device_us": 0.8319999999994252
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "device_us": 3.7780000000002474
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1789999999991778
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "device_us": 1.1089999999994689
+        },
+        {
+          "name": "PROBE_GEMM_DGRAD",
+          "device_us": 69.07099999999991
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.8670000000001892
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.0600000000004
+        },
+        {
+          "name": "PROBE_GEMM_WGRAD",
+          "device_us": 42.871000000000095
+        },
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "device_us": 0.8669999999992797
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "device_us": 5.026000000000749
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "device_us": 3.292000000000371
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "device_us": 55.72699999999986
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "device_us": 1.0390000000006694
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "device_us": 23.461999999999534
+        }
+      ]
+    }
+  ],
+  "loaded_gpu_libraries": [
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublas.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublasLt.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcudart.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcurand.so.10",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.0",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/libtransformer_engine.so",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so",
+    "/usr/lib/wsl/drivers/nv_dispsi.inf_amd64_8117bef9bb5edac9/libcuda.so.1.1",
+    "/usr/lib/wsl/lib/libcuda.so.1",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcurand.so.10.4.0.35",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libnvrtc.so.13.0.88"
+  ]
+}

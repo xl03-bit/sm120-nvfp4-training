@@ -2,6 +2,12 @@
 
 RTX 5060 Ti 16GB; WSL Ubuntu 22.04, PyTorch 2.11.0+cu130. Tests run on 2026-11-09. The independent preserve package was also GPU-tested on Windows with PyTorch 2.14.1+cu132.
 
+The later [official Transformer Engine default comparison](../official-te-20261113/README.md)
+uses these unchanged archives as baselines. It retains all 12 workload combinations,
+the official 2×512 graph speed win, both 512-step GPT-2 losses, and separate
+construction/capture/training memory measurements. This page remains the original
+project experiment record.
+
 All comparisons train both LoRA matrices at rank/alpha 16, with FP32 adapters and fused AdamW state, BF16 base storage for the reference/preserve paths, lr 2e-4, betas (0.9, 0.999), eps 1e-8 and no weight decay. The reference is the ordinary two-linear PyTorch LoRA expression, not a claim about every PEFT implementation.
 
 ## Full training steps

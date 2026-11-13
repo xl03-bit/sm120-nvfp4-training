@@ -1,0 +1,13 @@
+te_default balanced 64 7.863635383546352
+te_default balanced 162 7.512782104313374
+te_default balanced 312 7.229998029768467
+te_default balanced 512 7.003181107342243
+te_default balanced 768 6.86493456363678
+te_default balanced 1024 6.7683828473091125
+te_default balanced 1536 6.631017223000526
+te_default balanced 2048 6.520607404410839
+te_default balanced 3072 6.365852907299995
+te_default balanced 4096 6.238577663898468
+te_default balanced 6144 6.025970533490181
+te_default balanced 8192 5.848919108510017
+{"config": {"backend": "te_default", "profile": "balanced", "task": "fineweb", "remat": false, "curve": true, "phase_memory": false, "seed": 1234, "output": "results/curve_default_fineweb.json"}, "status": "complete", "torch": "2.11.0+cu130", "cuda": "13.0", "gpu": "NVIDIA GeForce RTX 5060 Ti", "memory_initial": {"allocated": 0, "reserved": 0, "peak_allocated": 0, "peak_reserved": 0, "cuda_device_used": 1180106752}, "provenance": {"sha256": "771fa4a99b9fe0946ffb6e848b4ba5c6a9b0fe87860ebf03bc2c1c7e45f8178e", "split_token": 95000257, "windows_sha256": {"701": "25e467c67b827b8e04b50c021e94e3a29a1705d8d16d9ed38f4ce89876de5eb8", "702": "eb4971741a1a7fbab427432c253d6a27f732f6c72e2482acbfe05ff5e6bce5cc"}}, "parameters": 354298880, "stack": "Official NVFP4 defaults; FP32 parameters/gradients/Adam moments; capturable FusedAdam for unchanged graph timing", "optimizer": {"lr": 9.999999747378752e-05, "bias_correction": true, "betas": [0.9, 0.999], "eps": 1e-08, "weight_decay": 0.01}, "memory_capture": {"allocated": 5863182848, "reserved": 6643777536, "peak_allocated": 6199040000, "peak_reserved": 6643777536, "cuda_device_used": 7899381760}, "executed_updates": 8192, "memory_training": {"allocated": 5863215616, "reserved": 7191134208, "peak_allocated": 6274921984, "peak_reserved": 7191134208, "cuda_device_used": 8446738432}, "device_memory_training_peak_bytes": 7673581568, "memory_final": {"allocated": 4446020096, "reserved": 7195328512, "peak_allocated": 6274921984, "peak_reserved": 7195328512, "cuda_device_used": 8450932736}, "optimizer_steps": [8192]}

@@ -1,0 +1,56 @@
+{
+  "runtime_kernel": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+  "matches": [
+    {
+      "module": "module_39.cubin",
+      "symbols": [
+        "STT_FUNC         STB_GLOBAL STO_ENTRY      cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu_stream_k",
+        "STT_FUNC         STB_GLOBAL STO_ENTRY      cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu"
+      ],
+      "returncode": 0,
+      "disassembly": "results/sass-module_39.txt",
+      "fp4_instructions": [
+        "/*24b0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R4, R88, R92.reuse, R4, R0, R8.reuse, URZ ;        /* 0x7088005c5804747f */",
+        "/*2530*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R12, R96, R92, R12, R3, R8, URZ ;                  /* 0x7080035c600c747f */",
+        "/*2560*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R16, R96, R94.reuse, R16, R3, R20.reuse, URZ ;     /* 0x7148035e6010747f */",
+        "/*2580*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R24, R88, R94, R24, R0, R20, URZ ;                 /* 0x7140005e5818747f */",
+        "/*2600*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R28, R88, R100.reuse, R28, R0, R9.reuse, URZ ;     /* 0x70980064581c747f */",
+        "/*2690*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R32, R96, R100, R32, R3, R9, URZ ;                 /* 0x709003646020747f */",
+        "/*2700*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R36, R96, R102.reuse, R36, R3, R21.reuse, URZ ;    /* 0x715803666024747f */",
+        "/*2730*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R40, R88, R102, R40, R0, R21, URZ ;                /* 0x715000665828747f */",
+        "/*2760*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R44, R88, R104.reuse, R44, R0, R10.reuse, URZ ;    /* 0x70a80068582c747f */",
+        "/*2790*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R48, R96, R104, R48, R3, R10, URZ ;                /* 0x70a003686030747f */",
+        "/*27d0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R52, R96, R106.reuse, R52, R3, R22.reuse, URZ ;    /* 0x7168036a6034747f */",
+        "/*2800*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R56, R88, R106, R56, R0, R22, URZ ;                /* 0x7160006a5838747f */",
+        "/*2830*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R60, R88, R108.reuse, R60, R0, R11.reuse, URZ ;    /* 0x70b8006c583c747f */",
+        "/*2850*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R64, R96, R108, R64, R3, R11, URZ ;                /* 0x70b0036c6040747f */",
+        "/*2880*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R68, R96, R110.reuse, R68, R3, R23.reuse, URZ ;    /* 0x7178036e6044747f */",
+        "/*28b0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R72, R88, R110, R72, R0, R23, URZ ;                /* 0x7170006e5848747f */",
+        "/*28f0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R4, R112, R116.reuse, R4, R2, R76.reuse, URZ ;     /* 0x74c802747004747f */",
+        "/*2910*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R12, R120, R116, R12, R81, R76, URZ ;              /* 0x74c05174780c747f */",
+        "/*2940*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R16, R120, R118.reuse, R16, R81, R84.reuse, URZ ;  /* 0x754851767810747f */",
+        "/*2980*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R24, R112, R118, R24, R2, R84, URZ ;               /* 0x754002767018747f */",
+        "/*29b0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R28, R112, R124.reuse, R28, R2, R77.reuse, URZ ;   /* 0x74d8027c701c747f */",
+        "/*29d0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R32, R120, R124, R32, R81, R77, URZ ;              /* 0x74d0517c7820747f */",
+        "/*29f0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R36, R120, R126.reuse, R36, R81, R85.reuse, URZ ;  /* 0x7558517e7824747f */",
+        "/*2a10*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R40, R112, R126, R40, R2, R85, URZ ;               /* 0x7550027e7028747f */",
+        "/*2a40*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R44, R112, R128.reuse, R44, R2, R78.reuse, URZ ;   /* 0x74e80280702c747f */",
+        "/*2a60*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R48, R120, R128, R48, R81, R78, URZ ;              /* 0x74e051807830747f */",
+        "/*2a80*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R52, R120, R130.reuse, R52, R81, R86.reuse, URZ ;  /* 0x756851827834747f */",
+        "/*2aa0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R56, R112, R130, R56, R2, R86, URZ ;               /* 0x756002827038747f */",
+        "/*2ad0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R60, R112, R132.reuse, R60, R2, R79.reuse, URZ ;   /* 0x74f80284703c747f */",
+        "/*2af0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R64, R120, R132, R64, R81, R79, URZ ;              /* 0x74f051847840747f */",
+        "/*2b20*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R68, R120, R134.reuse, R68, R81, R87.reuse, URZ ;  /* 0x757851867844747f */",
+        "/*2b50*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R72, R112, R134, R72, R2, R87, URZ ;               /* 0x757002867048747f */",
+        "/*2b80*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R4, R88, R92.reuse, R4, R0, R8.reuse, URZ ;        /* 0x7088005c5804747f */",
+        "/*2bc0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R12, R96, R92, R12, R3, R8, URZ ;                  /* 0x7080035c600c747f */",
+        "/*2be0*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R16, R96, R94.reuse, R16, R3, R20.reuse, URZ ;     /* 0x7148035e6010747f */",
+        "/*2c00*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R24, R88, R94, R24, R0, R20, URZ ;                 /* 0x7140005e5818747f */",
+        "/*2c20*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R28, R88, R100.reuse, R28, R0, R9.reuse, URZ ;     /* 0x70980064581c747f */",
+        "/*2c40*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R32, R96, R100, R32, R3, R9, URZ ;                 /* 0x709003646020747f */",
+        "/*2c60*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R36, R96, R102.reuse, R36, R3, R21.reuse, URZ ;    /* 0x715803666024747f */",
+        "/*2c80*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R40, R88, R102, R40, R0, R21, URZ ;                /* 0x715000665828747f */"
+      ]
+    }
+  ]
+}

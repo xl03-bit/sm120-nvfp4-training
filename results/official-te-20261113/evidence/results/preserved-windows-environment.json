@@ -1,0 +1,15 @@
+{
+  "executable": "D:\\Dev\\conda-envs\\research\\python.exe",
+  "python": "3.11.16 | packaged by conda-forge | (main, Sep  2 2026, 23:31:17) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "torch": "2.14.1+cu132",
+    "torchvision": "0.29.1+cu132",
+    "torchao": null,
+    "diffusers": "0.40.0",
+    "transformers": "5.16.1",
+    "accelerate": "1.14.0",
+    "safetensors": "0.8.0",
+    "numpy": "2.4.6"
+  },
+  "scope": "Read-only current Windows environment metadata; historical benchmark source of truth remains the Git archive."
+}

@@ -1,21 +1,20 @@
 # SM120 NVFP4 Training
 
-**GeForce RTX 50-series cards and the RTX PRO 6000 Blackwell have native FP4 Tensor Cores, but NVIDIA Transformer Engine does not offer its full NVFP4 training recipe on these SM120 GPUs.** Its supported NVFP4 training path on this hardware requires disabling stochastic rounding and random Hadamard transforms. [NVIDIA hardware support matrix](https://nvidia.github.io/TransformerEngine/support_matrix.html)
+**Use native NVFP4 to accelerate training and reduce GPU memory use on SM120 GPUs.** This PyTorch package combines FP4 Tensor Core forward/backward computation with compact weight and AdamW storage, plus configurable caching and recomputation for frozen backbones and LoRA.
 
-I built this open-source PyTorch package on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120) to make NVFP4 training accessible on these cards. It implements both operations in software and uses the FP4 Tensor Cores for forward and backward matrix multiplies. Six training profiles let you choose how much memory to spend on weights and AdamW state.
+Built on [Infatoshi/nvfp4-sm120](https://github.com/Infatoshi/nvfp4-sm120), it implements software stochastic rounding (SR) and random Hadamard transforms (RHT). Six full-parameter training profiles let you choose how much memory to spend on weights and AdamW state. Frozen-weight and LoRA paths offer additional storage choices.
+
+Official NVIDIA Transformer Engine also supports RHT, SR and native FP4 on the tested SM120 GPU in the main revision measured on **2026-11-13**. The project focuses on measured training throughput, memory use and model capacity. See the [official-default comparison](#official-transformer-engine-comparison-2026-11-13) for the pinned version, configuration differences, official wins and capacity failures.
 
 ## What does this mean?
 
-Consumer GPUs can put their FP4 compute to work during training. Workloads dominated by large matrix multiplies stand to benefit most. When GPU memory is the limit, storing weights and optimizer state more compactly can make room for a larger model on the same card.
+On the measured **RTX 5060 Ti 16GB**:
 
-As a rough illustration, the first three targets below compare NVFP4 on the smaller card with BF16 on the larger card, for the same model and batch shape. The fourth compares the size of model that fits in memory.
+- FLUX.2 Klein 4B LoRA at 1024px took **2.306 s/update with 6.626 GiB allocated**, versus **3.405 s and 9.516 GiB** for the matched BF16 run: about **1.48× throughput and 30.4% less allocation**.
+- The FLUX recompute option used **4.669 GiB**, **50.9% less allocation than BF16**, at **2.360 s/update**.
+- A **4.06B-parameter language model completed 2,048 full-parameter updates** with **12.75 GiB allocated**, using compact weights/moments and transpose recomputation.
 
-- An **RTX 5060** could approach **RTX 5080** training throughput.
-- An **RTX 5080** could approach **RTX 5090** training throughput.
-- An **RTX 5090** could approach **RTX PRO 6000 Blackwell** training throughput.
-- **One RTX PRO 6000 Blackwell** using a compact NVFP4 profile could fit a model that would otherwise need **two such GPUs** for BF16 training.
-
-These are illustrative hardware targets. The [measurements below](#406b-full-parameter-run) come from one RTX 5060 Ti and show model capacity, throughput and training progress.
+These are complete training-update measurements, not isolated GEMM rates. Benefits depend on shape, attention, precision and storage policy. Allocated memory is not total physical VRAM usage, and these single-GPU results do not establish equivalent performance on other cards. The sections below retain loss results and each measurement's scope.
 
 ## Install and verify
 
@@ -109,6 +108,75 @@ the scripts and recorded configuration of the completed 200-step LoRA experiment
 The [FLUX.2 example](examples/flux2_klein/README.md) includes training, inference,
 adapter export and the matched benchmark. These additions leave the six
 full-parameter profiles and the existing frozen-weight interfaces unchanged.
+
+## Official Transformer Engine comparison (2026-11-13)
+
+Tested official **TE `2.22.0.dev0+464df759`**, pinned to
+[`464df759d5a4ed549f2ce99b58fe653178a252f5`](https://github.com/NVIDIA/TransformerEngine/tree/464df759d5a4ed549f2ce99b58fe653178a252f5),
+including SM120 RHT/SR fixes. Actual quantizer/graph checks and native FP4 kernel
+evidence confirm RHT, SR and forward/backward FP4 execution on this RTX 5060 Ti.
+The earlier statement that official SM120 NVFP4 requires disabling RHT/SR does
+not apply to this tested revision.
+
+The primary comparison uses **official default `NVFP4BlockScaling()`**, with
+ordinary FP32 parameters/gradients and official FusedAdam FP32 moments for
+full-parameter training; LoRA retains BF16 frozen weights and FP32 adapters/AdamW
+state. Original model sizes, batches, objectives and timing methods are retained.
+No project compressed states, transpose-recomputation implementation or persistent
+quantized-weight cache were added to the official default path. This compares
+complete implementations with different storage policies; it is not a claim
+about TE's best possible tuned configuration or FP4 GEMM alone.
+
+Project values below come from the existing Git archives, without rerunning the
+project baseline. The short full-parameter archive predates the packaging fixes.
+
+| Workload / project baseline | Project s/update | Official s/update | Official time change | Project allocated GiB | Official allocated GiB | Official whole-device GiB |
+|---|---:|---:|---:|---:|---:|---:|
+| 453M, `balanced`, 2×64 | 0.01923 | 0.06153 | +220.0% | 2.049 | 6.896 | 7.846 |
+| FineWeb 354M short, `balanced`, 2×512 | 0.04008 | 0.07099 | +77.1% | 2.562 | 5.650 | 6.514 |
+| FineWeb 8,192 updates, `balanced`, final segment | 0.04082 | 0.07180 | +75.9% | 2.697 | 5.844 | 7.147 |
+| FLUX 40 updates, packed cache | 2.30552 | 2.38321 | +3.37% | 6.626 | 9.732 | 10.779 |
+| FLUX 1,000 updates, 970 shared timed indices | 2.37453 | 2.36624 | **−0.35%** | 6.626 | 9.732 | 10.790 |
+
+Official was also **1.9% faster** in the 2×512, 16-layer LoRA CUDA Graph test
+without checkpointing; the other eleven LoRA combinations were slower. FLUX's
+970-index long-run median was **0.55% slower** for official TE. Those indices
+include the project's previously documented preview overlap at updates 568–601.
+Excluding that interval from **both** runs gives 936 matched samples and means of
+**2.307914 s (project) versus 2.366685 s (official), +2.55%**. Both views are retained;
+the small raw-mean win is not evidence of a repeatable throughput advantage.
+
+| Final validation objective | Project | Official default | Official − project |
+|---|---:|---:|---:|
+| FineWeb 8,192-step CE, `balanced` | 5.852692 | 5.848919 | −0.003773 |
+| GPT-2 LoRA 512-step CE, checkpoint off/on | 3.674122 | 3.704230 | +0.030108 |
+| FLUX 1,000-step heldout flow MSE | 0.805012 | 0.812247 | +0.007235 |
+
+The completed official runs remained finite. These are single-seed results;
+FLUX's final heldout MSE rose above initialization for both implementations and
+does not directly score generated-image identity. Image tests also differ in
+OS/Python and source weight representation: official TE dynamically quantizes
+the corresponding BF16 base, while the project retains its prequantized payload
+and H128 backward recipe. The full record lists these differences.
+
+**Capacity:** official 4.06B initialization loaded the complete model, then OOMed
+while allocating default FP32 Adam states. The H3 default BF16 projection-storage
+probe also OOMed; it was not a completed H3 training run. No smaller model or
+custom CPU offload was substituted, and no official speed/loss is reported for
+these failures. They show the capacity benefit of the project's measured storage
+choices, without claiming that every possible official configuration would fail.
+
+Whole-device memory is sampled with NVML and includes allocator-external memory
+and other GPU users. The historical project runs have no corresponding NVML
+archive, so the table does not invent a project whole-device value or difference.
+LoRA construction/capture and reserved peaks are separately preserved in the
+full tables.
+
+See the [experiment record](results/official-te-20261113/README.md),
+[all workload/profile tables](results/official-te-20261113/tables.md), and
+[machine-readable comparison](results/official-te-20261113/comparison.json).
+Earlier runs combining official computation with project compressed storage are
+retained as **auxiliary** results, separate from the official-default comparison.
 
 ## Measurements on one RTX 5060 Ti
 

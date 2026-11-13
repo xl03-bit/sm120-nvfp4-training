@@ -1,9 +1,12 @@
 # Measurement provenance
 
-All measurements here were recorded on one RTX 5060 Ti 16GB under WSL2 Ubuntu 22.04, with PyTorch 2.11.0+cu130, CUDA 13.0, TorchAO 0.17.0 and Triton 3.6.0.
+The original full-parameter measurements below were recorded on one RTX 5060 Ti 16GB under WSL2 Ubuntu 22.04, with PyTorch 2.11.0+cu130, CUDA 13.0, TorchAO 0.17.0 and Triton 3.6.0. Later image and official-TE experiments have their own environment records; this stack does not describe every result directory.
 
 | Record | Origin and coverage |
 |---|---|
+| [Official Transformer Engine comparison, 2026-11-13](official-te-20261113/README.md) | Pinned official SM120 RHT/SR support, default full-step and 8,192-step training, all 12 LoRA combinations, GPT-2, FLUX 40/1,000 updates, actual 4.06B/H3 capacity OOMs, NVML memory, losses, official wins and separately labeled compressed-storage auxiliary runs. Includes hashed evidence, test harness and CPU table regeneration. Project baselines are the existing Git archives. |
+| [LoRA measurements](lora/README.md) | Original synthetic and pretrained GPT-2 adaptation, with construction/capture/training memory stages and recorded Windows checks. |
+| [Image and H3 experiments](lora-image/README.md) | Original Windows PyTorch 2.14.1+cu132 image measurements, packed cache/recompute choices, FLUX subject adaptation and the scope of the H3 engineering run. |
 | [4.06B FineWeb run](fineweb-4b-2048/README.md) | 2,048 full-parameter updates. Per-update losses and VRAM, 19 fixed-window evaluations, and a diagnosis of the FP8 overflow found in the initial run. |
 | [capacity-4b.json](capacity-4b.json) | Single-GPU capacity run with 4,063,797,760 trainable parameters. The 50-layer model used FP8 master weights for eligible projections, two 4-bit AdamW moments and transpose recomputation. The tied embedding/output weight stayed FP32. The log includes all five training losses, one held-out evaluation and peak allocated and reserved memory. |
 | [benchmarks.json](benchmarks.json) | Eighteen full-step runs through the original local training API. Six profiles on both workloads and three additional transpose-recomputation runs per workload. Each record includes all five timed rounds. |

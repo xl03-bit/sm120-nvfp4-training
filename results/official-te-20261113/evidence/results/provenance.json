@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "project_commit": "e31a84233c0563a4c7b34305f5e41095b354b86f",
+  "transformer_engine_commit": "464df759d5a4ed549f2ce99b58fe653178a252f5",
+  "sm120_fixes": [
+    "17702596 Add NVFP4 RHT Support for SM120 and SM121 #3300",
+    "fc1fc0e7 Fix NVFP4 stochastic rounding on architectures without cvt.rs #3281",
+    "2cd2257e Use software stochastic rounding in the RHT cast fusion kernels #3706",
+    "4a3a8a8e Fix RHT matrix dispatch #3669"
+  ],
+  "project_url": "https://github.com/xl03-bit/sm120-nvfp4-training",
+  "te_url": "https://github.com/NVIDIA/TransformerEngine",
+  "environment": "/home/lixin/te-nvfp4-compare-20261113/venv",
+  "baseline_environment": "/home/lixin/GRPF_FP8_500M/.venv",
+  "toolkit": "/usr/local/cuda-13.0",
+  "hardware_changes": false,
+  "primary_comparison": "official default recipe/storage versus repository archives; no custom official tuning",
+  "auxiliary_comparison": "official compute with project compressed weight/optimizer storage; separately labeled",
+  "image_environment": "/home/lixin/te-nvfp4-compare-20261113/image-venv"
+}

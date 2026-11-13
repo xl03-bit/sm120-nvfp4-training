@@ -1,0 +1,70 @@
+[
+  {
+    "rht": true,
+    "sr": true,
+    "successive_payload_changed_bytes": {
+      "_rowwise_data": [
+        69675,
+        69633,
+        69487
+      ],
+      "_columnwise_data": [
+        69806,
+        69746,
+        69337
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "rht": true,
+    "sr": false,
+    "successive_payload_changed_bytes": {
+      "_rowwise_data": [
+        0,
+        0,
+        0
+      ],
+      "_columnwise_data": [
+        0,
+        0,
+        0
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "rht": false,
+    "sr": true,
+    "successive_payload_changed_bytes": {
+      "_rowwise_data": [
+        69547,
+        69595,
+        69535
+      ],
+      "_columnwise_data": [
+        70050,
+        69808,
+        69760
+      ]
+    },
+    "status": "passed"
+  },
+  {
+    "rht": false,
+    "sr": false,
+    "successive_payload_changed_bytes": {
+      "_rowwise_data": [
+        0,
+        0,
+        0
+      ],
+      "_columnwise_data": [
+        0,
+        0,
+        0
+      ]
+    },
+    "status": "passed"
+  }
+]

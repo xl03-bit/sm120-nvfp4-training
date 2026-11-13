@@ -1,0 +1,53 @@
+{
+  "mode": "bf16",
+  "backward_mode": "cache",
+  "steps": 1000,
+  "label": "official-default-1000",
+  "validate_every": 100,
+  "save_every": 100,
+  "resume": null,
+  "resume_step": 0,
+  "skip_validation": false,
+  "attention": "cudnn",
+  "recipe": {
+    "rank": 16,
+    "alpha": 16,
+    "lr": 0.0001,
+    "optimizer": "FP32 fused AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "grad_clip": 1.0,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "seed": 7849,
+    "timestep_sampling": "uniform over original 1000-step scheduler",
+    "loss": "unweighted MSE, target noise - latent",
+    "checkpointing": true,
+    "caption_dropout": 0,
+    "prior_preservation": false,
+    "initialization": "A Kaiming uniform; B zero",
+    "target_modules": "same 98 projections quantized in official NVFP4 checkpoint in both modes",
+    "candidate_max_steps": 1000,
+    "preview_steps": [
+      100,
+      300,
+      600,
+      1000
+    ]
+  },
+  "base_id": "FLUX.2-klein-base-4B:a3b4f4849157f664bdbc776fd7453c2783562f4d:bf16",
+  "trainable_parameters": 23887872,
+  "frozen_sha256_before": "db627928c90c0e1bdf6c700836d6cdef6864c2563a09d1eaa20638f88e4044c2",
+  "activation_scale": null,
+  "precision": "BF16 compute with FP32 adapters and AdamW states",
+  "attention_description": "PyTorch cudnn SDPA",
+  "environment": {
+    "torch": "2.14.1+cu132",
+    "cuda": "13.2",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti"
+  }
+}

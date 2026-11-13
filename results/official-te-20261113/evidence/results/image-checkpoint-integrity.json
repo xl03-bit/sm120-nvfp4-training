@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "checkpoint": "/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/image-default/results/official-default-1000/adapter-1000.pt",
+  "adapters": 98,
+  "trainable_parameters": 23887872,
+  "optimizer_parameter_states": 196,
+  "optimizer_steps": [
+    1000.0
+  ],
+  "parameters_and_adam_states_finite": true,
+  "device": "cpu"
+}

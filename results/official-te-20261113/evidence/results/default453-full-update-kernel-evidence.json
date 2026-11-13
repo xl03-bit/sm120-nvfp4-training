@@ -1,0 +1,25 @@
+{
+  "FULL453_GEMM_FWD": {
+    "cuda_kernels": {
+      "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)": 64,
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu": 48,
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu_stream_k": 16
+    },
+    "native_fp4_launches": 64
+  },
+  "FULL453_GEMM_DGRAD": {
+    "cuda_kernels": {
+      "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)": 64,
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu": 48,
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu_stream_k": 16
+    },
+    "native_fp4_launches": 64
+  },
+  "FULL453_GEMM_WGRAD": {
+    "cuda_kernels": {
+      "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)": 64,
+      "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu": 64
+    },
+    "native_fp4_launches": 64
+  }
+}

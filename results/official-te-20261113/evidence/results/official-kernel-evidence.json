@@ -1,0 +1,804 @@
+{
+  "official_rht0_sr0_trace.json": {
+    "scopes": {
+      "PROBE_GEMM_DGRAD": [
+        3674946115683.399,
+        3674946115885.633
+      ],
+      "PROBE_GEMM_WGRAD": [
+        3674946115924.977,
+        3674946116066.974
+      ],
+      "PROBE_FORWARD": [
+        3674946109376.324,
+        3674946114753.326
+      ],
+      "PROBE_GEMM_FWD": [
+        3674946114142.64,
+        3674946114440.288
+      ],
+      "PROBE_BACKWARD": [
+        3674946114764.321,
+        3674946116272.7256
+      ]
+    },
+    "kernels_by_scope": {
+      "PROBE_FORWARD": [
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.832,
+          "correlation": 21946
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.525,
+          "correlation": 21949
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 4.159,
+          "correlation": 21958
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.282,
+          "correlation": 21960
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.213,
+          "correlation": 21964
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.797,
+          "correlation": 22030
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.698,
+          "correlation": 22033
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "microseconds": 6.862,
+          "correlation": 22038
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.213,
+          "correlation": 22041
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.179,
+          "correlation": 22045
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.327,
+          "correlation": 22079
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.802,
+          "correlation": 22091
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "microseconds": 3.569,
+          "correlation": 22109
+        }
+      ],
+      "PROBE_GEMM_FWD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.901,
+          "correlation": 22060
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.129,
+          "correlation": 22065
+        }
+      ],
+      "PROBE_BACKWARD": [
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "microseconds": 0.797,
+          "correlation": 22123
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "microseconds": 1.906,
+          "correlation": 22137
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "microseconds": 1.802,
+          "correlation": 22164
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "microseconds": 2.218,
+          "correlation": 22175
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.49,
+          "correlation": 22193
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.763,
+          "correlation": 22267
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.318,
+          "correlation": 22270
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 3.778,
+          "correlation": 22279
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.179,
+          "correlation": 22281
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.109,
+          "correlation": 22285
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.292,
+          "correlation": 22340
+        }
+      ],
+      "PROBE_GEMM_DGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.867,
+          "correlation": 22300
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.06,
+          "correlation": 22305
+        }
+      ],
+      "PROBE_GEMM_WGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.867,
+          "correlation": 22321
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.026,
+          "correlation": 22326
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "microseconds": 1.039,
+          "correlation": 22362
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "microseconds": 23.462,
+          "correlation": 22369
+        }
+      ]
+    }
+  },
+  "official_rht0_sr1_trace.json": {
+    "scopes": {
+      "PROBE_GEMM_DGRAD": [
+        3674946034334.535,
+        3674946034481.9263
+      ],
+      "PROBE_GEMM_WGRAD": [
+        3674946034507.616,
+        3674946034596.6704
+      ],
+      "PROBE_FORWARD": [
+        3674946027651.17,
+        3674946033260.607
+      ],
+      "PROBE_GEMM_FWD": [
+        3674946032657.703,
+        3674946032923.919
+      ],
+      "PROBE_BACKWARD": [
+        3674946033271.971,
+        3674946034803.886
+      ]
+    },
+    "kernels_by_scope": {
+      "PROBE_FORWARD": [
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.833,
+          "correlation": 14826
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.527,
+          "correlation": 14829
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, false, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 3.957,
+          "correlation": 14838
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.249,
+          "correlation": 14840
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.18,
+          "correlation": 14844
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.764,
+          "correlation": 14910
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.562,
+          "correlation": 14913
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "microseconds": 6.525,
+          "correlation": 14918
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.145,
+          "correlation": 14921
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.146,
+          "correlation": 14925
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.297,
+          "correlation": 14959
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.804,
+          "correlation": 14971
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "microseconds": 3.574,
+          "correlation": 14989
+        }
+      ],
+      "PROBE_GEMM_FWD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.902,
+          "correlation": 14940
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.171,
+          "correlation": 14945
+        }
+      ],
+      "PROBE_BACKWARD": [
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "microseconds": 0.799,
+          "correlation": 15003
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "microseconds": 1.943,
+          "correlation": 15017
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "microseconds": 1.805,
+          "correlation": 15044
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "microseconds": 2.187,
+          "correlation": 15055
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.492,
+          "correlation": 15073
+        },
+        {
+          "name": "transformer_engine::fused_attn::extract_seed_and_offset(long*, bool, long*, unsigned long, long*, unsigned long, unsigned int)",
+          "microseconds": 0.764,
+          "correlation": 15164
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.798,
+          "correlation": 15167
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<16, true, __nv_bfloat16>(__nv_bfloat16 const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.354,
+          "correlation": 15170
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_tuned_kernel::quantize_transpose_nvfp4_tuned_1D_kernel<__nv_fp8_e4m3, true, false, true, false>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 11.174,
+          "correlation": 15179
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.179,
+          "correlation": 15181
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.146,
+          "correlation": 15185
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.297,
+          "correlation": 15240
+        }
+      ],
+      "PROBE_GEMM_DGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.902,
+          "correlation": 15200
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.101,
+          "correlation": 15205
+        }
+      ],
+      "PROBE_GEMM_WGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.868,
+          "correlation": 15221
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.067,
+          "correlation": 15226
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "microseconds": 1.041,
+          "correlation": 15262
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "microseconds": 23.529,
+          "correlation": 15269
+        }
+      ]
+    }
+  },
+  "official_rht1_sr0_trace.json": {
+    "scopes": {
+      "PROBE_GEMM_DGRAD": [
+        3674945900402.53,
+        3674945900511.5537
+      ],
+      "PROBE_GEMM_WGRAD": [
+        3674945900535.584,
+        3674945900624.279
+      ],
+      "PROBE_FORWARD": [
+        3674945898682.422,
+        3674945899638.525
+      ],
+      "PROBE_GEMM_FWD": [
+        3674945899284.557,
+        3674945899430.038
+      ],
+      "PROBE_BACKWARD": [
+        3674945899646.079,
+        3674945900809.333
+      ]
+    },
+    "kernels_by_scope": {
+      "PROBE_FORWARD": [
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "microseconds": 0.832,
+          "correlation": 7449
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "microseconds": 2.149,
+          "correlation": 7455
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 9.151,
+          "correlation": 7471
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.283,
+          "correlation": 7473
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.213,
+          "correlation": 7477
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.797,
+          "correlation": 7543
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.56,
+          "correlation": 7546
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "microseconds": 6.621,
+          "correlation": 7551
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.143,
+          "correlation": 7554
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.109,
+          "correlation": 7558
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.328,
+          "correlation": 7592
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.769,
+          "correlation": 7604
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "microseconds": 3.536,
+          "correlation": 7622
+        }
+      ],
+      "PROBE_GEMM_FWD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.936,
+          "correlation": 7573
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.13,
+          "correlation": 7578
+        }
+      ],
+      "PROBE_BACKWARD": [
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "microseconds": 0.797,
+          "correlation": 7636
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "microseconds": 1.907,
+          "correlation": 7650
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "microseconds": 1.803,
+          "correlation": 7677
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "microseconds": 2.184,
+          "correlation": 7688
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.491,
+          "correlation": 7706
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "microseconds": 0.763,
+          "correlation": 7780
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "microseconds": 1.941,
+          "correlation": 7786
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 8.423,
+          "correlation": 7802
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.179,
+          "correlation": 7804
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.144,
+          "correlation": 7808
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.293,
+          "correlation": 7863
+        }
+      ],
+      "PROBE_GEMM_DGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.901,
+          "correlation": 7823
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.131,
+          "correlation": 7828
+        }
+      ],
+      "PROBE_GEMM_WGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.867,
+          "correlation": 7844
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.096,
+          "correlation": 7849
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "microseconds": 1.006,
+          "correlation": 7885
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "microseconds": 23.433,
+          "correlation": 7892
+        }
+      ]
+    }
+  },
+  "official_rht1_sr1_trace.json": {
+    "scopes": {
+      "PROBE_GEMM_DGRAD": [
+        3674945782490.132,
+        3674945782749.738
+      ],
+      "PROBE_GEMM_WGRAD": [
+        3674945782784.285,
+        3674945782885.657
+      ],
+      "PROBE_FORWARD": [
+        3674945771937.043,
+        3674945778450.372
+      ],
+      "PROBE_GEMM_FWD": [
+        3674945777734.721,
+        3674945778065.451
+      ],
+      "PROBE_BACKWARD": [
+        3674945778463.06,
+        3674945783141.323
+      ]
+    },
+    "kernels_by_scope": {
+      "PROBE_FORWARD": [
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "microseconds": 0.971,
+          "correlation": 72
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "microseconds": 2.253,
+          "correlation": 78
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, false, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 8.701,
+          "correlation": 94
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.213,
+          "correlation": 96
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.144,
+          "correlation": 100
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::zero_amax_kernel(float*, float const*)",
+          "microseconds": 0.798,
+          "correlation": 166
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::amax_kernel<8, true, float>(float const*, float*, unsigned long, unsigned long, float const*)",
+          "microseconds": 1.595,
+          "correlation": 169
+        },
+        {
+          "name": "void transformer_engine::quantize_transpose_nvfp4::(anonymous namespace)::block_scaled_1d_cast_transpose_kernel<true, true, false, true, float, float, unsigned char, __nv_fp8_e4m3, false, false, true, false>(float const*, float const*, unsigned char*, unsigned char*, __nv_fp8_e4m3*, __nv_fp8_e4m3*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, unsigned long const*, float const*)",
+          "microseconds": 6.517,
+          "correlation": 174
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.145,
+          "correlation": 177
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.109,
+          "correlation": 181
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.397,
+          "correlation": 215
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float, float>(at::TensorIteratorBase&, float)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.699,
+          "correlation": 227
+        },
+        {
+          "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4> >(at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsigned int, float, 4, 4>)",
+          "microseconds": 3.536,
+          "correlation": 245
+        }
+      ],
+      "PROBE_GEMM_FWD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 1.005,
+          "correlation": 196
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.131,
+          "correlation": 201
+        }
+      ],
+      "PROBE_BACKWARD": [
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+          "microseconds": 0.798,
+          "correlation": 259
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "microseconds": 2.114,
+          "correlation": 273
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "microseconds": 1.768,
+          "correlation": 300
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "microseconds": 2.115,
+          "correlation": 311
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "microseconds": 1.422,
+          "correlation": 329
+        },
+        {
+          "name": "transformer_engine::fused_attn::extract_seed_and_offset(long*, bool, long*, unsigned long, long*, unsigned long, unsigned int)",
+          "microseconds": 0.797,
+          "correlation": 420
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::ZeroAmaxKernel(float*, float*, float*)",
+          "microseconds": 0.798,
+          "correlation": 423
+        },
+        {
+          "name": "void transformer_engine::(anonymous namespace)::HadamardAmaxTmaKernel<__nv_bfloat16, 16, 128, 128, 64, 64, 128, 1, true, false, true>(CUtensorMap_st, float*, float*, float*, unsigned short, unsigned short, unsigned long, unsigned long)",
+          "microseconds": 1.976,
+          "correlation": 429
+        },
+        {
+          "name": "void transformer_engine::dispatch::nvfp4::quantize_transpose_kernel::quantize_transpose_nvfp4_kernel<false, transformer_engine::Empty, (float (*)(float, transformer_engine::Empty const&))0, __nv_bfloat16, __nv_fp8_e4m3, true, true, false, true, true>(CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, CUtensorMap_st, __nv_fp8_e4m3*, __nv_fp8_e4m3*, float const*, float const*, float const*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long const*)",
+          "microseconds": 28.252,
+          "correlation": 445
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.179,
+          "correlation": 447
+        },
+        {
+          "name": "transformer_engine::(anonymous namespace)::swizzle_rowwise_full_width_kernel(unsigned char const*, unsigned char*, int, unsigned int, int, int)",
+          "microseconds": 1.11,
+          "correlation": 451
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "microseconds": 3.328,
+          "correlation": 506
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<1>, at::native::(anonymous namespace)::BinaryOpScalarFunctor<float, 1, 1, 0>, std::plus<float>, float)",
+          "microseconds": 1.006,
+          "correlation": 528
+        },
+        {
+          "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*>(at::native::(anonymous namespace)::FusedOptimizerTensorListMetadata<4>, at::native::(anonymous namespace)::FusedAdamMathFunctor<float, 4, (at::native::ADAM_MODE)1, false>, float const*, double, double, double, double, double, bool, float const*, float const*)",
+          "microseconds": 23.503,
+          "correlation": 535
+        }
+      ],
+      "PROBE_GEMM_DGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.901,
+          "correlation": 466
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.13,
+          "correlation": 471
+        }
+      ],
+      "PROBE_GEMM_WGRAD": [
+        {
+          "name": "transformer_engine::nvfp4_recipe::compute_nvfp4_per_tensor_scale_kernel(float, float const*, float const*, float, float, float*)",
+          "microseconds": 0.866,
+          "correlation": 487
+        },
+        {
+          "name": "cutlass3x_sm120_bstensorop_s16864gemm_block_scaled_ue4m3xe2m1_ue4m3xe2m1_f32_bf16_bf16_128x128x256_1x1x1_0_tnn_align32_o_vs16_bias_bf16_relu",
+          "microseconds": 5.061,
+          "correlation": 492
+        }
+      ]
+    }
+  }
+}

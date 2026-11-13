@@ -1,0 +1,8 @@
+{
+  "source": "/home/lixin/te-nvfp4-compare-20261113/TransformerEngine/transformer_engine/pytorch/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so",
+  "destination": "/home/lixin/te-nvfp4-compare-20261113/image-venv/lib/python3.10/site-packages/transformer_engine/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so",
+  "extension_sha256": "25f722ce4aa9509c83dbecfaac48faa96842626c22fa903bf9bdb43a4698217a",
+  "core_sha256": {
+    "/home/lixin/te-nvfp4-compare-20261113/image-venv/lib/python3.10/site-packages/transformer_engine/libtransformer_engine.so": "9f63c93fbaabad8fb8baef73ceaae60c9de97da2171ee79408fd567391bb4182"
+  }
+}

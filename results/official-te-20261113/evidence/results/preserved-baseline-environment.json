@@ -1,0 +1,13 @@
+{
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "packages": {
+    "torch": "2.11.0",
+    "torchao": "0.17.0",
+    "triton": "3.6.0",
+    "nvidia-cudnn-cu13": "9.19.0.56",
+    "nvidia-cublas": "13.1.0.3",
+    "numpy": "2.2.6"
+  },
+  "executable": "/home/lixin/GRPF_FP8_500M/.venv/bin/python",
+  "scope": "Current preserved original environment metadata, not proof of every historical Git benchmark dependency version; no training or GPU computation executed."
+}

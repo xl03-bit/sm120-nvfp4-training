@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "steps": 1000,
+  "start_step": 0,
+  "segment_steps": 1000,
+  "wall_seconds": 2458.619562983,
+  "measured_steps": 990,
+  "median_step_seconds": 2.3205879239999376,
+  "mean_step_seconds": 2.3667089923737366,
+  "peak_allocated_GiB": 9.731608390808105,
+  "peak_reserved_GiB": 10.302734375,
+  "frozen_sha256_after": "db627928c90c0e1bdf6c700836d6cdef6864c2563a09d1eaa20638f88e4044c2",
+  "frozen_unchanged": true
+}

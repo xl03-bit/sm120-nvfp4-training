@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    "default_453m: complete, exact update count, finite loss, default recipe",
+    "default_fineweb: complete, exact update count, finite loss, default recipe",
+    "curve_default_fineweb: complete, exact update count, finite loss, default recipe",
+    "default/hybrid FineWeb train and validation window SHA256s identical",
+    "captured official optimizer matches eager parameters and both moments",
+    "both environments: all four RHT/SR combinations passed",
+    "SR changes graph replay payload; disabling SR leaves it bitwise unchanged",
+    "real 453M step: 64 native FP4 launches in each GEMM role; E2M1 SASS retained",
+    "all 12 original LoRA shape/checkpoint/execution combinations completed",
+    "both GPT-2 LoRA runs: 512 updates, frozen bases unchanged, validation improved",
+    "large models: actual OOM evidence, no reduced-size substitute",
+    "unmodified official source and submodules after checkout normalization",
+    "text and image environments use the identical unmodified official TE core binary",
+    "FLUX: full 40/1000 updates; identical image/timestep schedules, finite losses/gradients, frozen base unchanged",
+    "actual saved FLUX checkpoint: 98 adapters, 196 Adam states at update 1000; all finite"
+  ]
+}

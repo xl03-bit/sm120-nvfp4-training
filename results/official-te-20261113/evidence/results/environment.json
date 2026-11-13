@@ -1,0 +1,428 @@
+{
+  "time_utc": "2026-11-13T01:07:39.038410+00:00",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "executable": "/home/lixin/te-nvfp4-compare-20261113/venv/bin/python",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "torch": "2.11.0+cu130",
+  "torch_cuda": "13.0",
+  "cudnn": 91900,
+  "te": "2.22.0.dev0+464df759",
+  "te_path": "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/__init__.py",
+  "cublasLt_version": 130100,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "capability": [
+    12,
+    0
+  ],
+  "device_properties": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 5060 Ti', major=12, minor=0, total_memory=16283MB, multi_processor_count=36, uuid=48468fc9-2286-5eca-64a4-b4b7bd31bbf4, pci_bus_id=1, pci_device_id=0, pci_domain_id=0, L2_cache_size=32MB)",
+  "matmul_tf32": false,
+  "cudnn_tf32": true,
+  "env": {
+    "TORCH_EXTENSIONS_DIR": "/home/lixin/te-nvfp4-compare-20261113/torch_extensions",
+    "TRITON_CACHE_DIR": "/home/lixin/te-nvfp4-compare-20261113/triton_cache",
+    "PYTHONPATH": "/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/project/src:/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113",
+    "LD_LIBRARY_PATH": "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cudnn/lib",
+    "OMP_NUM_THREADS": "4",
+    "CUDA_HOME": "/usr/local/cuda"
+  },
+  "pip_check": {
+    "command": [
+      "/home/lixin/te-nvfp4-compare-20261113/venv/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "returncode": 0,
+    "output": "No broken requirements found.\n"
+  },
+  "pip_list": [
+    {
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "name": "apache-tvm-ffi",
+      "version": "0.1.16"
+    },
+    {
+      "name": "backports.strenum",
+      "version": "1.3.1"
+    },
+    {
+      "name": "cmake",
+      "version": "4.4.4"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.2"
+    },
+    {
+      "name": "cuda-bindings",
+      "version": "13.4.4"
+    },
+    {
+      "name": "cuda-pathfinder",
+      "version": "1.8.3"
+    },
+    {
+      "name": "cuda-toolkit",
+      "version": "13.0.2"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1"
+    },
+    {
+      "name": "einops",
+      "version": "0.8.2"
+    },
+    {
+      "name": "exceptiongroup",
+      "version": "1.3.1"
+    },
+    {
+      "name": "filelock",
+      "version": "4.1.0"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.65.0"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "importlib_metadata",
+      "version": "9.0.1"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.9"
+    },
+    {
+      "name": "ml_dtypes",
+      "version": "0.6.0"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.4.2"
+    },
+    {
+      "name": "ninja",
+      "version": "1.13.2"
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6"
+    },
+    {
+      "name": "nvdlfw_inspect",
+      "version": "0.2.2"
+    },
+    {
+      "name": "nvidia-cublas",
+      "version": "13.1.0.3"
+    },
+    {
+      "name": "nvidia-cuda-cupti",
+      "version": "13.0.85"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc",
+      "version": "13.0.88"
+    },
+    {
+      "name": "nvidia-cuda-runtime",
+      "version": "13.0.96"
+    },
+    {
+      "name": "nvidia-cudnn-cu13",
+      "version": "9.19.0.56"
+    },
+    {
+      "name": "nvidia-cudnn-frontend",
+      "version": "1.32.3"
+    },
+    {
+      "name": "nvidia-cufft",
+      "version": "12.0.0.61"
+    },
+    {
+      "name": "nvidia-cufile",
+      "version": "1.15.1.6"
+    },
+    {
+      "name": "nvidia-curand",
+      "version": "10.4.0.35"
+    },
+    {
+      "name": "nvidia-cusolver",
+      "version": "12.0.4.66"
+    },
+    {
+      "name": "nvidia-cusparse",
+      "version": "12.6.3.3"
+    },
+    {
+      "name": "nvidia-cusparselt-cu13",
+      "version": "0.8.0"
+    },
+    {
+      "name": "nvidia-cutlass-dsl",
+      "version": "4.8.1"
+    },
+    {
+      "name": "nvidia-cutlass-dsl-libs-base",
+      "version": "4.8.1"
+    },
+    {
+      "name": "nvidia-cutlass-dsl-libs-core",
+      "version": "4.8.1"
+    },
+    {
+      "name": "nvidia-cutlass-dsl-libs-cu12",
+      "version": "4.8.1"
+    },
+    {
+      "name": "nvidia-cutlass-dsl-libs-cu13",
+      "version": "4.8.1"
+    },
+    {
+      "name": "nvidia-nccl-cu13",
+      "version": "2.28.9"
+    },
+    {
+      "name": "nvidia-nvjitlink",
+      "version": "13.0.88"
+    },
+    {
+      "name": "nvidia-nvshmem-cu13",
+      "version": "3.4.5"
+    },
+    {
+      "name": "nvidia-nvtx",
+      "version": "13.0.85"
+    },
+    {
+      "name": "onnx",
+      "version": "1.23.2"
+    },
+    {
+      "name": "onnx-ir",
+      "version": "1.1.0"
+    },
+    {
+      "name": "onnxscript",
+      "version": "0.7.2"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3"
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0"
+    },
+    {
+      "name": "pip",
+      "version": "26.3"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0"
+    },
+    {
+      "name": "protobuf",
+      "version": "7.36.2"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "pybind11",
+      "version": "3.1.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.3"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.4"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3"
+    },
+    {
+      "name": "pytest",
+      "version": "9.2.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3"
+    },
+    {
+      "name": "scipy",
+      "version": "1.15.3"
+    },
+    {
+      "name": "setuptools",
+      "version": "81.0.0"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "tomli",
+      "version": "2.5.0"
+    },
+    {
+      "name": "torch",
+      "version": "2.11.0"
+    },
+    {
+      "name": "torchao",
+      "version": "0.17.0"
+    },
+    {
+      "name": "torchvision",
+      "version": "0.26.0"
+    },
+    {
+      "name": "transformer_engine",
+      "version": "2.22.0.dev0+464df759"
+    },
+    {
+      "name": "triton",
+      "version": "3.6.0"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.5"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.6"
+    },
+    {
+      "name": "wheel",
+      "version": "0.48.0"
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2"
+    }
+  ],
+  "te_source": {
+    "commit": {
+      "command": [
+        "git",
+        "-C",
+        "/home/lixin/te-nvfp4-compare-20261113/TransformerEngine",
+        "show",
+        "-s",
+        "--format=%H%n%cI%n%s",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "output": "464df759d5a4ed549f2ce99b58fe653178a252f5\n2026-11-12T09:00:29-08:00\nAdd user to TE CI (#3855)\n"
+    },
+    "tracked_status": {
+      "command": [
+        "git",
+        "-C",
+        "/home/lixin/te-nvfp4-compare-20261113/TransformerEngine",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "returncode": 0,
+      "output": " M .clang-format\n M .github/ISSUE_TEMPLATE/bug_report.md\n M .github/ISSUE_TEMPLATE/feature_request.md\n M .github/PULL_REQUEST_TEMPLATE.md\n M .github/actions/build-pytorch-wheel/Dockerfile\n M .github/actions/build-pytorch-wheel/action.yml\n M .github/actions/build-pytorch-wheel/build.sh\n M .github/scripts/check_for_ngc_images.sh\n M .github/workflows/attach-wheels-to-release.yml\n M .github/workflows/blossom-ci.yml\n M .github/workflows/community_label.yml\n M .github/workflows/deploy_nightly_docs.yml\n M .github/workflows/docs.yml\n M .github/workflows/license.yml\n M .github/workflows/lint.yml\n M .github/workflows/minimum_versions.yml\n M .github/workflows/trigger-ci.yml\n M .github/workflows/upload-ci-logs.yml\n M .gitignore\n M .gitmodules\n M .pre-commit-config.yaml\n M 3rdparty/cutlass\n M 3rdparty/googletest\n M 3rdparty/nccl-extensions\n M AGENTS.md\n M Acknowledgements.txt\n M CLAUDE.md\n M CODEOWNERS\n M CONTRIBUTING.rst\n M CPPLINT.cfg\n M LICENSE\n M MANIFEST.in\n M README.rst\n M SECURITY.md\n M benchmarks/attention/benchmark_attention.py\n M benchmarks/benchmark_group_quantize_current_scaling.py\n M benchmarks/benchmark_group_scaled_swiglu.py\n M benchmarks/benchmark_parallel_cross_entropy.py\n M benchmarks/benchmark_rht_cast.py\n M benchmarks/benchmark_rht_cast_swizzle_fusion.py\n M benchmarks/gemm/benchmark_gemm.py\n M benchmarks/linear/benchmark_graph_safe_grouped_mlp.py\n M benchmarks/linear/benchmark_grouped_gemm_kernels.py\n M benchmarks/linear/benchmark_grouped_linear.py\n M benchmarks/linear/benchmark_grouped_linear_cublas_grouped_gemm.py\n M benchmarks/linear/benchmark_linear.py\n M benchmarks/profile_rht_cast_swizzle_fusion.py\n M build_tools/VERSION.txt\n M build_tools/__init__.py\n M build_tools/build_ext.py\n M build_tools/jax.py\n M build_tools/pytorch.py\n M build_tools/te_version.py\n M build_tools/utils.py\n M build_tools/wheel_utils/Dockerfile.aarch\n M build_tools/wheel_utils/Dockerfile.x86\n M build_tools/wheel_utils/build_wheels.sh\n M build_tools/wheel_utils/launch_aarch.sh\n M build_tools/wheel_utils/launch_x86.sh\n M docs/.gitignore\n M docs/Doxyfile\n M docs/Makefile\n M docs/_static/css/diagram-colors.css\n M docs/_static/css/output-style.css\n M docs/_static/css/sphinx_tabs.css\n M docs/_static/css/svg-responsive.css\n M docs/api/c/activation.rst\n M docs/api/c/cast.rst\n M docs/api/c/cast_transpose_noop.rst\n M docs/api/c/cudnn.rst\n M docs/api/c/fused_attn.rst\n M docs/api/c/fused_rope.rst\n M docs/api/c/gemm.rst\n M docs/api/c/index.rst\n M docs/api/c/multi_tensor.rst\n M docs/api/c/normalization.rst\n M docs/api/c/padding.rst\n M docs/api/c/permutation.rst\n M docs/api/c/recipe.rst\n M docs/api/c/softmax.rst\n M docs/api/c/swizzle.rst\n M docs/api/c/transformer_engine.rst\n M docs/api/c/transpose.rst\n M docs/api/common.rst\n M docs/api/framework.rst\n M docs/api/jax.rst\n M docs/api/pytorch.rst\n M docs/conf.py\n M docs/debug.rst\n M docs/debug/1_getting_started.rst\n M docs/debug/2_config_file_structure.rst\n M docs/debug/3_api_debug_setup.rst\n M docs/debug/3_api_features.rst\n M docs/debug/3_api_te_calls.rst\n M docs/debug/4_distributed.rst\n M docs/debug/5_custom_feature_tutorial.ipynb\n M docs/debug/api.rst\n M docs/debug/custom_feature_dir/custom_feature_example_config.yaml\n M docs/debug/custom_feature_dir/percentage_greater_than_threshold.py\n M docs/debug/custom_feature_dir/utils.py\n M docs/documentation-archive.rst\n M docs/ecosystem.rst\n M docs/envvars.rst\n M docs/examples/advanced_optimizations.ipynb\n M docs/examples/attention/arbitrary_mask_to_post_scale_bias.py\n M docs/examples/attention/attention.ipynb\n M docs/examples/attention/cp_ag_thd_dpa_jax_deep_dive.ipynb\n M docs/examples/attention/example_attention.py\n M docs/examples/fine_grained_quantization/pytorch_fine_grained_quantization_example.py\n M docs/examples/fp8_primer.ipynb\n M docs/examples/gemm_profiling/gemm_profiling.rst\n M docs/examples/jax/attention.out\n M docs/examples/jax/attention.py\n M docs/examples/jax/attention.rst\n M docs/examples/jax/attention_context_parallel.out\n M docs/examples/jax/attention_context_parallel.py\n M docs/examples/jax/attention_context_parallel.rst\n M docs/examples/jax/attention_single_gpu.rst\n M docs/examples/jax/collective_gemm.rst\n M docs/examples/jax/dense.out\n M docs/examples/jax/dense.py\n M docs/examples/jax/dense.rst\n M docs/examples/jax/expert_parallelism.rst\n M docs/examples/jax/quickstart_jax_utils.py\n M docs/examples/jax/test_attention.py\n M docs/examples/jax/test_dense.py\n M docs/examples/onnx/onnx_export.ipynb\n M docs/examples/onnx/utils.py\n M docs/examples/op_fuser/op_fuser.rst\n M docs/examples/quickstart_utils.py\n M docs/examples/te_gemma/media/calibration.svg\n M docs/examples/te_gemma/media/calibration_1_half.svg\n M docs/examples/te_gemma/media/calibration_2_half.svg\n M docs/examples/te_gemma/media/fp8_model_init.svg\n M docs/examples/te_gemma/media/fp8_model_init_1_half.svg\n M docs/examples/te_gemma/media/fp8_model_init_2_half.svg\n M docs/examples/te_gemma/media/graphs.svg\n M docs/examples/te_gemma/requirements.txt\n M docs/examples/te_gemma/te_gemma.py\n M docs/examples/te_gemma/te_gemma_loading_weights.py\n M docs/examples/te_gemma/tutorial_generation_gemma_with_te.ipynb\n M docs/examples/te_gemma/utils.py\n M docs/examples/te_jax_integration.rst\n M docs/examples/te_llama/requirements.txt\n M docs/examples/te_llama/te_llama.py\n M docs/examples/te_llama/tutorial_accelerate_hf_llama_with_te.ipynb\n M docs/examples/te_llama/utils.py\n M docs/examples/te_mixtral/collator.py\n M docs/examples/te_mixtral/hf_to_te_weights.py\n M docs/examples/te_mixtral/media/dense_to_sparse.drawio\n M docs/examples/te_mixtral/media/fused_mlp_path.drawio\n M docs/examples/te_mixtral/media/mixtral_decoder_swap.drawio\n M docs/examples/te_mixtral/media/moe_loop_vs_grouped.drawio\n M docs/examples/te_mixtral/requirements.txt\n M docs/examples/te_mixtral/run_finetune_ep.py\n M docs/examples/te_mixtral/te_mixtral.py\n M docs/examples/te_mixtral/te_mixtral_mxfp8.py\n M docs/examples/te_mixtral/te_moe_dispatch.py\n M docs/examples/te_mixtral/test_accuracy.py\n M docs/examples/te_mixtral/tutorial_accelerate_hf_mixtral_with_te.ipynb\n M docs/examples/te_mixtral/utils.py\n M docs/faq.rst\n M docs/features/low_precision_training/fine_grained_quantization/fine_grained_quantization.rst\n M docs/features/low_precision_training/fine_grained_quantization/img/fine_grained_assignments.svg\n M docs/features/low_precision_training/fine_grained_quantization/img/fine_grained_linear_mapping.svg\n M docs/features/low_precision_training/fine_grained_quantization/img/hybrid_columnwise_source.svg\n M docs/features/low_precision_training/fine_grained_quantization/img/hybrid_quantizer.svg\n M docs/features/low_precision_training/fp8_blockwise_scaling/fp8_blockwise_scaling.rst\n M docs/features/low_precision_training/fp8_blockwise_scaling/img/blockwise_swizzle_flow.svg\n M docs/features/low_precision_training/fp8_blockwise_scaling/img/combined_scaling.svg\n M docs/features/low_precision_training/fp8_blockwise_scaling/img/transpose_handling.svg\n M docs/features/low_precision_training/fp8_blockwise_scaling/pytorch_blockwise_scaling_example.py\n M docs/features/low_precision_training/fp8_current_scaling/fp8_current_scaling.rst\n M docs/features/low_precision_training/fp8_current_scaling/img/fp8_cast_process.svg\n M docs/features/low_precision_training/fp8_current_scaling/img/fp8_current_scaling_all_gather.svg\n M docs/features/low_precision_training/fp8_current_scaling/img/fp8_formats.svg\n M docs/features/low_precision_training/fp8_current_scaling/img/fp8_scaling_concept.svg\n M docs/features/low_precision_training/fp8_current_scaling/jax_current_scaling_example.py\n M docs/features/low_precision_training/fp8_current_scaling/pytorch_current_scaling_example.py\n M docs/features/low_precision_training/fp8_delayed_scaling/fp8_delayed_scaling.rst\n M docs/features/low_precision_training/fp8_delayed_scaling/img/scaling_comparison.svg\n M docs/features/low_precision_training/fp8_delayed_scaling/jax_delayed_scaling_distributed_example.py\n M docs/features/low_precision_training/fp8_delayed_scaling/jax_delayed_scaling_example.py\n M docs/features/low_precision_training/fp8_delayed_scaling/pytorch_delayed_scaling_distributed_example.py\n M docs/features/low_precision_training/fp8_delayed_scaling/pytorch_delayed_scaling_example.py\n M docs/features/low_precision_training/index.rst\n M docs/features/low_precision_training/introduction/autocast_jax.py\n M docs/features/low_precision_training/introduction/autocast_pytorch.py\n M docs/features/low_precision_training/introduction/bf16_fp16_training_jax.py\n M docs/features/low_precision_training/introduction/bf16_fp16_training_pytorch.py\n M docs/features/low_precision_training/introduction/img/fp8_linear_flow.svg\n M docs/features/low_precision_training/introduction/img/fp_formats_comparison.svg\n M docs/features/low_precision_training/introduction/img/master_weights_approaches.svg\n M docs/features/low_precision_training/introduction/img/mixed_precision_operations.svg\n M docs/features/low_precision_training/introduction/introduction.rst\n M docs/features/low_precision_training/mxfp8/img/fp8_1d_scaling.svg\n M docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg\n M docs/features/low_precision_training/mxfp8/img/mxfp8_scale_linearize_and_swizzle.svg\n M docs/features/low_precision_training/mxfp8/img/mxfp8_swizzle_both_tensors.svg\n M docs/features/low_precision_training/mxfp8/img/mxfp8_tensor_scaling_layout.svg\n M docs/features/low_precision_training/mxfp8/jax_mxfp8_example.py\n M docs/features/low_precision_training/mxfp8/mxfp8.rst\n M docs/features/low_precision_training/mxfp8/pytorch_mxfp8_example.py\n M docs/features/low_precision_training/nvfp4/img/nvfp4_all_gather.svg\n M docs/features/low_precision_training/nvfp4/img/nvfp4_hierarchical_scaling.svg\n M docs/features/low_precision_training/nvfp4/img/nvfp4_row_col.svg\n M docs/features/low_precision_training/nvfp4/img/nvfp4_vs_fp8.svg\n M docs/features/low_precision_training/nvfp4/img/rht.svg\n M docs/features/low_precision_training/nvfp4/img/stochastic_rounding.svg\n M docs/features/low_precision_training/nvfp4/jax_nvfp4_example.py\n M docs/features/low_precision_training/nvfp4/nvfp4.rst\n M docs/features/low_precision_training/nvfp4/pytorch_nvfp4_example.py\n M docs/features/low_precision_training/performance_considerations/fused_layers_jax.py\n M docs/features/low_precision_training/performance_considerations/fused_layers_pytorch.py\n M docs/features/low_precision_training/performance_considerations/img/fused_layers.svg\n M docs/features/low_precision_training/performance_considerations/img/gemm_access_pattern.svg\n M docs/features/low_precision_training/performance_considerations/img/hopper_vs_blackwell_layout.svg\n M docs/features/low_precision_training/performance_considerations/img/sequence_parallel_quantization.svg\n M docs/features/low_precision_training/performance_considerations/img/transpose_fusion.svg\n M docs/features/low_precision_training/performance_considerations/memory_usage_1_jax.out\n M docs/features/low_precision_training/performance_considerations/memory_usage_1_jax.py\n M docs/features/low_precision_training/performance_considerations/memory_usage_1_pytorch.out\n M docs/features/low_precision_training/performance_considerations/memory_usage_1_pytorch.py\n M docs/features/low_precision_training/performance_considerations/memory_usage_2_jax.out\n M docs/features/low_precision_training/performance_considerations/memory_usage_2_jax.py\n M docs/features/low_precision_training/performance_considerations/memory_usage_2_pytorch.out\n M docs/features/low_precision_training/performance_considerations/memory_usage_2_pytorch.py\n M docs/features/low_precision_training/performance_considerations/memory_usage_3_pytorch.out\n M docs/features/low_precision_training/performance_considerations/memory_usage_3_pytorch.py\n M docs/features/low_precision_training/performance_considerations/performance_considerations.rst\n M docs/features/low_precision_training/performance_considerations/save_original_input_pytorch.out\n M docs/features/low_precision_training/performance_considerations/save_original_input_pytorch.py\n M docs/features/low_precision_training/speedups.rst\n M docs/features/mixture_of_experts/grouped_linear_jax.py\n M docs/features/mixture_of_experts/grouped_linear_pytorch.py\n M docs/features/mixture_of_experts/grouped_mlp_pytorch.py\n M docs/features/mixture_of_experts/img/grouped_linear.svg\n M docs/features/mixture_of_experts/img/moe_ep_one_step.svg\n M docs/features/mixture_of_experts/img/moe_expert_parallel.svg\n M docs/features/mixture_of_experts/img/moe_expert_placement.svg\n M docs/features/mixture_of_experts/img/moe_grouped_mlp.svg\n M docs/features/mixture_of_experts/img/moe_layer_ep.svg\n M docs/features/mixture_of_experts/img/moe_padding.svg\n M docs/features/mixture_of_experts/img/moe_permute.svg\n M docs/features/mixture_of_experts/img/moe_router.svg\n M docs/features/mixture_of_experts/img/moe_unpermute.svg\n M docs/features/mixture_of_experts/mixture_of_experts.rst\n M docs/features/mixture_of_experts/moe_expert_parallel_jax.py\n M docs/features/mixture_of_experts/moe_expert_parallel_pytorch.py\n M docs/features/mixture_of_experts/moe_layer_pytorch.py\n M docs/features/mixture_of_experts/moe_permute_pad_pytorch.py\n M docs/features/mixture_of_experts/moe_permute_pytorch.py\n M docs/features/mixture_of_experts/moe_unpermute_pytorch.py\n M docs/features/mixture_of_experts/router_jax.py\n M docs/features/mixture_of_experts/router_pytorch.py\n M docs/features/other_optimizations/cpu_offloading/cpu_offloading.rst\n M docs/features/other_optimizations/cpu_offloading/img/layer_sequence.svg\n M docs/features/other_optimizations/cpu_offloading/img/pcie_vs_nvlink.svg\n M docs/features/other_optimizations/cpu_offloading/img/scheduling.svg\n M docs/features/other_optimizations/cpu_offloading/img/scheduling_stall.svg\n M docs/features/other_optimizations/cpu_offloading/pytorch_basic_offload_example.py\n M docs/features/other_optimizations/cpu_offloading/pytorch_cuda_graphs_example.py\n M docs/features/other_optimizations/cpu_offloading/pytorch_manual_offload_example.py\n M docs/features/other_optimizations/index.rst\n M docs/getting_started/getting_started_jax.out\n M docs/getting_started/getting_started_jax.py\n M docs/getting_started/getting_started_jax_summary.csv\n M docs/getting_started/getting_started_pytorch.out\n M docs/getting_started/getting_started_pytorch.py\n M docs/getting_started/getting_started_pytorch_summary.csv\n M docs/getting_started/getting_started_utils_jax.py\n M docs/getting_started/getting_started_utils_pytorch.py\n M docs/getting_started/index.rst\n M docs/getting_started/transformer_layer.svg\n M docs/index.rst\n M docs/installation.rst\n M docs/project_updates.rst\n M docs/release_notes.md\n M docs/resources.rst\n M docs/support_matrix.rst\n M docs/troubleshooting.rst\n M docs/versions1.json\n M examples/README.md\n M examples/jax/README.md\n M examples/jax/collective_gemm/common.py\n M examples/jax/collective_gemm/conftest.py\n M examples/jax/collective_gemm/run_test_cgemm.sh\n M examples/jax/collective_gemm/test_dense_grad.py\n M examples/jax/collective_gemm/test_gemm.py\n M examples/jax/collective_gemm/test_layernorm_mlp_grad.py\n M examples/jax/datasets.txt\n M examples/jax/encoder/README.md\n M examples/jax/encoder/common.py\n M examples/jax/encoder/conftest.py\n M examples/jax/encoder/requirements.txt\n M examples/jax/encoder/run_test_multiprocessing_encoder.sh\n M examples/jax/encoder/test_model_parallel_encoder.py\n M examples/jax/encoder/test_multigpu_encoder.py\n M examples/jax/encoder/test_multiprocessing_encoder.py\n M examples/jax/encoder/test_single_gpu_encoder.py\n M examples/jax/ep/bench/ep_bench.py\n M examples/jax/ep/bench/run_ep_bench.sh\n M examples/jax/ep/ep_moe.py\n M examples/jax/ep/run_test_ep.sh\n M examples/jax/mnist/README.md\n M examples/jax/mnist/requirements.txt\n M examples/jax/mnist/test_single_gpu_mnist.py\n M examples/pytorch/comm_gemm_overlap/README.md\n M examples/pytorch/comm_gemm_overlap/te_layer_with_overlap.py\n M examples/pytorch/ep/bench/ep_bench.py\n M examples/pytorch/ep/bench/run_ep_bench.sh\n M examples/pytorch/ep/bench/run_nccl_ep_bench.sh\n M examples/pytorch/ep/ep_moe.py\n M examples/pytorch/ep/run_test_ep.sh\n M examples/pytorch/fsdp/README.md\n M examples/pytorch/fsdp/fsdp.py\n M examples/pytorch/mnist/main.py\n M examples/pytorch/quantized_model_init/fully_shard.py\n M examples/pytorch/quantized_model_init/main.py\n M pylintrc\n M pyproject.toml\n M qa/L0_cppunittest/test.sh\n M qa/L0_jax_distributed_unittest/test.sh\n M qa/L0_jax_lint/test.sh\n M qa/L0_jax_unittest/test.sh\n M qa/L0_jax_wheel/test.sh\n M qa/L0_license/config.json\n M qa/L0_license/copyright_checker.py\n M qa/L0_license/test.sh\n M qa/L0_pytorch_debug_unittest/test.sh\n M qa/L0_pytorch_lint/test.sh\n M qa/L0_pytorch_unittest/test.sh\n M qa/L0_pytorch_wheel/test.sh\n M qa/L1_cpp_distributed/test.sh\n M qa/L1_cppunittest_cutedsl_off/test.sh\n M qa/L1_jax_distributed_unittest/test.sh\n M qa/L1_pytorch_distributed_unittest/test.sh\n M qa/L1_pytorch_hybrid_distributed_unittest/test.sh\n M qa/L1_pytorch_mcore_fsdp_integration/.gitignore\n M qa/L1_pytorch_mcore_fsdp_integration/merges.txt\n M qa/L1_pytorch_mcore_fsdp_integration/test.sh\n M qa/L1_pytorch_mcore_integration/.gitignore\n M qa/L1_pytorch_mcore_integration/merges.txt\n M qa/L1_pytorch_mcore_integration/test.sh\n M qa/L1_pytorch_onnx_unittest/test.sh\n M qa/L2_jax_distributed_unittest/test.sh\n M qa/L2_jax_unittest/test.sh\n M qa/L3_pytorch_FA_versions_test/test.sh\n M qa/check_nccl_ep_headers.py\n M qa/format.sh\n M setup.py\n M tests/cpp/CMakeLists.txt\n M tests/cpp/operator/CMakeLists.txt\n M tests/cpp/operator/test_act.cu\n M tests/cpp/operator/test_cast.cu\n M tests/cpp/operator/test_cast_current_scaling.cu\n M tests/cpp/operator/test_cast_current_scaling_grouped.cu\n M tests/cpp/operator/test_cast_dbias.cu\n M tests/cpp/operator/test_cast_dbias_dgelu.cu\n M tests/cpp/operator/test_cast_float8blockwise.cu\n M tests/cpp/operator/test_cast_float8blockwise_grouped.cu\n M tests/cpp/operator/test_cast_gated_swiglu.cu\n M tests/cpp/operator/test_cast_mxfp8.cu\n M tests/cpp/operator/test_cast_mxfp8_gated_swiglu.cu\n M tests/cpp/operator/test_cast_mxfp8_grouped.cu\n M tests/cpp/operator/test_cast_mxfp8_grouped_scaled_swiglu.cu\n M tests/cpp/operator/test_cast_nvfp4_transpose.cu\n M tests/cpp/operator/test_cast_transpose.cu\n M tests/cpp/operator/test_cast_transpose_current_scaling.cu\n M tests/cpp/operator/test_cast_transpose_dbias.cu\n M tests/cpp/operator/test_cast_transpose_dbias_dgelu.cu\n M tests/cpp/operator/test_cast_transpose_dgeglu.cu\n M tests/cpp/operator/test_causal_softmax.cu\n M tests/cpp/operator/test_dequantize_float8blockwise_grouped.cu\n M tests/cpp/operator/test_dequantize_mxfp8.cu\n M tests/cpp/operator/test_dequantize_mxfp8_grouped.cu\n M tests/cpp/operator/test_dequantize_nvfp4.cu\n M tests/cpp/operator/test_fused_moe_aux_loss.cpp\n M tests/cpp/operator/test_gemm.cu\n M tests/cpp/operator/test_grouped_gemm.cu\n M tests/cpp/operator/test_memset.cu\n M tests/cpp/operator/test_multi_cast_transpose.cu\n M tests/cpp/operator/test_multi_padding.cu\n M tests/cpp/operator/test_multi_swizzle.cu\n M tests/cpp/operator/test_multi_unpadding.cu\n M tests/cpp/operator/test_normalization.cu\n M tests/cpp/operator/test_normalization.h\n M tests/cpp/operator/test_normalization_mxfp8.cu\n M tests/cpp/operator/test_qdq.cu\n M tests/cpp/operator/test_requantize_mxfp8_grouped.cu\n M tests/cpp/operator/test_row_scaled_nvfp4_grouped_amax.cu\n M tests/cpp/operator/test_row_scaled_nvfp4_grouped_cast.cu\n M tests/cpp/operator/test_scaled_activation.cu\n M tests/cpp/operator/test_softmax.cu\n M tests/cpp/operator/test_splits_to_offsets.cu\n M tests/cpp/operator/test_swap_first_dims.cu\n M tests/cpp/operator/test_swizzle.cu\n M tests/cpp/operator/test_swizzle_block_scaling.cu\n M tests/cpp/operator/test_transpose.cu\n M tests/cpp/test_common.cu\n M tests/cpp/test_common.h\n M tests/cpp/util/CMakeLists.txt\n M tests/cpp/util/test_nvrtc.cpp\n M tests/cpp/util/test_string.cpp\n M tests/cpp_distributed/CMakeLists.txt\n M tests/cpp_distributed/run_test_ep.sh\n M tests/cpp_distributed/test_comm_gemm.cu\n M tests/cpp_distributed/test_ep.cu\n M tests/cpp_distributed/test_ep_common.h\n M tests/jax/conftest.py\n M tests/jax/distributed_test_base.py\n M tests/jax/moe/test_moe_fsdp_layout.py\n M tests/jax/moe/test_moe_resource_api.py\n M tests/jax/multi_process_launch.sh\n M tests/jax/multi_process_launch_ep.sh\n M tests/jax/pytest.ini\n M tests/jax/run_te_ep_moe.sh\n M tests/jax/test_custom_call_compute.py\n M tests/jax/test_distributed_dense.py\n M tests/jax/test_distributed_fused_attn.py\n M tests/jax/test_distributed_helper.py\n M tests/jax/test_distributed_layernorm.py\n M tests/jax/test_distributed_layernorm_mlp.py\n M tests/jax/test_distributed_mhc.py\n M tests/jax/test_distributed_permutation.py\n M tests/jax/test_distributed_router.py\n M tests/jax/test_distributed_softmax.py\n M tests/jax/test_functions.py\n M tests/jax/test_fused_attn.py\n M tests/jax/test_fused_attn_score_mod.py\n M tests/jax/test_fused_router.py\n M tests/jax/test_gemm_partitioning.py\n M tests/jax/test_layer.py\n M tests/jax/test_mhc.py\n M tests/jax/test_misc.py\n M tests/jax/test_multi_process_distributed_grouped_gemm.py\n M tests/jax/test_multi_process_ep.py\n M tests/jax/test_mxfp8_cutedsl_backend.py\n M tests/jax/test_permutation.py\n M tests/jax/test_recipe_characteristics.py\n M tests/jax/test_sanity_import.py\n M tests/jax/test_softmax.py\n M tests/jax/test_te_ep_moe.py\n M tests/jax/test_triton_custom_calls.py\n M tests/jax/utils.py\n M tests/pytorch/attention/mla_rope_utils.py\n M tests/pytorch/attention/run_attention_with_cp.py\n M tests/pytorch/attention/run_attention_with_cp_pool.py\n M tests/pytorch/attention/run_graph_cache.py\n M tests/pytorch/attention/test_attention.py\n M tests/pytorch/attention/test_attention_backend_selection.py\n M tests/pytorch/attention/test_attention_with_cp.py\n M tests/pytorch/attention/test_cp_utils.py\n M tests/pytorch/attention/test_cu_seqlens_cache.py\n M tests/pytorch/attention/test_flex_attention.py\n M tests/pytorch/attention/test_fused_mla.py\n M tests/pytorch/attention/test_gdn2_attention.py\n M tests/pytorch/attention/test_gdn_attention.py\n M tests/pytorch/attention/test_gdp_attention.py\n M tests/pytorch/attention/test_kda_attention.py\n M tests/pytorch/attention/test_kv_cache.py\n M tests/pytorch/attention/test_linear_mxfp8_attention.py\n M tests/pytorch/attention/test_mixed_thd_attention.py\n M tests/pytorch/debug/conftest.py\n M tests/pytorch/debug/run_distributed.py\n M tests/pytorch/debug/test_api_features.py\n M tests/pytorch/debug/test_config.py\n M tests/pytorch/debug/test_configs/disable_fp8_gemms.yaml\n M tests/pytorch/debug/test_configs/disable_fp8_layer.yaml\n M tests/pytorch/debug/test_configs/dummy_feature.yaml\n M tests/pytorch/debug/test_configs/fake_quantization_config.yaml\n M tests/pytorch/debug/test_configs/log_config.yaml\n M tests/pytorch/debug/test_configs/per_tensor_scaling.yaml\n M tests/pytorch/debug/test_configs/perf_config.yaml\n M tests/pytorch/debug/test_configs/stats_collection_test_config.yaml\n M tests/pytorch/debug/test_configs/tensor_manipulation_transformer_engine.yaml\n M tests/pytorch/debug/test_configs/test_switch_to_nondebug_mode.yaml\n M tests/pytorch/debug/test_distributed.py\n M tests/pytorch/debug/test_log.py\n M tests/pytorch/debug/test_numerics.py\n M tests/pytorch/debug/test_perf.py\n M tests/pytorch/debug/test_sanity.py\n M tests/pytorch/debug/utils.py\n M tests/pytorch/distributed/ep_reference.py\n M tests/pytorch/distributed/fsdp2_tests/conftest.py\n M tests/pytorch/distributed/fsdp2_tests/fsdp2_utils.py\n M tests/pytorch/distributed/fsdp2_tests/run_fsdp2_fused_adam.py\n M tests/pytorch/distributed/fsdp2_tests/run_fsdp2_mem_leak.py\n M tests/pytorch/distributed/fsdp2_tests/run_fsdp2_model.py\n M tests/pytorch/distributed/run_ep.py\n M tests/pytorch/distributed/run_gemm_with_overlap.py\n M tests/pytorch/distributed/run_hybrid_tp_sp.py\n M tests/pytorch/distributed/run_layer_with_overlap.py\n M tests/pytorch/distributed/run_newton_schulz.py\n M tests/pytorch/distributed/run_numerics.py\n M tests/pytorch/distributed/run_numerics_exact.py\n M tests/pytorch/distributed/run_test_ep.sh\n M tests/pytorch/distributed/test_cast_master_weights_to_fp8.py\n M tests/pytorch/distributed/test_comm_gemm_overlap.py\n M tests/pytorch/distributed/test_ep.py\n M tests/pytorch/distributed/test_fusible_ops.py\n M tests/pytorch/distributed/test_fusible_ops_with_userbuffers.py\n M tests/pytorch/distributed/test_hybrid_tp_sp.py\n M tests/pytorch/distributed/test_newton_schulz.py\n M tests/pytorch/distributed/test_numerics.py\n M tests/pytorch/distributed/test_numerics_exact.py\n M tests/pytorch/distributed/test_parallel_cross_entropy.py\n M tests/pytorch/distributed/test_sanity.py\n M tests/pytorch/distributed/test_symmetric_memory.py\n M tests/pytorch/distributed/test_torch_fsdp2.py\n M tests/pytorch/hybrid_quantization_utils.py\n M tests/pytorch/layernorm_mlp/test_selective_activation_checkpoint.py\n M tests/pytorch/mxfp8/mxfp8_utils.py\n M tests/pytorch/mxfp8/test_mxfp8_cutedsl_backend.py\n M tests/pytorch/mxfp8/test_mxfp8_dequantize_extreme_scales.py\n M tests/pytorch/mxfp8/test_mxfp8_group_quantize_graph_safe.py\n M tests/pytorch/mxfp8/test_mxfp8_master_weight_empty_shard.py\n M tests/pytorch/mxfp8/test_mxfp8_quantize_swizzle_fusion.py\n M tests/pytorch/mxfp8/test_mxfp8_requantize_cutedsl.py\n M tests/pytorch/mxfp8/test_mxfp8_rmsnorm_fwd.py\n M tests/pytorch/nvfp4/nvfp4_utils.py\n M tests/pytorch/nvfp4/test_nvfp4_2d_quantize_swizzle_fusion.py\n M tests/pytorch/nvfp4/test_nvfp4_fsdp2_hooks.py\n M tests/pytorch/nvfp4/test_nvfp4_gemm_exact.py\n M tests/pytorch/nvfp4/test_nvfp4_group_quantize.py\n M tests/pytorch/nvfp4/test_nvfp4_group_quantize_graph_safe.py\n M tests/pytorch/nvfp4/test_nvfp4_group_row_scaled_quantize.py\n M tests/pytorch/nvfp4/test_nvfp4_module_exact.py\n M tests/pytorch/nvfp4/test_nvfp4_quantize_exact.py\n M tests/pytorch/nvfp4/test_nvfp4_rht_quantize_exact.py\n M tests/pytorch/nvfp4/test_nvfp4_rht_quantize_swizzle_fusion.py\n M tests/pytorch/nvfp4/test_nvfp4_rht_sm12x.py\n M tests/pytorch/nvfp4/test_nvfp4_rng_lifetime.py\n M tests/pytorch/nvfp4/test_nvfp4_sr_quantize.py\n M tests/pytorch/nvfp4/test_nvfp4_weight_swizzle_cache.py\n M tests/pytorch/references/blockwise_fp8_gemm_reference.py\n M tests/pytorch/references/blockwise_quantizer_reference.py\n M tests/pytorch/references/quantize_scale_calc.py\n M tests/pytorch/references/ref_per_tensor_cs.py\n M tests/pytorch/test_backward_override.py\n M tests/pytorch/test_batched_linear.py\n M tests/pytorch/test_checkpoint.py\n M tests/pytorch/test_cpu_offloading.py\n M tests/pytorch/test_cpu_offloading_v1.py\n M tests/pytorch/test_cross_entropy.py\n M tests/pytorch/test_cuda_graphs.py\n M tests/pytorch/test_custom_recipe.py\n M tests/pytorch/test_deferred_init.py\n M tests/pytorch/test_distributed_weight.py\n M tests/pytorch/test_float8_blockwise_gemm_exact.py\n M tests/pytorch/test_float8_blockwise_scaling_exact.py\n M tests/pytorch/test_float8_current_scaling_exact.py\n M tests/pytorch/test_float8blockwisetensor.py\n M tests/pytorch/test_fused_optimizer.py\n M tests/pytorch/test_fused_rope.py\n M tests/pytorch/test_fused_router.py\n M tests/pytorch/test_fused_router_perf.py\n M tests/pytorch/test_fusible_ops.py\n M tests/pytorch/test_gqa.py\n M tests/pytorch/test_grouped_linear.py\n M tests/pytorch/test_grouped_mlp.py\n M tests/pytorch/test_grouped_tensor.py\n M tests/pytorch/test_hf_integration.py\n M tests/pytorch/test_hybrid_quantization.py\n M tests/pytorch/test_hybrid_quantization_fsdp2.py\n M tests/pytorch/test_identity_quantizer.py\n M tests/pytorch/test_jit.py\n M tests/pytorch/test_mhc.py\n M tests/pytorch/test_module_grouped_linear_distributed_weight.py\n M tests/pytorch/test_multi_tensor.py\n M tests/pytorch/test_mxfp8_2d_quantize.py\n M tests/pytorch/test_nccl_ep_discovery.py\n M tests/pytorch/test_numerics.py\n M tests/pytorch/test_onnx_export.py\n M tests/pytorch/test_ops_grouped_linear_distributed_weight.py\n M tests/pytorch/test_optional_flash_attn_import.py\n M tests/pytorch/test_partial_cast.py\n M tests/pytorch/test_permutation.py\n M tests/pytorch/test_qk_norm.py\n M tests/pytorch/test_quantized_tensor.py\n M tests/pytorch/test_recipe.py\n M tests/pytorch/test_sanity.py\n M tests/pytorch/test_sanity_import.py\n M tests/pytorch/test_strided_batched_gemm.py\n M tests/pytorch/test_tied_delayed_wgrad.py\n M tests/pytorch/test_torch_compile.py\n M tests/pytorch/test_weight_swizzle_in_layers.py\n M tests/pytorch/utils.py\n M transformer_engine/__init__.py\n M transformer_engine/common/CMakeLists.txt\n M transformer_engine/common/CuTeDSL/__init__.py\n M transformer_engine/common/CuTeDSL/activations.py\n M transformer_engine/common/CuTeDSL/cast/__init__.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/__init__.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/dequantize_mxfp8.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_common.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_g2r_bidim.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_g2r_rowwise_1lane.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_g2r_rowwise_2lane.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_g2s_bidim.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/quantize_mxfp8_g2s_general.py\n M transformer_engine/common/CuTeDSL/cast/mxfp8/requantize_mxfp8.py\n M transformer_engine/common/CuTeDSL/utils.py\n M transformer_engine/common/CuTeDSL/utils_fp8.py\n M transformer_engine/common/__init__.py\n M transformer_engine/common/activation/activation_template.h\n M transformer_engine/common/activation/gelu.cu\n M transformer_engine/common/activation/gelu_dbias.cu\n M transformer_engine/common/activation/gelu_grouped.cu\n M transformer_engine/common/activation/gelu_grouped_bwd.cu\n M transformer_engine/common/activation/gelu_grouped_dbias.cu\n M transformer_engine/common/activation/glu.cu\n M transformer_engine/common/activation/qgelu_grouped.cu\n M transformer_engine/common/activation/qgelu_grouped_bwd.cu\n M transformer_engine/common/activation/qgelu_grouped_dbias.cu\n M transformer_engine/common/activation/relu.cu\n M transformer_engine/common/activation/relu_dbias.cu\n M transformer_engine/common/activation/relu_grouped.cu\n M transformer_engine/common/activation/relu_grouped_bwd.cu\n M transformer_engine/common/activation/relu_grouped_dbias.cu\n M transformer_engine/common/activation/scaled_activation.cu\n M transformer_engine/common/activation/scaled_activation.h\n M transformer_engine/common/activation/scaled_clamped_swiglu_grouped.cu\n M transformer_engine/common/activation/scaled_srelu.cu\n M transformer_engine/common/activation/scaled_swiglu.cu\n M transformer_engine/common/activation/scaled_swiglu_grouped.cu\n M transformer_engine/common/activation/srelu_grouped.cu\n M transformer_engine/common/activation/srelu_grouped_bwd.cu\n M transformer_engine/common/activation/srelu_grouped_dbias.cu\n M transformer_engine/common/activation/swiglu.cu\n M transformer_engine/common/activation/swiglu_dbias.cu\n M transformer_engine/common/activation/swiglu_grouped.cu\n M transformer_engine/common/activation/swiglu_grouped_bwd.cu\n M transformer_engine/common/activation/swiglu_grouped_dbias.cu\n M transformer_engine/common/cast/cast.cu\n M transformer_engine/common/cast/cast_dbias.cu\n M transformer_engine/common/cast/cast_grouped.cu\n M transformer_engine/common/cast/cast_grouped_dbias.cu\n M transformer_engine/common/cast/core/common.cuh\n M transformer_engine/common/cast/core/grouped_layout.cuh\n M transformer_engine/common/cast/core/grouped_tma.cuh\n M transformer_engine/common/cast/dispatch/dequantize.cuh\n M transformer_engine/common/cast/dispatch/gated.cuh\n M transformer_engine/common/cast/dispatch/quantize.cuh\n M transformer_engine/common/cast/fp8/dequantize_fp8.cuh\n M transformer_engine/common/cast/fp8/gated_fp8.cuh\n M transformer_engine/common/cast/fp8/group_amax_fp8.cuh\n M transformer_engine/common/cast/fp8/group_quantize_fp8.cuh\n M transformer_engine/common/cast/fp8/quantize_fp8.cuh\n M transformer_engine/common/cast/fp8_blockwise/group_dequantize_fp8_blockwise.cuh\n M transformer_engine/common/cast/fp8_blockwise/group_quantize_fp8_blockwise.cuh\n M transformer_engine/common/cast/mxfp8/dequantize_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/dequantize_mxfp8_cutedsl.cuh\n M transformer_engine/common/cast/mxfp8/gated_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/group_dequantize_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/group_quantize_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/group_scaled_swiglu_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/quantize_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/quantize_mxfp8_cutedsl.cuh\n M transformer_engine/common/cast/mxfp8/requantize_mxfp8.cu\n M transformer_engine/common/cast/mxfp8/requantize_mxfp8_cutedsl.cuh\n M transformer_engine/common/cast/mxfp8/specialized/cast_bidim.cuh\n M transformer_engine/common/cast/mxfp8/specialized/cast_rowwise.cuh\n M transformer_engine/common/cast/mxfp8/specialized/quantize_mxfp8.cuh\n M transformer_engine/common/cast/mxfp8/specialized/state_counter.cuh\n M transformer_engine/common/cast/mxfp8/specialized/swizzle.cuh\n M transformer_engine/common/cast/mxfp8/swizzle.cuh\n M transformer_engine/common/cast/nvfp4/core_nvfp4.cuh\n M transformer_engine/common/cast/nvfp4/dequantize_nvfp4.cuh\n M transformer_engine/common/cast/nvfp4/group_quantize_transpose_nvfp4.cuh\n M transformer_engine/common/cast/nvfp4/quantize_4over6_kernel.cuh\n M transformer_engine/common/cast/nvfp4/quantize_4over6_nvfp4.cuh\n M transformer_engine/common/cast/nvfp4/quantize_transpose_nvfp4.cuh\n M transformer_engine/common/cast/nvfp4/rtc/quantize_4over6.cu\n M transformer_engine/common/cast/nvfp4/rtc_dispatch.cpp\n M transformer_engine/common/cast/nvfp4/rtc_dispatch.h\n M transformer_engine/common/cast/nvfp4/specialized/quantize_transpose_nvfp4_tuned_1D.cuh\n M transformer_engine/common/cast/nvfp4/swizzle.cuh\n M transformer_engine/common/cmake/cuDNN.cmake\n M transformer_engine/common/comm_gemm/comm_gemm.cpp\n M transformer_engine/common/comm_gemm_overlap/comm_gemm_overlap.cpp\n M transformer_engine/common/comm_gemm_overlap/userbuffers/ipcsocket.cc\n M transformer_engine/common/comm_gemm_overlap/userbuffers/ipcsocket.h\n M transformer_engine/common/comm_gemm_overlap/userbuffers/userbuffers-host.cpp\n M transformer_engine/common/comm_gemm_overlap/userbuffers/userbuffers.cu\n M transformer_engine/common/comm_gemm_overlap/userbuffers/userbuffers.h\n M transformer_engine/common/common.cu\n M transformer_engine/common/common.h\n M transformer_engine/common/cudnn_min_version.h\n M transformer_engine/common/cudnn_utils.cpp\n M transformer_engine/common/cudnn_utils.h\n M transformer_engine/common/dropout/dropout.cu\n M transformer_engine/common/ep/ep_api.cpp\n M transformer_engine/common/ep/ep_backend.cpp\n M transformer_engine/common/ep/ep_backend.h\n M transformer_engine/common/ep/nccl_ep_provider.cpp\n M transformer_engine/common/ep/nccl_ep_provider.h\n M transformer_engine/common/fused_attn/config_and_params.cpp\n M transformer_engine/common/fused_attn/config_and_params.h\n M transformer_engine/common/fused_attn/context_parallel.cu\n M transformer_engine/common/fused_attn/flash_attn.cu\n M transformer_engine/common/fused_attn/fused_attn.cpp\n M transformer_engine/common/fused_attn/fused_attn_f16_arbitrary_seqlen.cu\n M transformer_engine/common/fused_attn/fused_attn_f16_arbitrary_seqlen.h\n M transformer_engine/common/fused_attn/fused_attn_fp8.cu\n M transformer_engine/common/fused_attn/fused_attn_fp8.h\n M transformer_engine/common/fused_attn/graph_cache.h\n M transformer_engine/common/fused_attn/graph_cache_debug.h\n M transformer_engine/common/fused_attn/kv_cache.cu\n M transformer_engine/common/fused_attn/utils.cu\n M transformer_engine/common/fused_attn/utils.h\n M transformer_engine/common/fused_rope/fused_mla_kv_rope_mxfp8.cu\n M transformer_engine/common/fused_rope/fused_rope.cu\n M transformer_engine/common/fused_router/async_loader.h\n M transformer_engine/common/fused_router/fused_moe_aux_loss.cu\n M transformer_engine/common/fused_router/fused_score_for_moe_aux_loss.cu\n M transformer_engine/common/fused_router/fused_topk_with_score_function.cu\n M transformer_engine/common/fused_router/utils.h\n M transformer_engine/common/fused_softmax/scaled_aligned_causal_masked_softmax.cu\n M transformer_engine/common/fused_softmax/scaled_masked_softmax.cu\n M transformer_engine/common/fused_softmax/scaled_upper_triang_masked_softmax.cu\n M transformer_engine/common/gemm/config.cpp\n M transformer_engine/common/gemm/config.h\n M transformer_engine/common/gemm/cublaslt_batched_gemm.cu\n M transformer_engine/common/gemm/cublaslt_gemm.cu\n M transformer_engine/common/gemm/cublaslt_grouped_gemm.cu\n M transformer_engine/common/gemm/cutlass_grouped_gemm.cu\n M transformer_engine/common/gemm/cutlass_grouped_gemm.cuh\n M transformer_engine/common/hadamard_transform/customized_pipeline.cuh\n M transformer_engine/common/hadamard_transform/graph_safe_group_hadamard_transform.cu\n M transformer_engine/common/hadamard_transform/graph_safe_group_row_cast_col_hadamard_transform_cast_fusion.cu\n M transformer_engine/common/hadamard_transform/group_hadamard_transform.cu\n M transformer_engine/common/hadamard_transform/group_hadamard_transform_cast_fusion.cu\n M transformer_engine/common/hadamard_transform/group_row_cast_col_hadamard_transform_cast_fusion.cu\n M transformer_engine/common/hadamard_transform/hadamard_transform.cu\n M transformer_engine/common/hadamard_transform/hadamard_transform_cast_fusion.cu\n M transformer_engine/common/hadamard_transform/hadamard_transform_utils.cuh\n M transformer_engine/common/hadamard_transform/row_cast_col_hadamard_transform_cast_fusion.cu\n M transformer_engine/common/include/transformer_engine/activation.h\n M transformer_engine/common/include/transformer_engine/cast.h\n M transformer_engine/common/include/transformer_engine/cast_transpose_noop.h\n M transformer_engine/common/include/transformer_engine/comm_gemm.h\n M transformer_engine/common/include/transformer_engine/comm_gemm_overlap.h\n M transformer_engine/common/include/transformer_engine/comm_window.h\n M transformer_engine/common/include/transformer_engine/cudnn.h\n M transformer_engine/common/include/transformer_engine/dropout.h\n M transformer_engine/common/include/transformer_engine/ep.h\n M transformer_engine/common/include/transformer_engine/fused_attn.h\n M transformer_engine/common/include/transformer_engine/fused_rope.h\n M transformer_engine/common/include/transformer_engine/fused_router.h\n M transformer_engine/common/include/transformer_engine/gemm.h\n M transformer_engine/common/include/transformer_engine/hadamard_transform.h\n M transformer_engine/common/include/transformer_engine/multi_stream.h\n M transformer_engine/common/include/transformer_engine/multi_tensor.h\n M transformer_engine/common/include/transformer_engine/newton_schulz.h\n M transformer_engine/common/include/transformer_engine/normalization.h\n M transformer_engine/common/include/transformer_engine/nvfp4/4over6.h\n M transformer_engine/common/include/transformer_engine/padding.h\n M transformer_engine/common/include/transformer_engine/permutation.h\n M transformer_engine/common/include/transformer_engine/recipe.h\n M transformer_engine/common/include/transformer_engine/softmax.h\n M transformer_engine/common/include/transformer_engine/swizzle.h\n M transformer_engine/common/include/transformer_engine/topk.h\n M transformer_engine/common/include/transformer_engine/transformer_engine.h\n M transformer_engine/common/include/transformer_engine/transpose.h\n M transformer_engine/common/include/transformer_engine/utils.h\n M transformer_engine/common/init_python.cpp\n M transformer_engine/common/libtransformer_engine.version\n M transformer_engine/common/multi_tensor/adam.cu\n M transformer_engine/common/multi_tensor/compute_scale.cu\n M transformer_engine/common/multi_tensor/l2norm.cu\n M transformer_engine/common/multi_tensor/multi_tensor_apply.cuh\n M transformer_engine/common/multi_tensor/scale.cu\n M transformer_engine/common/multi_tensor/sgd.cu\n M transformer_engine/common/newton_schulz/newton_schulz.cpp\n M transformer_engine/common/normalization/common.cpp\n M transformer_engine/common/normalization/common.h\n M transformer_engine/common/normalization/kernel_params.h\n M transformer_engine/common/normalization/kernel_traits.h\n M transformer_engine/common/normalization/layernorm/ln_api.cpp\n M transformer_engine/common/normalization/layernorm/ln_bwd_kernels.cuh\n M transformer_engine/common/normalization/layernorm/ln_bwd_semi_cuda_kernel.cu\n M transformer_engine/common/normalization/layernorm/ln_fwd_cuda_kernel.cu\n M transformer_engine/common/normalization/layernorm/ln_fwd_kernels.cuh\n M transformer_engine/common/normalization/layernorm/rtc/ln_bwd_kernel.cu\n M transformer_engine/common/normalization/layernorm/rtc/ln_fwd_kernel.cu\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_api.cpp\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_bwd_kernels.cuh\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_bwd_semi_cuda_kernel.cu\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_fwd_cuda_kernel.cu\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_fwd_kernels.cuh\n M transformer_engine/common/normalization/rmsnorm/rmsnorm_fwd_mxfp8.cu\n M transformer_engine/common/normalization/rmsnorm/rtc/rmsnorm_bwd_kernel.cu\n M transformer_engine/common/normalization/rmsnorm/rtc/rmsnorm_fwd_kernel.cu\n M transformer_engine/common/normalization/rtc_dispatch.cpp\n M transformer_engine/common/normalization/rtc_dispatch.h\n M transformer_engine/common/nvshmem_api/CMakeLists.txt\n M transformer_engine/common/nvshmem_api/nvshmem_waitkernel.cu\n M transformer_engine/common/nvshmem_api/nvshmem_waitkernel.h\n M transformer_engine/common/nvtx.h\n M transformer_engine/common/permutation/permutation.cu\n M transformer_engine/common/recipe/__init__.py\n M transformer_engine/common/recipe/current_scaling.cu\n M transformer_engine/common/recipe/delayed_scaling.cu\n M transformer_engine/common/recipe/fp8_block_scaling.cu\n M transformer_engine/common/recipe/mxfp8_scaling.cu\n M transformer_engine/common/recipe/nvfp4.cu\n M transformer_engine/common/recipe/recipe_common.cuh\n M transformer_engine/common/swizzle/swizzle.cu\n M transformer_engine/common/swizzle/swizzle_block_scaling.cu\n M transformer_engine/common/transformer_engine.cpp\n M transformer_engine/common/transpose/cast_transpose.cu\n M transformer_engine/common/transpose/cast_transpose.h\n M transformer_engine/common/transpose/cast_transpose_fusion.cu\n M transformer_engine/common/transpose/multi_cast_transpose.cu\n M transformer_engine/common/transpose/quantize_transpose_square_blockwise.cu\n M transformer_engine/common/transpose/quantize_transpose_vector_blockwise.cu\n M transformer_engine/common/transpose/quantize_transpose_vector_blockwise_fp4.cu\n M transformer_engine/common/transpose/rtc/cast_transpose.cu\n M transformer_engine/common/transpose/rtc/cast_transpose_fusion.cu\n M transformer_engine/common/transpose/rtc/swap_first_dims.cu\n M transformer_engine/common/transpose/rtc/transpose.cu\n M transformer_engine/common/transpose/swap_first_dims.cu\n M transformer_engine/common/transpose/transpose.cu\n M transformer_engine/common/transpose/transpose.h\n M transformer_engine/common/transpose/transpose_fusion.cu\n M transformer_engine/common/triton/__init__.py\n M transformer_engine/common/triton/cross_entropy.py\n M transformer_engine/common/triton/grouped_dbias_dscales.py\n M transformer_engine/common/triton/mhc.py\n M transformer_engine/common/triton/pad.py\n M transformer_engine/common/triton/permutation.py\n M transformer_engine/common/tvm_ffi_bridge.h\n M transformer_engine/common/util/cuda_driver.cpp\n M transformer_engine/common/util/cuda_driver.h\n M transformer_engine/common/util/cuda_nvml.cpp\n M transformer_engine/common/util/cuda_nvml.h\n M transformer_engine/common/util/cuda_runtime.cpp\n M transformer_engine/common/util/cuda_runtime.h\n M transformer_engine/common/util/curanddx.hpp\n M transformer_engine/common/util/cutedsl_utils.h\n M transformer_engine/common/util/handle_manager.h\n M transformer_engine/common/util/logging.h\n M transformer_engine/common/util/math.h\n M transformer_engine/common/util/multi_stream.cpp\n M transformer_engine/common/util/multi_stream.h\n M transformer_engine/common/util/padding.cu\n M transformer_engine/common/util/ptx.cuh\n M transformer_engine/common/util/ptx_arch_spec.cuh\n M transformer_engine/common/util/pybind_helper.h\n M transformer_engine/common/util/rtc.cpp\n M transformer_engine/common/util/rtc.h\n M transformer_engine/common/util/shared_lib_wrapper.h\n M transformer_engine/common/util/splits_to_offsets.cu\n M transformer_engine/common/util/standalone_topk.cuh\n M transformer_engine/common/util/string.h\n M transformer_engine/common/util/string_header.h.in\n M transformer_engine/common/util/system.h\n M transformer_engine/common/util/topk.cu\n M transformer_engine/common/util/type_extrema.h\n M transformer_engine/common/util/utils.cu\n M transformer_engine/common/util/vectorized_pointwise.h\n M transformer_engine/common/utils.cuh\n M transformer_engine/common/utils.py\n M transformer_engine/debug/__init__.py\n M transformer_engine/debug/features/__init__.py\n M transformer_engine/debug/features/_test_dummy_feature.py\n M transformer_engine/debug/features/api.py\n M transformer_engine/debug/features/disable_fp8_gemm.py\n M transformer_engine/debug/features/disable_fp8_layer.py\n M transformer_engine/debug/features/disable_quantization_gemm.py\n M transformer_engine/debug/features/disable_quantization_layer.py\n M transformer_engine/debug/features/dump_tensors.py\n M transformer_engine/debug/features/fake_quant.py\n M transformer_engine/debug/features/log_fp8_tensor_stats.py\n M transformer_engine/debug/features/log_nvfp4_tensor_stats.py\n M transformer_engine/debug/features/log_tensor_stats.py\n M transformer_engine/debug/features/per_tensor_scaling.py\n M transformer_engine/debug/features/utils/__init__.py\n M transformer_engine/debug/features/utils/stats_buffer.py\n M transformer_engine/debug/features/utils/stats_computation.py\n M transformer_engine/debug/pytorch/__init__.py\n M transformer_engine/debug/pytorch/debug_quantization.py\n M transformer_engine/debug/pytorch/debug_state.py\n M transformer_engine/debug/pytorch/utils.py\n M transformer_engine/jax/MANIFEST.in\n M transformer_engine/jax/__init__.py\n M transformer_engine/jax/activation.py\n M transformer_engine/jax/attention.py\n M transformer_engine/jax/checkpoint_policies.py\n M transformer_engine/jax/cpp_extensions/__init__.py\n M transformer_engine/jax/cpp_extensions/activation.py\n M transformer_engine/jax/cpp_extensions/amax.py\n M transformer_engine/jax/cpp_extensions/attention.py\n M transformer_engine/jax/cpp_extensions/base.py\n M transformer_engine/jax/cpp_extensions/ep.py\n M transformer_engine/jax/cpp_extensions/flex_attention.py\n M transformer_engine/jax/cpp_extensions/gemm.py\n M transformer_engine/jax/cpp_extensions/grouped_gemm_glu.py\n M transformer_engine/jax/cpp_extensions/misc.py\n M transformer_engine/jax/cpp_extensions/normalization.py\n M transformer_engine/jax/cpp_extensions/quantization.py\n M transformer_engine/jax/cpp_extensions/router.py\n M transformer_engine/jax/cpp_extensions/softmax.py\n M transformer_engine/jax/cpp_extensions/topk.py\n M transformer_engine/jax/csrc/extensions.h\n M transformer_engine/jax/csrc/extensions/activation.cpp\n M transformer_engine/jax/csrc/extensions/amax.cpp\n M transformer_engine/jax/csrc/extensions/attention.cpp\n M transformer_engine/jax/csrc/extensions/cgemm_helper.cpp\n M transformer_engine/jax/csrc/extensions/cgemm_helper.h\n M transformer_engine/jax/csrc/extensions/cublas.cpp\n M transformer_engine/jax/csrc/extensions/cudnn.cpp\n M transformer_engine/jax/csrc/extensions/ep.cpp\n M transformer_engine/jax/csrc/extensions/ffi.cpp\n M transformer_engine/jax/csrc/extensions/ffi.h\n M transformer_engine/jax/csrc/extensions/ffi_collectives.cpp\n M transformer_engine/jax/csrc/extensions/ffi_collectives.h\n M transformer_engine/jax/csrc/extensions/gemm.cpp\n M transformer_engine/jax/csrc/extensions/inspect.cpp\n M transformer_engine/jax/csrc/extensions/misc.cpp\n M transformer_engine/jax/csrc/extensions/misc.h\n M transformer_engine/jax/csrc/extensions/normalization.cpp\n M transformer_engine/jax/csrc/extensions/pybind.cpp\n M transformer_engine/jax/csrc/extensions/quantization.cpp\n M transformer_engine/jax/csrc/extensions/router.cpp\n M transformer_engine/jax/csrc/extensions/softmax.cpp\n M transformer_engine/jax/csrc/extensions/topk.cpp\n M transformer_engine/jax/csrc/extensions/utils.cpp\n M transformer_engine/jax/csrc/extensions/utils.h\n M transformer_engine/jax/debug/__init__.py\n M transformer_engine/jax/debug/experimental/__init__.py\n M transformer_engine/jax/debug/experimental/inspect.py\n M transformer_engine/jax/dense.py\n M transformer_engine/jax/ep.py\n M transformer_engine/jax/flax/__init__.py\n M transformer_engine/jax/flax/module.py\n M transformer_engine/jax/flax/moe.py\n M transformer_engine/jax/flax/transformer.py\n M transformer_engine/jax/layernorm.py\n M transformer_engine/jax/layernorm_dense.py\n M transformer_engine/jax/layernorm_mlp.py\n M transformer_engine/jax/mhc.py\n M transformer_engine/jax/moe.py\n M transformer_engine/jax/permutation.py\n M transformer_engine/jax/pyproject.toml\n M transformer_engine/jax/quantize/__init__.py\n M transformer_engine/jax/quantize/dequantizer.py\n M transformer_engine/jax/quantize/device_utils.py\n M transformer_engine/jax/quantize/hadamard.py\n M transformer_engine/jax/quantize/helper.py\n M transformer_engine/jax/quantize/metadata.py\n M transformer_engine/jax/quantize/misc.py\n M transformer_engine/jax/quantize/quantizer.py\n M transformer_engine/jax/quantize/scaling_modes.py\n M transformer_engine/jax/quantize/tensor.py\n M transformer_engine/jax/router.py\n M transformer_engine/jax/setup.py\n M transformer_engine/jax/sharding.py\n M transformer_engine/jax/softmax.py\n M transformer_engine/jax/triton_extensions/__init__.py\n M transformer_engine/jax/triton_extensions/mhc.py\n M transformer_engine/jax/triton_extensions/permutation.py\n M transformer_engine/jax/triton_extensions/utils.py\n M transformer_engine/jax/version_utils.py\n M transformer_engine/pytorch/MANIFEST.in\n M transformer_engine/pytorch/__init__.py\n M transformer_engine/pytorch/_extra_state.py\n M transformer_engine/pytorch/attention/__init__.py\n M transformer_engine/pytorch/attention/custom_ops.py\n M transformer_engine/pytorch/attention/dot_product_attention/__init__.py\n M transformer_engine/pytorch/attention/dot_product_attention/backends.py\n M transformer_engine/pytorch/attention/dot_product_attention/context_parallel.py\n M transformer_engine/pytorch/attention/dot_product_attention/dot_product_attention.py\n M transformer_engine/pytorch/attention/dot_product_attention/flex_attention.py\n M transformer_engine/pytorch/attention/dot_product_attention/softmax.py\n M transformer_engine/pytorch/attention/dot_product_attention/utils.py\n M transformer_engine/pytorch/attention/fused_mla_q_uproj.py\n M transformer_engine/pytorch/attention/inference.py\n M transformer_engine/pytorch/attention/linear_attention/__init__.py\n M transformer_engine/pytorch/attention/linear_attention/base.py\n M transformer_engine/pytorch/attention/linear_attention/gdn.py\n M transformer_engine/pytorch/attention/linear_attention/gdn2.py\n M transformer_engine/pytorch/attention/linear_attention/gdp.py\n M transformer_engine/pytorch/attention/linear_attention/kda.py\n M transformer_engine/pytorch/attention/multi_head_attention.py\n M transformer_engine/pytorch/attention/rope.py\n M transformer_engine/pytorch/constants.py\n M transformer_engine/pytorch/cpp_extensions/__init__.py\n M transformer_engine/pytorch/cpp_extensions/fused_attn.py\n M transformer_engine/pytorch/cpp_extensions/gemm.py\n M transformer_engine/pytorch/cpu_offload.py\n M transformer_engine/pytorch/cpu_offload_v1.py\n M transformer_engine/pytorch/cross_entropy.py\n M transformer_engine/pytorch/csrc/common.cpp\n M transformer_engine/pytorch/csrc/common.h\n M transformer_engine/pytorch/csrc/extensions.h\n M transformer_engine/pytorch/csrc/extensions/activation.cpp\n M transformer_engine/pytorch/csrc/extensions/allocate.cpp\n M transformer_engine/pytorch/csrc/extensions/apply_rope.cpp\n M transformer_engine/pytorch/csrc/extensions/attention.cpp\n M transformer_engine/pytorch/csrc/extensions/bias.cpp\n M transformer_engine/pytorch/csrc/extensions/cast.cpp\n M transformer_engine/pytorch/csrc/extensions/comm.cpp\n M transformer_engine/pytorch/csrc/extensions/comm_gemm_overlap.cpp\n M transformer_engine/pytorch/csrc/extensions/dropout.cpp\n M transformer_engine/pytorch/csrc/extensions/ep.cpp\n M transformer_engine/pytorch/csrc/extensions/fp8_partial_cast.cpp\n M transformer_engine/pytorch/csrc/extensions/gemm.cpp\n M transformer_engine/pytorch/csrc/extensions/grouped_mlp_experimental.cpp\n M transformer_engine/pytorch/csrc/extensions/misc.cpp\n M transformer_engine/pytorch/csrc/extensions/multi_tensor/adam.cpp\n M transformer_engine/pytorch/csrc/extensions/multi_tensor/compute_scale.cpp\n M transformer_engine/pytorch/csrc/extensions/multi_tensor/l2norm.cpp\n M transformer_engine/pytorch/csrc/extensions/multi_tensor/scale.cpp\n M transformer_engine/pytorch/csrc/extensions/multi_tensor/sgd.cpp\n M transformer_engine/pytorch/csrc/extensions/newton_schulz.cpp\n M transformer_engine/pytorch/csrc/extensions/normalization.cpp\n M transformer_engine/pytorch/csrc/extensions/nvfp4_2d_partial_cast.cpp\n M transformer_engine/pytorch/csrc/extensions/nvshmem_comm.cpp\n M transformer_engine/pytorch/csrc/extensions/padding.cpp\n M transformer_engine/pytorch/csrc/extensions/permutation.cpp\n M transformer_engine/pytorch/csrc/extensions/pybind.cpp\n M transformer_engine/pytorch/csrc/extensions/pybind_dtype_caster.h\n M transformer_engine/pytorch/csrc/extensions/recipe.cpp\n M transformer_engine/pytorch/csrc/extensions/router.cpp\n M transformer_engine/pytorch/csrc/extensions/softmax.cpp\n M transformer_engine/pytorch/csrc/extensions/swizzle.cpp\n M transformer_engine/pytorch/csrc/extensions/transpose.cpp\n M transformer_engine/pytorch/csrc/pybind.h\n M transformer_engine/pytorch/csrc/quantizer.cpp\n M transformer_engine/pytorch/csrc/type_converters.cpp\n M transformer_engine/pytorch/csrc/util.h\n M transformer_engine/pytorch/custom_recipes/__init__.py\n M transformer_engine/pytorch/custom_recipes/gemm.py\n M transformer_engine/pytorch/custom_recipes/quantizer_factories.py\n M transformer_engine/pytorch/custom_recipes/quantizer_factory_zoo.py\n M transformer_engine/pytorch/custom_recipes/reference_current_scaling.py\n M transformer_engine/pytorch/custom_recipes/reference_nvfp4.py\n M transformer_engine/pytorch/custom_recipes/reference_utils.py\n M transformer_engine/pytorch/device.py\n M transformer_engine/pytorch/distributed.py\n M transformer_engine/pytorch/distributed_weight.py\n M transformer_engine/pytorch/dynamo/__init__.py\n M transformer_engine/pytorch/dynamo/custom_op.py\n M transformer_engine/pytorch/dynamo/fake.py\n M transformer_engine/pytorch/dynamo/quantizer_opaque.py\n M transformer_engine/pytorch/dynamo/tensor_spec.py\n M transformer_engine/pytorch/ep.py\n M transformer_engine/pytorch/export.py\n M transformer_engine/pytorch/float8_tensor.py\n M transformer_engine/pytorch/fp8.py\n M transformer_engine/pytorch/graph.py\n M transformer_engine/pytorch/jit.py\n M transformer_engine/pytorch/module/__init__.py\n M transformer_engine/pytorch/module/_common.py\n M transformer_engine/pytorch/module/_split_quantization.py\n M transformer_engine/pytorch/module/base.py\n M transformer_engine/pytorch/module/fp8_padding.py\n M transformer_engine/pytorch/module/fp8_unpadding.py\n M transformer_engine/pytorch/module/grouped_linear.py\n M transformer_engine/pytorch/module/layernorm.py\n M transformer_engine/pytorch/module/layernorm_linear.py\n M transformer_engine/pytorch/module/layernorm_mlp.py\n M transformer_engine/pytorch/module/linear.py\n M transformer_engine/pytorch/module/rmsnorm.py\n M transformer_engine/pytorch/newton_schulz.py\n M transformer_engine/pytorch/numerics_debug.py\n M transformer_engine/pytorch/onnx_extensions.py\n M transformer_engine/pytorch/ops/__init__.py\n M transformer_engine/pytorch/ops/_common.py\n M transformer_engine/pytorch/ops/basic/__init__.py\n M transformer_engine/pytorch/ops/basic/activation.py\n M transformer_engine/pytorch/ops/basic/add_extra_input.py\n M transformer_engine/pytorch/ops/basic/all_gather.py\n M transformer_engine/pytorch/ops/basic/all_reduce.py\n M transformer_engine/pytorch/ops/basic/basic_linear.py\n M transformer_engine/pytorch/ops/basic/batched_linear.py\n M transformer_engine/pytorch/ops/basic/bias.py\n M transformer_engine/pytorch/ops/basic/combine.py\n M transformer_engine/pytorch/ops/basic/constant_scale.py\n M transformer_engine/pytorch/ops/basic/dispatch.py\n M transformer_engine/pytorch/ops/basic/dropout.py\n M transformer_engine/pytorch/ops/basic/grouped_linear.py\n M transformer_engine/pytorch/ops/basic/identity.py\n M transformer_engine/pytorch/ops/basic/l2normalization.py\n M transformer_engine/pytorch/ops/basic/layer_norm.py\n M transformer_engine/pytorch/ops/basic/make_extra_output.py\n M transformer_engine/pytorch/ops/basic/quantize.py\n M transformer_engine/pytorch/ops/basic/reduce_scatter.py\n M transformer_engine/pytorch/ops/basic/reshape.py\n M transformer_engine/pytorch/ops/basic/rmsnorm.py\n M transformer_engine/pytorch/ops/basic/swiglu.py\n M transformer_engine/pytorch/ops/fused/__init__.py\n M transformer_engine/pytorch/ops/fused/backward_activation_bias.py\n M transformer_engine/pytorch/ops/fused/backward_add_rmsnorm.py\n M transformer_engine/pytorch/ops/fused/backward_linear_add.py\n M transformer_engine/pytorch/ops/fused/backward_linear_scale.py\n M transformer_engine/pytorch/ops/fused/forward_linear_bias_activation.py\n M transformer_engine/pytorch/ops/fused/forward_linear_bias_add.py\n M transformer_engine/pytorch/ops/fused/forward_linear_scale_add.py\n M transformer_engine/pytorch/ops/fused/grouped_mlp.py\n M transformer_engine/pytorch/ops/fused/userbuffers_backward_linear.py\n M transformer_engine/pytorch/ops/fused/userbuffers_forward_linear.py\n M transformer_engine/pytorch/ops/fuser.py\n M transformer_engine/pytorch/ops/linear.py\n M transformer_engine/pytorch/ops/op.py\n M transformer_engine/pytorch/ops/sequential.py\n M transformer_engine/pytorch/optimizers/__init__.py\n M transformer_engine/pytorch/optimizers/fused_adam.py\n M transformer_engine/pytorch/optimizers/fused_sgd.py\n M transformer_engine/pytorch/optimizers/multi_tensor_apply.py\n M transformer_engine/pytorch/optimizers/newton_schulz.py\n M transformer_engine/pytorch/permutation.py\n M transformer_engine/pytorch/pyproject.toml\n M transformer_engine/pytorch/quantization.py\n M transformer_engine/pytorch/quantized_tensor.py\n M transformer_engine/pytorch/router.py\n M transformer_engine/pytorch/setup.py\n M transformer_engine/pytorch/tensor/__init__.py\n M transformer_engine/pytorch/tensor/_quantization_helpers.py\n M transformer_engine/pytorch/tensor/float8_blockwise_tensor.py\n M transformer_engine/pytorch/tensor/float8_tensor.py\n M transformer_engine/pytorch/tensor/grouped_tensor.py\n M transformer_engine/pytorch/tensor/hybrid_tensor.py\n M transformer_engine/pytorch/tensor/identity_tensor.py\n M transformer_engine/pytorch/tensor/mxfp8_tensor.py\n M transformer_engine/pytorch/tensor/nvfp4_tensor.py\n M transformer_engine/pytorch/tensor/storage/__init__.py\n M transformer_engine/pytorch/tensor/storage/float8_blockwise_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/float8_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/grouped_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/hybrid_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/identity_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/mxfp8_tensor_storage.py\n M transformer_engine/pytorch/tensor/storage/nvfp4_tensor_storage.py\n M transformer_engine/pytorch/tensor/utils.py\n M transformer_engine/pytorch/torch_version.py\n M transformer_engine/pytorch/transformer.py\n M transformer_engine/pytorch/triton/__init__.py\n M transformer_engine/pytorch/triton/cross_entropy.py\n M transformer_engine/pytorch/triton/grouped_dbias_dscales.py\n M transformer_engine/pytorch/triton/mhc.py\n M transformer_engine/pytorch/triton/pad.py\n M transformer_engine/pytorch/triton/permutation.py\n M transformer_engine/pytorch/utils.py\n"
+    }
+  },
+  "project": {
+    "commit": {
+      "command": [
+        "git",
+        "-C",
+        "/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/project",
+        "show",
+        "-s",
+        "--format=%H%n%cI%n%s",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "output": "e31a84233c0563a4c7b34305f5e41095b354b86f\n2026-11-09T19:41:14+08:00\nPublish the recorded 200-step H3 single-frame LoRA example\n"
+    },
+    "tracked_status": {
+      "command": [
+        "git",
+        "-C",
+        "/mnt/c/Users/18066/Desktop/workspace/te-nvfp4-compare-20261113/project",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "returncode": 0,
+      "output": ""
+    }
+  },
+  "loaded_gpu_libraries": [
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublas.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcublasLt.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcudart.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libcurand.so.10",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.0",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/nvidia/cu13/lib/libnvrtc.so.13",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/libtransformer_engine.so",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so",
+    "/usr/lib/wsl/drivers/nv_dispsi.inf_amd64_8117bef9bb5edac9/libcuda.so.1.1",
+    "/usr/lib/wsl/lib/libcuda.so.1",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcurand.so.10.4.0.35",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libnvrtc.so.13.0.88"
+  ],
+  "binary_sha256": {
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/libtransformer_engine.so": "9f63c93fbaabad8fb8baef73ceaae60c9de97da2171ee79408fd567391bb4182",
+    "/home/lixin/te-nvfp4-compare-20261113/venv/lib/python3.10/site-packages/transformer_engine/transformer_engine_torch.cpython-310-x86_64-linux-gnu.so": "ca997cb905caede61c848ec7e5aa7afb0a93aeed544cb6f7e6e9de039e6ef030"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "main": {
+    "command": [
+      "git",
+      "-C",
+      "/home/lixin/te-nvfp4-compare-20261113/TransformerEngine",
+      "-c",
+      "core.autocrlf=true",
+      "-c",
+      "core.filemode=false",
+      "diff",
+      "--exit-code",
+      "--ignore-submodules"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  "submodules": {
+    "command": [
+      "git",
+      "-C",
+      "/home/lixin/te-nvfp4-compare-20261113/TransformerEngine",
+      "submodule",
+      "foreach",
+      "--recursive",
+      "--quiet",
+      "git -c core.autocrlf=true -c core.filemode=false diff --exit-code"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  "explanation": "Source was cloned with Windows CRLF checkout rules then copied to Linux. Per-command core.autocrlf=true and core.filemode=false normalize checkout representation; no source files are rewritten. Raw Linux status is retained separately in environment.json."
+}
