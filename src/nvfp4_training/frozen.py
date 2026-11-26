@@ -4,7 +4,7 @@ Frozen weights have no high-precision master copy. The input Jacobian still uses
 native FP4 GEMMs, so an application must validate both outputs and gradients.
 """
 from types import SimpleNamespace
-from fnmatch import fnmatchcase
+from precision_lora._selection import matches_module as _matches
 from pathlib import Path
 import hashlib
 import os
@@ -86,9 +86,6 @@ class PackedMHA(nn.Module):
         y=F.scaled_dot_product_attention(q,k,v,attn_mask=attn_mask,dropout_p=0,is_causal=is_causal)
         y=self.out(y.transpose(1,2).reshape(n,l,c))
         return (y if self.batch_first else y.transpose(0,1)),None
-
-def _matches(name,patterns):
-    return any(fnmatchcase(part,p) for p in patterns for part in (name,*[name.rsplit('.',i)[0] for i in range(1,name.count('.')+1)]))
 
 def _plan(model,include,keep):
     if not include or isinstance(include,str) or isinstance(keep,str):

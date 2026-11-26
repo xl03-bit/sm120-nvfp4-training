@@ -5,6 +5,8 @@ filenames or quantize floating-point pretrained weights without being asked.
 """
 from __future__ import annotations
 
+import math
+
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -64,7 +66,8 @@ class PackedNVFP4Linear(nn.Module):
             raise ValueError("Invalid logical shape")
         if block_scale.numel() != _round128(rows) * ((width + 63) // 64) * 4:
             raise ValueError("Swizzled scale storage size does not match the packed shape")
-        if not torch.isfinite(tensor_scale).all() or tensor_scale.item() <= 0:
+        global_scale = tensor_scale.item()
+        if not math.isfinite(global_scale) or global_scale <= 0:
             raise ValueError("Tensor scale must be finite and positive")
         if bias is not None and (bias.shape != (n,) or not bias.is_floating_point()):
             raise ValueError("Bias must have logical output width")
@@ -83,14 +86,15 @@ class PackedNVFP4Linear(nn.Module):
         self.source_dtype = torch.bfloat16
         nr, kr = _round128(rows), _round128(width)
         q = F.pad(packed, (0, (kr-width)//2, 0, nr-rows)).contiguous() if (nr, kr) != (rows, width) else packed.contiguous()
-        old = block_scale.contiguous().view(torch.uint8).flatten()
-        source_indices = _indices(rows, width//16, width, q.device)
-        active = old[source_indices]
-        if not torch.isfinite(active.view(torch.float8_e4m3fn).float()).all() or (active.bitwise_and(128) != 0).any():
+        scales = block_scale.contiguous()
+        old = scales.view(torch.uint8).flatten()
+        aligned = (nr, kr) == (rows, width)
+        # Full tiles use every swizzled byte. Nonnegative finite E4M3fn codes
+        # are exactly 0x00 through 0x7e (0x7f is NaN, 0x80 is negative zero).
+        active = old if aligned else old[_indices(rows, width//16, width, q.device)]
+        if active.amax().item() > 0x7e:
             raise ValueError("Block scales must be finite and nonnegative")
-        if (nr, kr) == (rows, width):
-            scales = block_scale.contiguous()
-        else:
+        if not aligned:
             raw = torch.zeros(nr*kr//16, dtype=torch.uint8, device=q.device)
             raw[_indices(rows, width//16, kr, q.device)] = active
             scales = raw.view(torch.float8_e4m3fn)
@@ -109,6 +113,41 @@ class PackedNVFP4Linear(nn.Module):
             bq = cuda.transpose_rht_quant(self.quant, self.signs, self.backward_scale) if backward_mode == "cache" else (None, None, None)
         self.register_buffer("backward_packed", bq[0])
         self.register_buffer("backward_blocks", bq[1])
+
+    @classmethod
+    @torch.inference_mode(False)
+    @torch.no_grad()
+    def from_linear(cls, linear, *, backward_mode="recompute", seed=0):
+        """Quantize a frozen CUDA BF16 Linear, preserving its logical shape and mode.
+
+        The packed base owns its weights and optional bias. Its native input
+        gradient remains available after conversion during inference or calibration.
+        """
+        if type(linear) is not nn.Linear:
+            raise TypeError("Expected a standard torch.nn.Linear")
+        weight, bias = linear.weight, linear.bias
+        if weight.requires_grad or (bias is not None and bias.requires_grad):
+            raise ValueError("Weight and bias must be frozen before packing")
+        if not weight.is_cuda or weight.dtype != torch.bfloat16 or weight.layout != torch.strided:
+            raise TypeError("Expected a dense CUDA BF16 weight")
+        n, k = linear.out_features, linear.in_features
+        if min(n, k) < 1 or weight.shape != (n, k):
+            raise ValueError("Weight must match the nonempty logical Linear shape")
+        if bias is not None and (bias.shape != (n,) or bias.device != weight.device
+                                 or bias.dtype != torch.bfloat16 or bias.layout != torch.strided):
+            raise ValueError("Expected a dense BF16 bias of output width on the weight device")
+        # The infinity norm propagates NaNs and reduces directly to a scalar.
+        peak = torch.linalg.vector_norm(weight, ord=math.inf, dtype=weight.dtype)
+        if not math.isfinite(peak.item()) or (bias is not None and not torch.isfinite(bias).all()):
+            raise ValueError("Weight and bias must be finite")
+
+        from . import _packed_cuda as cuda
+        with torch.cuda.device(weight.device):
+            aligned = F.pad(weight, (0, -k % 128)) if k % 128 else weight.contiguous()
+            packed = cls(*cuda.quantize(aligned), shape=(n, k),
+                         bias=bias.detach().clone() if bias is not None else None,
+                         layout="comfy-high-first-swizzle128x4", backward_mode=backward_mode, seed=seed)
+        return packed.train(linear.training)
 
     @property
     def quant(self):

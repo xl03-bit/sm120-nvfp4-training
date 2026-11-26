@@ -73,33 +73,63 @@ extern "C" __global__ void rotate(const unsigned short* x,const float* signs,flo
     for(int d=1;d<32;d*=2)maximum=fmaxf(maximum,__shfl_xor_sync(0xffffffff,maximum,d));
     if(!(j&31))atomicMax((int*)amax,__float_as_int(maximum));
 }
-extern "C" __global__ void amax_bf16(const unsigned short* x,float* amax,int count) {
-    int i=blockIdx.x*blockDim.x+threadIdx.x;float v=i<count?fabsf(bf(x[i])):0;
-    for(int d=1;d<32;d*=2)v=fmaxf(v,__shfl_xor_sync(0xffffffff,v,d));
-    if(!(threadIdx.x&31))atomicMax((int*)amax,__float_as_int(v));
+extern "C" __global__ void amax_bf16(const unsigned short* x,float* amax,int rows,int cols) {
+    // One atomic per block, including for matrices larger than a signed 32-bit count.
+    long long count=(long long)rows*cols;
+    __shared__ float warp_max[8];
+    float v=0.0f;
+    for(long long i=(long long)blockIdx.x*blockDim.x+threadIdx.x; i<count; i+=gridDim.x*blockDim.x)
+        v=fmaxf(v,fabsf(bf(x[i])));
+    int lane=threadIdx.x%32, warp=threadIdx.x/32;
+    for(int d=16;d>0;d/=2)v=fmaxf(v,__shfl_down_sync(0xffffffff,v,d));
+    if(!lane)warp_max[warp]=v;
+    __syncthreads();
+    if(!warp){
+        v=lane<8?warp_max[lane]:0.0f;
+        for(int d=4;d>0;d/=2)v=fmaxf(v,__shfl_down_sync(0xffffffff,v,d));
+        if(!lane)atomicMax((int*)amax,__float_as_int(v));
+    }
 }
 extern "C" __global__ void finish_scale(const float* amax,float* scale) {
     scale[0]=fmaxf(amax[0]/2688.0f,1.0e-30f);
 }
 extern "C" __global__ void quant(const void* x,const float* amax,unsigned char* q,unsigned char* s,float* global,int rows,int cols,unsigned seed,int sr,const unsigned* counter,int input_bf16) {
-    if(counter)seed+=counter[0];
-    int j=threadIdx.x;long long i=(long long)blockIdx.x*128+j;
-    int r=i/cols,c=i%cols;
-    float v=r<rows?(input_bf16?bf(((const unsigned short*)x)[i]):((const float*)x)[i]):0.0f,a=fabsf(v);
-    for(int d=1;d<16;d*=2)a=fmaxf(a,__shfl_xor_sync(0xffffffff,a,d));
-    float g=fmaxf(amax[0]/2688.0f,1.0e-30f);
-    unsigned char sc=rf8(a/(6.0f*g));float tot=f8(sc)*g;
-    float normalized=tot==0?0:v/tot;
-    if(sr){
-        unsigned char code=rf4(normalized,mix((unsigned)i^seed),1);
-        int other=__shfl_xor_sync(0xffffffff,(int)code,1);
-        if(r<rows && !(c&1))q[i/2]=(code<<4)|other;
-    }else{
-        float other=__shfl_xor_sync(0xffffffff,normalized,1);
-        if(r<rows && !(c&1))q[i/2]=pack_rne(normalized,other);
+    // Each lane writes one E2M1 pair. Eight lanes share a 16-value block scale.
+    int j=threadIdx.x, c=blockIdx.x*128+j*2;
+    int stored_rows=(rows+15)/16*16;
+    if(blockIdx.y==0){
+        // Initialize only the unused bytes of the final 128-row scale tile.
+        int tail=(rows+127)/128*128-stored_rows;
+        for(int b=j;b<tail*8;b+=blockDim.x)
+            s[swizzle(stored_rows+b/8,blockIdx.x*8+b%8,cols)]=0;
     }
-    if(r<rows && !(c&15))s[swizzle(r,c/16,cols)]=sc;
-    if(i==0)global[0]=g;
+    if(counter)seed+=counter[0];
+    float g=fmaxf(amax[0]/2688.0f,1.0e-30f);
+    if(!blockIdx.x && !blockIdx.y && !j)global[0]=g;
+    for(int r=blockIdx.y;r<stored_rows;r+=gridDim.y){
+        long long i=(long long)r*cols+c;
+        if(r>=rows){
+            q[i/2]=0;
+            if(!(c&15))s[swizzle(r,c/16,cols)]=0;
+            continue;
+        }
+        float hi=input_bf16?bf(((const unsigned short*)x)[i]):((const float*)x)[i];
+        float lo=input_bf16?bf(((const unsigned short*)x)[i+1]):((const float*)x)[i+1];
+        float a=fmaxf(fabsf(hi),fabsf(lo));
+        for(int d=1;d<8;d*=2)a=fmaxf(a,__shfl_xor_sync(0xffffffff,a,d));
+        unsigned char sc=rf8(a/(6.0f*g));
+        float tot=f8(sc)*g;
+        hi=tot==0?0:hi/tot;
+        lo=tot==0?0:lo/tot;
+        if(sr){
+            unsigned char high=rf4(hi,mix((unsigned)i^seed),1);
+            unsigned char low=rf4(lo,mix((unsigned)(i+1)^seed),1);
+            q[i/2]=(high<<4)|low;
+        }else{
+            q[i/2]=pack_rne(hi,lo);
+        }
+        if(!(c&15))s[swizzle(r,c/16,cols)]=sc;
+    }
 }
 extern "C" __global__ void rope(const unsigned short* x,const unsigned short* rot,unsigned short* y,int rows,int heads,int dim,int pairs,int backward) {
     int i=blockIdx.x*blockDim.x+threadIdx.x;
@@ -227,18 +257,22 @@ def dequant(q,s,g):
 def quantize(x,signs=None,seed=0,sr=False):
     n,k=x.shape
     assert x.is_cuda and x.is_contiguous() and k%128==0 and x.dtype==torch.bfloat16
-    if n%16:
-        x=torch.nn.functional.pad(x,(0,0,0,16-n%16));n=x.shape[0]
+    stored_rows=(n+15)//16*16
+    scale_rows=(n+127)//128*128
+    amax=torch.zeros((),dtype=torch.float32,device=x.device)
     if signs is not None:
-        work=torch.empty(x.shape,dtype=torch.float32,device=x.device);amax=torch.zeros((),device=x.device)
+        work=torch.empty(x.shape,dtype=torch.float32,device=x.device)
         launch('rotate',x.numel()//128,128,x,signs,work,amax,n,k)
     else:
-        work=x;amax=torch.zeros((),device=x.device)
-        launch('amax_bf16',(x.numel()+255)//256,256,x,amax,x.numel())
-    q=torch.empty((n,k//2),dtype=torch.uint8,device=x.device)
-    s=torch.zeros(((n+127)//128*128,k//16),dtype=torch.float8_e4m3fn,device=x.device)
-    g=torch.empty((),device=x.device)
-    launch('quant',(x.numel()+127)//128,128,work,amax,q,s,g,n,k,0 if torch.is_tensor(seed) else int(seed)&0xffffffff,int(sr),seed if torch.is_tensor(seed) else None,int(signs is None))
+        work=x
+        launch('amax_bf16',min(512,(x.numel()+255)//256),256,x,amax,n,k)
+    q=torch.empty((stored_rows,k//2),dtype=torch.uint8,device=x.device)
+    s=torch.empty((scale_rows,k//16),dtype=torch.float8_e4m3fn,device=x.device)
+    g=torch.empty((),dtype=torch.float32,device=x.device)
+    counter = seed if torch.is_tensor(seed) else None
+    initial_seed = 0 if counter is not None else int(seed) & 0xffffffff
+    launch('quant',(k//128,min(stored_rows,65535)),64,work,amax,q,s,g,n,k,
+           initial_seed,int(sr),counter,int(signs is None))
     return q,s,g
 
 def matmul(a,b,dtype=torch.bfloat16):
@@ -278,10 +312,10 @@ def transpose_rht_quant(source,signs,backward_scale):
 def backward_scale(source, signs):
     q,s,g=source;n,k=q.shape[0],q.shape[1]*2
     assert n%128==0 and k%128==0
-    amax=torch.zeros((),device=q.device)
+    amax=torch.zeros((),dtype=torch.float32,device=q.device)
     launch('transpose_rht_quant',(k//32,n//128),256,q,s,g,signs,None,None,None,n,k,amax)
     # Tensor / Python scalar may become reciprocal multiplication, differing
     # by one ULP from the quantizer's CUDA division. Use the same operation.
-    scale=torch.empty((),device=q.device)
+    scale=torch.empty((),dtype=torch.float32,device=q.device)
     launch('finish_scale',1,1,amax,scale)
     return scale

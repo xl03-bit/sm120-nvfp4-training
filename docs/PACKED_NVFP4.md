@@ -45,6 +45,62 @@ repository. A model-specific loader must map its projections, biases and AWQ
 metadata correctly. Do not call `model.bfloat16()` after loading quantized buffers;
 move by device only and select compute precision through autocast.
 
+## Select packed projections with calibration data
+
+For a model with frozen CUDA BF16 `nn.Linear` weights, supply groups of
+projections and a scoring function that reuses your calibration samples. This
+example scores a classifier. Replace the patterns and forward call with those
+for your own model.
+
+```python
+from precision_lora import calibrate_packed_layers
+
+# Each batch contains (inputs, class_indices) on the model's device.
+batches = tuple(calibration_batches)
+
+def accuracy(candidate):
+    correct = total = 0
+    for inputs, labels in batches:
+        correct += (candidate(inputs).argmax(-1) == labels).sum().item()
+        total += labels.numel()
+    return correct / total
+
+report = calibrate_packed_layers(
+    model,
+    groups={"encoder": ["encoder.blocks.*.mlp"], "decoder": ["decoder.blocks.*.mlp"]},
+    keep=["decoder.blocks.*.mlp.output"],
+    evaluate=accuracy,
+    max_drop=0.005,  # half a percentage point of accuracy
+)
+```
+
+Group and `keep` patterns match module names or ancestors using the same
+case-sensitive glob rules as `nvfp4_training.pack_frozen_layers`. Give each
+candidate to a single group. `keep` protects matching projections. Select
+standard, untied Linear modules that the model calls in its forward pass.
+
+Calibration first scores the original model, then tries each group in the
+supplied order alongside all previously accepted groups. It keeps the packed
+modules if the score meets `baseline - max_drop`. A rejected group recovers its
+original BF16 modules. A packing or scoring exception restores all replacements
+from that call. During calibration both the original and trial weights can be
+resident on the GPU. Accepted modules release their original weights when the
+call returns and no other references remain.
+
+Use a deterministic, read-only scoring function with higher scores indicating
+better quality (e.g. negate a loss). Scores are measured in eval mode with
+gradients disabled. The report contains `baseline`, `final_score` and a
+`groups` list with the matched candidate paths, trial score and decision.
+A fully protected group has an empty `modules` list and a `None` score.
+Evaluate the resulting model on held-out samples to measure task accuracy,
+throughput and memory. Group order and the calibration data can change which
+combination fits the budget.
+
+Accepted projections are ordinary `PackedNVFP4Linear` instances with native
+forward and input-gradient GEMMs. To pack one known projection directly, use
+`PackedNVFP4Linear.from_linear(frozen_linear)`. Both entry points accept
+`backward_mode="recompute"` or `"cache"` and an optional `seed`.
+
 ## Memory and speed choices
 
 | Backward mode | Persistent aligned base storage | Backward preparation |
@@ -78,6 +134,7 @@ existing graph support.
 
 ```bash
 python tests/test_packed_lora.py --output packed-checks.json
+python tests/test_packed_calibration.py
 ```
 
 Coverage includes 128×384, 193×257, 11×19 and 256×512 projections; batches/sequences

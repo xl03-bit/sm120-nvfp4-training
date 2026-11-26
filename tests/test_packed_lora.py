@@ -31,10 +31,54 @@ def make_base(n,k,mode='recompute',seed=91,awq=False):
                             input_scale=torch.linspace(.7,1.3,k,device='cuda') if awq else None)
 
 
+def check_known_packed_bytes():
+    """Exercise both grid axes, nibble order, scale swizzling and both row paddings."""
+    values = torch.tensor([0, -.5, 1, -1.5, 2, -3, 4, -6, 6, -4, 3, -2, 1.5, -1, .5, 0],
+                          dtype=torch.bfloat16)
+    codes = torch.tensor([0x09, 0x2b, 0x4d, 0x6f, 0x7e, 0x5c, 0x3a, 0x10], dtype=torch.uint8)
+    x = torch.zeros(129, 256, dtype=torch.bfloat16)
+    expected_q = torch.zeros(144, 128, dtype=torch.uint8)
+    expected_scales = torch.zeros(256 * 16, dtype=torch.uint8)
+    # A maximum of 6 * 448 gives tensor scale 1. Only three blocks have
+    # nonzero E4M3 scales, at known offsets in the 128-row swizzled tiles.
+    for row, col, scale, offset, scale_byte in [(0, 0, 1, 0, 0x38), (33, 128, 2, 1044, 0x40),
+                                               (128, 240, 448, 3587, 0x7e)]:
+        x[row, col:col + 16] = values * scale
+        expected_q[row, col // 2:col // 2 + 8] = codes
+        expected_scales[offset] = scale_byte
+    x = x.cuda()
+    for stochastic in (False, True):
+        q, s, g = cuda.quantize(x, seed=37, sr=stochastic)
+        assert g.item() == 1.0
+        assert torch.equal(q.cpu(), expected_q)
+        assert torch.equal(s.view(torch.uint8).flatten().cpu(), expected_scales)
+
+    layout = 'comfy-high-first-swizzle128x4'
+    # A compact source uses only row 128 of its last scale tile. Garbage in
+    # unused slots must be discarded while repacking, even if it encodes NaN.
+    dirty = s.clone()
+    dirty.view(torch.uint8).flatten()[-1] = 0xff
+    base = PackedNVFP4Linear(q[:129], dirty, g, layout=layout)
+    assert torch.equal(base.block_scale.view(torch.uint8).flatten().cpu(), expected_scales)
+    # Check both validation paths: a compact block containing NaN and a
+    # completely aligned tile with a negative zero in the last active slot.
+    for packed, index, bad in [(q[:129], 3587, 0x7f), (F.pad(q, (0, 0, 0, 112)), -1, 0x80)]:
+        invalid = s.clone()
+        invalid.view(torch.uint8).flatten()[index] = bad
+        try:
+            PackedNVFP4Linear(packed, invalid, g, layout=layout)
+        except ValueError as error:
+            assert 'Block scales' in str(error)
+        else:
+            raise AssertionError('Accepted an invalid active E4M3 scale')
+
+
 def run():
     torch.set_num_threads(4)
     torch.manual_seed(431)
     checks=[]
+    check_known_packed_bytes()
+    checks.append(dict(check='known_nibbles_swizzled_scales_and_padding', passed=True))
     # Scalar division must match the original quantizer, not a rounded host
     # reciprocal multiplied on the GPU. Float64 provides an independent check.
     for value in [0.,1.0872942,1.0872943,1.,.001,10000.]:

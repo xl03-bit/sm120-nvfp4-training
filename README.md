@@ -66,6 +66,8 @@ activation memory, and CUDA Graph replay reduces launch overhead for fixed shape
 
 For already quantized NVFP4 checkpoints, `mode="packed_nvfp4"` preserves the source
 weight payload and offers GPU recomputation or caching of the backward layout.
+Starting from frozen BF16 weights, `calibrate_packed_layers` tries caller-defined
+groups on calibration samples and packs those that fit the caller's score budget.
 See [packed NVFP4 LoRA](docs/PACKED_NVFP4.md) for formats, tested compatibility and
 memory choices. This new mode uses eager training; the existing modes keep their
 CUDA Graph support.

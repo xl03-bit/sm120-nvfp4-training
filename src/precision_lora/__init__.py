@@ -2,6 +2,7 @@
 from .core import enable_lora, prepare_lora, lora_parameters, save_lora, load_lora, merge_lora, LoRALinear
 from .graph import capture_lora_step
 from .packed import PackedNVFP4Linear
+from .calibration import calibrate_packed_layers
 
 __all__ = ['enable_lora', 'prepare_lora', 'lora_parameters', 'save_lora', 'load_lora',
-           'merge_lora', 'LoRALinear', 'capture_lora_step', 'PackedNVFP4Linear']
+           'merge_lora', 'LoRALinear', 'capture_lora_step', 'PackedNVFP4Linear', 'calibrate_packed_layers']
