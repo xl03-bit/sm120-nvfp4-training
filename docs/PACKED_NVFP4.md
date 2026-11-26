@@ -101,6 +101,45 @@ forward and input-gradient GEMMs. To pack one known projection directly, use
 `PackedNVFP4Linear.from_linear(frozen_linear)`. Both entry points accept
 `backward_mode="recompute"` or `"cache"` and an optional `seed`.
 
+## Gated delta-rule prefill
+
+Models that already implement gated delta-rule linear attention can call
+`gated_delta_rule` at their prefill call site on SM120. It works with BF16
+projections and with calibrated packed projections. Weight packing and the
+attention call are independent opt-ins.
+
+```python
+import torch
+from precision_lora import gated_delta_rule
+
+# Inside a compatible attention module's dense prefill branch on SM120.
+# Keep the model's own training, variable-length and token-decode branches.
+rule = self.training_delta_rule if torch.is_grad_enabled() else gated_delta_rule
+output, next_state = rule(
+    query, key, value, g=log_decay, beta=update_strength,
+    initial_state=previous_state, output_final_state=use_cache,
+    use_qk_l2norm_in_kernel=True,  # use the model's normalization convention
+)
+```
+
+Q, K and V have shape `[batch, time, heads, width]` and share an FP32, FP16 or
+BF16 dtype. Q and K have the same width. The finite log decay and update
+strength use `[batch, time, heads]`. After optional Q/K normalization in their
+input dtype, each token decays the state by `exp(g)`, predicts V from K and
+that state, then adds the outer product of K with `beta * (V - prediction)`.
+The output reads the updated state with Q scaled by `1 / sqrt(key_width)`.
+Pass padding and head expansion through the model's usual preprocessing.
+Concatenated independent sequences need separate states.
+
+The implementation streams blocks of up to 64 tokens. One CUDA block solves
+each triangular system in shared memory. A short tail uses its actual length.
+Omitting the initial state lets the first block skip the incoming-state products.
+The last block computes an outgoing state only when requested. It returns FP32
+state with shape `[batch, heads, key_width, value_width]` and output in the
+input dtype. FP32 matrix products follow PyTorch's configured matmul precision.
+Use the same setting and chunk size for reference comparisons. Check both
+output scores and task accuracy on held-out inputs for your model.
+
 ## Memory and speed choices
 
 | Backward mode | Persistent aligned base storage | Backward preparation |
@@ -135,6 +174,7 @@ existing graph support.
 ```bash
 python tests/test_packed_lora.py --output packed-checks.json
 python tests/test_packed_calibration.py
+python tests/test_gated_delta.py
 ```
 
 Coverage includes 128×384, 193×257, 11×19 and 256×512 projections; batches/sequences

@@ -78,6 +78,10 @@ model, optimizer = prepare_lora(model, mode="preserve", rank=16, alpha=16)
 # Use the normal loss.backward() / optimizer.step() loop.
 ```
 
+Models with gated delta-rule linear attention can also accelerate dense prefill
+with either BF16 or packed projection weights. See the
+[inference call site](docs/PACKED_NVFP4.md#gated-delta-rule-prefill).
+
 The unchanged-precision implementation is also available independently as
 `precision_lora`, with only PyTorch as a dependency. See the [LoRA API guide](docs/LORA.md)
 for target selection, save/load, merging, independent packaging and examples.

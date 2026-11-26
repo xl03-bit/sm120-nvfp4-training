@@ -9,6 +9,7 @@ import ctypes as C
 import ctypes.util
 from pathlib import Path
 import hashlib
+from ._delta_cuda import SOURCE as DELTA_SOURCE
 
 SOURCE=r'''
 __device__ float bf(unsigned short x) { return __uint_as_float((unsigned)x<<16); }
@@ -191,7 +192,7 @@ extern "C" __global__ void transpose_rht_quant(const unsigned char* q,const unsi
         }
     }
 }
-'''
+''' + DELTA_SOURCE
 
 P=C.c_void_p;I=C.c_int;U=C.c_uint;S=C.c_size_t
 _module=None;_functions={};_device=None
@@ -239,7 +240,7 @@ def init():
     _driver.cuLaunchKernel.argtypes=[P,U,U,U,U,U,U,U,P,P,P];_driver.cuLaunchKernel.restype=I
     _module=P();buf=C.create_string_buffer(ptx);check(_driver.cuModuleLoadData(C.byref(_module),buf),'load PTX')
     _device=torch.cuda.current_device()
-    for name in ('dequant','rotate','quant','rope','transpose_rht_quant','amax_bf16','finish_scale'):
+    for name in ('dequant','rotate','quant','rope','transpose_rht_quant','amax_bf16','finish_scale','unit_lower_inverse'):
         f=P();check(_driver.cuModuleGetFunction(C.byref(f),_module,name.encode()),'load kernel');_functions[name]=f
 
 def launch(name,blocks,threads,*args):

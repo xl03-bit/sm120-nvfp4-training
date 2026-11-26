@@ -8,12 +8,13 @@ from .profiles import list_profiles, profile_config
 from ._runtime import load_runtime
 from .lora import enable_lora, prepare_lora, lora_parameters, save_lora, load_lora, merge_lora, PackedNVFP4Linear
 from .lora_graph import capture_lora_step
-from precision_lora import calibrate_packed_layers
+from precision_lora import calibrate_packed_layers, gated_delta_rule
 
 __all__ = ["list_profiles", "prepare_training", "enable_nvfp4", "train_step",
            "capture_step", "save_checkpoint", "load_checkpoint", "check_finite",
            "enable_lora", "prepare_lora", "lora_parameters", "save_lora", "load_lora", "merge_lora", "capture_lora_step", "PackedNVFP4Linear",
-           "pack_frozen_layers", "save_frozen_cache", "load_frozen_cache", "capture_frozen", "calibrate_packed_layers"]
+           "pack_frozen_layers", "save_frozen_cache", "load_frozen_cache", "capture_frozen", "calibrate_packed_layers",
+           "gated_delta_rule"]
 
 def pack_frozen_layers(model, *, include, keep=()):
     from .frozen import pack_frozen_layers as convert

@@ -17,7 +17,7 @@ shutil.copyfile(ROOT/'NOTICE.md',staging/'NOTICE.md')
 shutil.copytree(ROOT/'THIRD_PARTY_LICENSES',staging/'THIRD_PARTY_LICENSES',dirs_exist_ok=True)
 (staging/'README.md').write_text((ROOT/'docs/LORA.md').read_text(encoding='utf8').replace('../results/','results/').replace('../examples/','examples/').replace('(PACKED_NVFP4.md)','(docs/PACKED_NVFP4.md)'),encoding='utf8')
 for name in ('tests/test_lora.py','tests/test_lora_graph.py','tests/test_packed_lora.py','tests/test_packed_calibration.py',
-             'examples/lora.py','docs/PACKED_NVFP4.md','docs/LORA.md'):
+             'tests/test_gated_delta.py','examples/lora.py','docs/PACKED_NVFP4.md','docs/LORA.md'):
     dst=staging/name;dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,dst)
 if (ROOT/'results/lora').exists():
     shutil.copytree(ROOT/'results/lora',staging/'results/lora',dirs_exist_ok=True)
