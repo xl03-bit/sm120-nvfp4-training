@@ -1,7 +1,7 @@
 """Greedy calibration of frozen BF16 projections on the native packed path."""
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
-from itertools import chain
+from itertools import chain, zip_longest
 import math
 from numbers import Real
 
@@ -105,6 +105,69 @@ def _score(evaluate, model):
     if isinstance(value, bool) or not isinstance(value, Real) or not math.isfinite(value):
         raise ValueError("evaluate must return a finite real scalar")
     return float(value)
+
+
+def hidden_state_evaluator(batches, observe):
+    """Build a calibration score from the worst batch/layer relative L2 error.
+
+    batches() must replay the same inputs in order. observe(model, batch) yields
+    unique (name, floating_tensor) pairs per batch, with any padding removed by
+    the caller. The first call stores independent CPU references and scores zero.
+    Create a new evaluator for each baseline. A changed all-zero reference raises.
+    """
+    if not callable(batches) or not callable(observe):
+        raise TypeError("batches and observe must be callable")
+    reference = None
+
+    def states(model):
+        for index, batch in enumerate(batches()):
+            names = set()
+            for name, state in observe(model, batch):
+                if not isinstance(name, str) or not name or name in names:
+                    raise ValueError("Expected a unique, nonempty hidden-state name per batch")
+                names.add(name)
+                if not isinstance(state, torch.Tensor) or state.layout != torch.strided or not state.is_floating_point():
+                    raise TypeError(f"Expected a dense floating tensor for hidden state {name!r}")
+                if not state.numel():
+                    raise ValueError(f"Empty hidden state {name!r} in batch {index}")
+                yield (index, name), state.detach().to(device="cpu", copy=reference is None)
+            if not names:
+                raise ValueError(f"No hidden states observed in batch {index}")
+
+    @torch.no_grad()
+    def evaluate(model):
+        nonlocal reference
+        if reference is None:
+            captured = []
+            for key, state in states(model):
+                norm = torch.linalg.vector_norm(state, dtype=torch.float64).item()
+                if not math.isfinite(norm):
+                    raise ValueError(f"Nonfinite reference norm at {key}")
+                captured.append((key, state, norm))
+            if not captured:
+                raise ValueError("Expected at least one calibration batch")
+            reference = captured
+            return 0.0
+
+        worst = 0.0
+        for current, saved in zip_longest(states(model), reference):
+            if current is None or saved is None:
+                raise ValueError("Hidden-state observation count changed")
+            key, state = current
+            expected_key, target, norm = saved
+            if key != expected_key or state.shape != target.shape or state.dtype != target.dtype:
+                raise ValueError(f"Hidden-state name, order, shape or dtype changed at {expected_key}")
+            if norm == 0:
+                if not torch.equal(state, target):
+                    raise ValueError(f"Changed hidden state with zero reference norm at {key}")
+                continue
+            error = torch.linalg.vector_norm(state.double() - target).item() / norm
+            if not math.isfinite(error):
+                raise ValueError(f"Nonfinite relative hidden-state error at {key}")
+            worst = max(worst, error)
+        return -worst
+
+    return evaluate
 
 
 @torch.no_grad()

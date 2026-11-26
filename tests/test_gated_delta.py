@@ -101,6 +101,22 @@ class GatedDeltaTests(unittest.TestCase):
                 else:
                     self.assertIsNone(last)
 
+    def test_tail_matches_explicit_zero_padding(self):
+        q, k, v, gate, beta, initial = inputs(75, 128, 31, torch.bfloat16)
+        data = (q, k, v, gate, beta)
+        for minimum in (32, 64):
+            with self.subTest(minimum=minimum):
+                pad = minimum - 11
+                extended = [torch.cat((x, x.new_zeros((x.shape[0], pad, *x.shape[2:]))), dim=1)
+                            for x in data]
+                options = dict(initial_state=initial, output_final_state=True, use_qk_l2norm_in_kernel=True)
+                # The default uses the full GEMM dimensions on the short tail.
+                short, state = gated_delta_rule(*data, min_tail_size=None if minimum == 64 else minimum,
+                                                **options)
+                long, extended_state = gated_delta_rule(*extended, min_tail_size=1, **options)
+                self.assertTrue(torch.equal(short.view(torch.int16), long[:, :75].view(torch.int16)))
+                self.assertTrue(torch.equal(state.view(torch.int32), extended_state.view(torch.int32)))
+
     def test_inference_guard(self):
         for index in (0, 3, 5):
             with self.subTest(grad_input=index), torch.enable_grad():

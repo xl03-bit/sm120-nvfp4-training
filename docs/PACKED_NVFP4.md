@@ -101,6 +101,39 @@ forward and input-gradient GEMMs. To pack one known projection directly, use
 `PackedNVFP4Linear.from_linear(frozen_linear)`. Both entry points accept
 `backward_mode="recompute"` or `"cache"` and an optional `seed`.
 
+### Bound hidden-state error
+
+NVFP4 packing rounds weights and activations. Equal scores or predicted classes
+can hide changes to intermediate states. To limit those changes, select the
+layers and tokens to compare. In this example `fixed_batches()` replays the
+same inputs and Boolean token masks, and `named_states` yields the model's
+named `[batch, time, features]` tensors in a fixed order.
+
+```python
+from precision_lora import calibrate_packed_layers, hidden_state_evaluator
+
+def observe(model, batch):
+    inputs, mask = batch
+    for name, state in named_states(model, inputs, mask):
+        yield name, state[mask]
+
+report = calibrate_packed_layers(model, groups=groups,
+                                 evaluate=hidden_state_evaluator(fixed_batches, observe),
+                                 max_drop=0.01)
+```
+
+The example accepts a group when every observed batch and layer stays within
+1% relative L2 error, computed as `norm(candidate - baseline) / norm(baseline)`
+over the supplied tensor. Choose a budget for your application and check it
+alongside task quality on held-out inputs. An unchanged zero reference scores
+zero error. Changing it raises a scoring error and rolls back calibration.
+
+Create a fresh evaluator for each baseline and keep inputs, batch order,
+padding and precision settings fixed. Its first call stores the selected
+reference tensors in CPU memory at their original dtype. Each trial transfers
+its observed tensors to the CPU and compares them one at a time in FP64.
+Choose observation sites and sample counts to fit host memory and runtime.
+
 ## Gated delta-rule prefill
 
 Models that already implement gated delta-rule linear attention can call
@@ -132,13 +165,18 @@ Pass padding and head expansion through the model's usual preprocessing.
 Concatenated independent sequences need separate states.
 
 The implementation streams blocks of up to 64 tokens. One CUDA block solves
-each triangular system in shared memory. A short tail uses its actual length.
+each triangular system in shared memory. By default the last block is padded
+to `chunk_size` so its matrix products use the full block dimensions. Set
+`min_tail_size` between 1 and `chunk_size` to try a smaller last block.
+It processes the larger of the actual tail length and this minimum. Shorter
+matrix dimensions can change the GPU's reduction order and rounding.
 Omitting the initial state lets the first block skip the incoming-state products.
 The last block computes an outgoing state only when requested. It returns FP32
 state with shape `[batch, heads, key_width, value_width]` and output in the
 input dtype. FP32 matrix products follow PyTorch's configured matmul precision.
-Use the same setting and chunk size for reference comparisons. Check both
-output scores and task accuracy on held-out inputs for your model.
+Use the same precision setting for reference comparisons. Measure hidden-state
+error, throughput and peak allocation on representative batches when choosing
+a tail size. For cached prefill, compare the returned recurrent state as well.
 
 ## Memory and speed choices
 

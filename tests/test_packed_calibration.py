@@ -6,7 +6,7 @@ from unittest.mock import patch
 import torch
 from torch import nn
 
-from precision_lora import PackedNVFP4Linear, calibrate_packed_layers
+from precision_lora import PackedNVFP4Linear, calibrate_packed_layers, hidden_state_evaluator
 
 
 def frozen_stack(size):
@@ -19,7 +19,9 @@ class CalibrationTests(unittest.TestCase):
     @unittest.skipUnless(find_spec("nvfp4_training"), "full training package only")
     def test_training_package_export(self):
         from nvfp4_training import calibrate_packed_layers as exported
+        from nvfp4_training import hidden_state_evaluator as exported_evaluator
         self.assertIs(exported, calibrate_packed_layers)
+        self.assertIs(exported_evaluator, hidden_state_evaluator)
 
     def test_cumulative_budget_and_rejected_identity(self):
         model = frozen_stack(3)
@@ -44,6 +46,73 @@ class CalibrationTests(unittest.TestCase):
         self.assertIs(model[1], original[1])
         self.assertIsInstance(model[0], nn.Identity)
         self.assertIsInstance(model[2], nn.Identity)
+
+    def test_hidden_error_budget_with_fixed_argmax_and_padding(self):
+        model, proposals = frozen_stack(3), frozen_stack(3)
+        original_last = model[2]
+        for layer in (*model, *proposals):
+            layer.weight.copy_(torch.eye(4))
+            layer.bias.zero_()
+        inputs = torch.eye(4, dtype=torch.bfloat16)[:2].unsqueeze(0)
+        valid = torch.tensor([[True, False]])
+        proposals[0].weight[1, 1] = 2  # Changes only the padded token.
+        proposals[1].weight[0, 0] = 1.03125
+        proposals[2].weight[0, 0] = 1.5
+
+        def observe(candidate, batch):
+            hidden, mask = batch
+            for name, layer in candidate.named_children():
+                hidden = layer(hidden)
+                yield name, hidden[mask]
+            self.assertTrue(torch.equal(hidden.argmax(-1), inputs.argmax(-1)))
+
+        evaluate = hidden_state_evaluator(lambda: [(inputs, valid)], observe)
+        with patch.object(PackedNVFP4Linear, "from_linear", side_effect=list(proposals)):
+            report = calibrate_packed_layers(model, groups={"padding": ["0"], "small": ["1"], "large": ["2"]},
+                                             evaluate=evaluate, max_drop=0.05)
+        self.assertEqual([g["accepted"] for g in report["groups"]], [True, True, False])
+        self.assertEqual([g["score"] for g in report["groups"]], [0, -0.03125, -0.546875])
+        self.assertIs(model[0], proposals[0])
+        self.assertIs(model[1], proposals[1])
+        self.assertIs(model[2], original_last)
+        self.assertFalse(torch.equal(model(inputs)[~valid], inputs[~valid]))
+
+    def test_hidden_error_uses_a_snapshot_and_the_worst_batch(self):
+        x = torch.tensor([3., 4.])
+        y = torch.ones(3)
+        evaluate = hidden_state_evaluator(lambda: [x, y], lambda _, batch: [("state", batch)])
+        self.assertEqual(evaluate(None), 0)
+        x[0] = 4.5
+        y.mul_(1.125)
+        self.assertAlmostEqual(evaluate(None), -0.3)
+
+    def test_hidden_error_rejects_invalid_observations(self):
+        state = torch.ones(3)
+        batches = [[("first", state), ("second", state)]]
+        evaluate = hidden_state_evaluator(lambda: batches, lambda _, batch: batch)
+        self.assertEqual(evaluate(None), 0)
+        for invalid in ([], [[]], [[("first", state)]], [[("first", state), ("first", state)]],
+                        [[("second", state), ("first", state)]], [[("first", state[1:]), ("second", state)]],
+                        [[("first", state.double()), ("second", state)]],
+                        [[("first", state[:0])]], [[("first", state * float("nan")), ("second", state)]]):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                batches = invalid
+                evaluate(None)
+
+    def test_hidden_zero_reference_error_rolls_back_all_groups(self):
+        model = frozen_stack(2)
+        originals = list(model)
+
+        def observe(candidate, zero):
+            yield "state", zero + 1 if isinstance(candidate[1], nn.Identity) else zero
+
+        evaluate = hidden_state_evaluator(lambda: [torch.zeros(2)], observe)
+        with patch.object(PackedNVFP4Linear, "from_linear", side_effect=lambda *a, **kw: nn.Identity()):
+            with self.assertRaisesRegex(ValueError, "zero reference"):
+                calibrate_packed_layers(model, groups={"first": ["0"], "second": ["1"]},
+                                        evaluate=evaluate, max_drop=1)
+        for current, original in zip(model, originals):
+            self.assertIs(current, original)
 
     def test_exception_restores_all_groups(self):
         for failure in ("pack", "evaluate", "nonfinite"):

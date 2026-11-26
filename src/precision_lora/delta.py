@@ -10,22 +10,30 @@ def _normalize(x):
     return x * torch.rsqrt((x * x).sum(-1, keepdim=True) + 1e-6)
 
 
-def _head_major(x):
-    return x.transpose(1, 2).to(dtype=torch.float32, memory_format=torch.contiguous_format)
+def _head_major(x, block_size):
+    head = x.transpose(1, 2)
+    length = head.shape[2]
+    if length == block_size:
+        return head.to(dtype=torch.float32, memory_format=torch.contiguous_format)
+    padded = torch.empty((*head.shape[:2], block_size, *head.shape[3:]),
+                         device=x.device, dtype=torch.float32)
+    padded[:, :, :length].copy_(head)
+    padded[:, :, length:].zero_()
+    return padded
 
 
-def _chunk(query, key, value, gate, beta, state, need_state, normalize):
+def _chunk(query, key, value, gate, beta, state, need_state, normalize, block_size):
     if normalize:
         key = _normalize(key)
-    k = _head_major(key)
-    step = _head_major(beta).unsqueeze(-1)
-    log_decay = _head_major(gate).cumsum(-1)
+    k = _head_major(key, block_size)
+    step = _head_major(beta, block_size).unsqueeze(-1)
+    log_decay = _head_major(gate, block_size).cumsum(-1)
     # Entry (i,j) decays the j-th update up to query i, for j <= i.
     decay = (log_decay.unsqueeze(-1) - log_decay.unsqueeze(-2)).exp_().tril_()
     weighted_key = k * step
     kt = k.transpose(-2, -1)
     transform = unit_lower_inverse_((weighted_key @ kt).mul_(decay).neg_())
-    updates = transform @ (_head_major(value) * step)
+    updates = transform @ (_head_major(value, block_size) * step)
     if state is not None:
         from_start = log_decay.exp().unsqueeze(-1)
         state_keys = transform @ weighted_key.mul_(from_start)
@@ -35,7 +43,7 @@ def _chunk(query, key, value, gate, beta, state, need_state, normalize):
 
     if normalize:
         query = _normalize(query)
-    q = _head_major(query) * (1 / math.sqrt(query.shape[-1]))
+    q = _head_major(query, block_size) * (1 / math.sqrt(query.shape[-1]))
     output = (q @ kt).mul_(decay) @ updates
     if state is not None:
         output.add_((q * from_start) @ state)
@@ -50,7 +58,7 @@ def _chunk(query, key, value, gate, beta, state, need_state, normalize):
     return output, next_state
 
 
-def gated_delta_rule(query, key, value, g, beta, *, chunk_size=64, initial_state=None,
+def gated_delta_rule(query, key, value, g, beta, *, chunk_size=64, min_tail_size=None, initial_state=None,
                      output_final_state=False, use_qk_l2norm_in_kernel=False):
     """Evaluate a causal gated delta rule on dense, equal-length CUDA batches.
 
@@ -59,9 +67,15 @@ def gated_delta_rule(query, key, value, g, beta, *, chunk_size=64, initial_state
     Returns (output in the input dtype, optional FP32 final state). Inputs and
     caller-owned state are read-only. Use the model's differentiable rule when
     training with gradients. Normalization, if requested, uses the input dtype.
+    The final block defaults to the full chunk size to retain the per-matrix
+    dimensions of a padded final block. A smaller minimum can change rounding.
     """
     if type(chunk_size) is not int or not 1 <= chunk_size <= 64:
         raise ValueError("chunk_size must be an integer between 1 and 64")
+    if min_tail_size is None:
+        min_tail_size = chunk_size
+    if type(min_tail_size) is not int or not 1 <= min_tail_size <= chunk_size:
+        raise ValueError("min_tail_size must be an integer between 1 and chunk_size")
     if query.ndim != 4 or key.shape != query.shape or value.ndim != 4 or value.shape[:3] != query.shape[:3]:
         raise ValueError("Expected Q/K/V shaped [batch, time, heads, width] with matching Q/K widths")
     batch, length, heads, width = query.shape
@@ -88,9 +102,11 @@ def gated_delta_rule(query, key, value, g, beta, *, chunk_size=64, initial_state
         for start in range(0, length, chunk_size):
             stop = min(start + chunk_size, length)
             span = slice(start, stop)
+            count = stop - start
             block, state = _chunk(query[:, span], key[:, span], value[:, span], g[:, span], beta[:, span],
-                                  state, output_final_state or stop < length, use_qk_l2norm_in_kernel)
-            output[:, span].copy_(block.transpose(1, 2))
+                                  state, output_final_state or stop < length, use_qk_l2norm_in_kernel,
+                                  max(count, min_tail_size))
+            output[:, span].copy_(block[:, :, :count].transpose(1, 2))
             del block
     if output_final_state and length == 0:
         state = torch.zeros(state_shape, device=query.device, dtype=torch.float32) if state is None else state.clone()

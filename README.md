@@ -68,6 +68,8 @@ For already quantized NVFP4 checkpoints, `mode="packed_nvfp4"` preserves the sou
 weight payload and offers GPU recomputation or caching of the backward layout.
 Starting from frozen BF16 weights, `calibrate_packed_layers` tries caller-defined
 groups on calibration samples and packs those that fit the caller's score budget.
+Use `hidden_state_evaluator` to budget the worst relative L2 error across the
+layers and calibration batches you observe.
 See [packed NVFP4 LoRA](docs/PACKED_NVFP4.md) for formats, tested compatibility and
 memory choices. This new mode uses eager training; the existing modes keep their
 CUDA Graph support.
